@@ -16,7 +16,7 @@ def generate_launch_description():
         package='data_logger', 
         namespace='data_logger', 
         executable='data_logger_node', 
-        parameters=[{'use_sim_time': use_sim_time}]
+        # parameters=[{'use_sim_time': use_sim_time}]
     )
 
 
@@ -24,21 +24,21 @@ def generate_launch_description():
         package='web_video_server',
         namespace='web_video_server',
         executable='web_video_server',
-        parameters=[{'use_sim_time': use_sim_time}]
+        # parameters=[{'use_sim_time': use_sim_time}]
     )
 
     motor_control_node = Node(
         package='motor_control_pkg',
         namespace='motor_control_pkg',
         executable='motor_control_node',
-        parameters=[{'use_sim_time': use_sim_time}]
+        # parameters=[{'use_sim_time': use_sim_time}]
     )
 
     image_stitcher_node = Node(
         package='image_stitcher',
         namespace='stiched_images',
         executable='image_stitcher_node',
-        parameters=[{'use_sim_time': use_sim_time}]
+        # parameters=[{'use_sim_time': use_sim_time}]
     )
 
     
@@ -51,9 +51,6 @@ def generate_launch_description():
                     'launch/twist_mux_launch.py'
                 ])
             ]),
-            launch_arguments={
-                'use_sim_time': use_sim_time
-            }
         ),
         motor_control_node,
         image_stitcher_node,
