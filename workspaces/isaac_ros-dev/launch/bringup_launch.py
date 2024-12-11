@@ -56,11 +56,11 @@ def generate_launch_description():
 	 #executable='road_segmentation_node'
     #)
 
-    #image_stitcher_node = Node(
-    #     package='image_stitcher',
-    #     namespace='stiched_images',
-    #     executable='image_stitcher_node'
-    #)
+    image_stitcher_node = Node(
+         package='image_stitcher',
+         namespace='stiched_images',
+         executable='image_stitcher_node'
+    )
 
     # right_fisheye_node = Node(
     #     package='usb_cam', executable='usb_cam_node_exe',
@@ -86,14 +86,6 @@ def generate_launch_description():
     #                             'camera_configs','left_boxcam','left_boxcam_params.yaml')]
     # )
     return LaunchDescription([
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource([
-                PathJoinSubstitution([
-                    FindPackageShare('realsense2_camera'),
-                    'launch/rs_launch.py'
-                ])
-            ])              
-        ),
         # IncludeLaunchDescription(
         #     PythonLaunchDescriptionSource([
         #         PathJoinSubstitution([
@@ -125,7 +117,7 @@ def generate_launch_description():
         # simulator_control_node,
         # realsense_obj_det_node,
         web_video_server_node,
-        motor_control_node,
+        image_stitcher_node,
         #road_segmentation_node.0
         
         #image_stitcher_node
