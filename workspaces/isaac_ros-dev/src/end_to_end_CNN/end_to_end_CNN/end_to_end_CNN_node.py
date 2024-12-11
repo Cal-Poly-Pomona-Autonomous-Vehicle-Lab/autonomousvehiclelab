@@ -11,7 +11,7 @@ from rclpy.node import Node
 
 from end_to_end_CNN import end_to_end_CNN_model
 
-model_dir = "/avlcode/workspaces/isaac_ros-dev/src/end_to_end_CNN/models/checkpoints/model.pth"
+model_dir = "/home/agxorin1/autonomousvehiclelab/workspaces/isaac_ros-dev/src/end_to_end_CNN/models/checkpoints/model.pth"
 transform = transforms.Compose([
     transforms.ToPILImage(), 
     transforms.Resize((66, 200)),
@@ -38,15 +38,16 @@ class end_to_end_CNN_node(Node):
 
         # Init the End to End Convolutional Neural Network
         self.end_to_end_CNN_ = end_to_end_CNN_model.SelfDrivingCarCNN()
-        self.end_to_end_CNN_.load_state_dict(torch.load(model_dir))
-        self.end_to_end_CNN_.eval()
-
 
         if torch.cuda.is_available():
             self.device_ = torch.device('cuda:0')
 
         print('using device:', self.device_)
+        
         self.end_to_end_CNN_.to(self.device_)
+
+        self.end_to_end_CNN_.load_state_dict(torch.load(model_dir))
+        self.end_to_end_CNN_.eval()
 
     def front_image_callback(self, msg: Image) -> None: 
         ''' 

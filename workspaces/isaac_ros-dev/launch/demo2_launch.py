@@ -7,11 +7,10 @@ from launch.substitutions import PathJoinSubstitution, TextSubstitution
 import os
 
 def generate_launch_description():
-
-    camera_publisher_node = Node(
-        package='camera_publishers',
-        namespace='camera_publishers',
-        executable='camera_publishers'
+    image_stitcher_node = Node(
+         package='image_stitcher',
+         namespace='stiched_images',
+         executable='image_stitcher_node'
     )
 
     end_to_end = Node(
@@ -46,7 +45,7 @@ def generate_launch_description():
         #         ])
         #     ])
         # ),
-        camera_publisher_node,
+        image_stitcher_node, 
         end_to_end
         # object_avoidance_node.
         ])
