@@ -46,7 +46,7 @@ int main(int argc, char **argv) {
     rclcpp::Rate rate(10);
     while (rclcpp::ok()) {
         hardware->read();  // Read hardware state
-        cm.update(hardware->get_time(), hardware->get_period());
+        cm.update(hardware->get_time(), hardware->get_period()); //Change this
         hardware->write(); // Send commands to hardware
 
         rate.sleep();
