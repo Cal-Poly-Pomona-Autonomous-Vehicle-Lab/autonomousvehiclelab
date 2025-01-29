@@ -1,0 +1,33 @@
+[35m[1mConsolidate compiler generated dependencies of target data_logger_node2[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/data_logger_node2.dir/src/data_logger_node2.cpp.o[0m
+[01m[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:[m[K In constructor ‘[01m[KDataLogger::DataLogger()[m[K’:
+[01m[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:51:50:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kentry[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   51 |                                 for (const auto &[01;35m[Kentry[m[K : fs::directory_iterator(m_drive)) {
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:67:50:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kentry[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+   67 |                                 for (const auto &[01;35m[Kentry[m[K : fs::directory_iterator(m_image_drive)) {
+      |                                                  [01;35m[K^~~~~[m[K
+[01m[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:32:37:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kqos[m[K’ set but not used [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable-Wunused-but-set-variable]8;;[m[K]
+   32 |                         rclcpp::QoS [01;35m[Kqos[m[K = rclcpp::QoS(1);
+      |                                     [01;35m[K^~~[m[K
+[100%] [32m[1mLinking CXX executable data_logger_node2[0m
+/usr/bin/ld: warning: libopencv_imgcodecs.so.4.5d, needed by /opt/ros/humble/lib/libcv_bridge.so, may conflict with libopencv_imgcodecs.so.408
+[100%] Built target data_logger_node2
+-- Install configuration: ""
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/lib/data_logger/data_logger_node2
+-- Set runtime path of "/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/lib/data_logger/data_logger_node2" to ""
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/ament_index/resource_index/package_run_dependencies/data_logger
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/ament_index/resource_index/parent_prefix_path/data_logger
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/environment/ament_prefix_path.sh
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/environment/ament_prefix_path.dsv
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/environment/path.sh
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/environment/path.dsv
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/local_setup.bash
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/local_setup.sh
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/local_setup.zsh
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/local_setup.dsv
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/package.dsv
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/ament_index/resource_index/packages/data_logger
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/cmake/data_loggerConfig.cmake
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/cmake/data_loggerConfig-version.cmake
+-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/package.xml

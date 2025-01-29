@@ -1,0 +1,369 @@
+[0.000000] (-) TimerEvent: {}
+[0.001054] (-) JobUnselected: {'identifier': 'agv_bot_description'}
+[0.001332] (-) JobUnselected: {'identifier': 'async_web_server_cpp'}
+[0.001574] (-) JobUnselected: {'identifier': 'camera_publishers'}
+[0.001667] (-) JobUnselected: {'identifier': 'gps_package'}
+[0.001844] (-) JobUnselected: {'identifier': 'image_stitcher'}
+[0.001891] (-) JobUnselected: {'identifier': 'joint_state_publisher'}
+[0.001965] (-) JobUnselected: {'identifier': 'joint_state_publisher_gui'}
+[0.002009] (-) JobUnselected: {'identifier': 'motor_control_pkg'}
+[0.002068] (-) JobUnselected: {'identifier': 'realsense2_camera'}
+[0.002420] (-) JobUnselected: {'identifier': 'realsense2_camera_msgs'}
+[0.002556] (-) JobUnselected: {'identifier': 'realsense2_description'}
+[0.002596] (-) JobUnselected: {'identifier': 'realsense_obj_det'}
+[0.002639] (-) JobUnselected: {'identifier': 'road_segmentation'}
+[0.002690] (-) JobUnselected: {'identifier': 'teleop_twist_joy'}
+[0.002729] (-) JobUnselected: {'identifier': 'teleop_twist_keyboard'}
+[0.002767] (-) JobUnselected: {'identifier': 'twist_converter'}
+[0.002971] (-) JobUnselected: {'identifier': 'twist_mux'}
+[0.003010] (-) JobUnselected: {'identifier': 'web_video_server'}
+[0.003089] (data_logger) JobQueued: {'identifier': 'data_logger', 'dependencies': OrderedDict()}
+[0.003231] (data_logger) JobStarted: {'identifier': 'data_logger'}
+[0.021016] (data_logger) JobProgress: {'identifier': 'data_logger', 'progress': 'cmake'}
+[0.022311] (data_logger) JobProgress: {'identifier': 'data_logger', 'progress': 'build'}
+[0.023556] (data_logger) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger', '--', '-j8', '-l8'], 'cwd': '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'agxorin1'), ('ROS_PACKAGE_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/share'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda-12.2/lib64:'), ('HOME', '/home/agxorin1'), ('OLDPWD', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '2875'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'agxorin1'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib/aarch64-linux-gnu/pkgconfig:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'agxorin1'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda-12.2/bin:/home/agxorin1/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/agxorin1:@/tmp/.ICE-unix/2850,unix/agxorin1:/tmp/.ICE-unix/2850'), ('FASTRTPS_DEFAULT_PROFILES_FILE', '/var/tmp/husarnet-fastdds-simple.xml'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/9c9a1b42_14bf_4e27_b7c7_22948c1932df'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('RMW_IMPLEMENTATION', 'rmw_fastrtps_cpp'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.92'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_mux:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/new_car_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_bot_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/data_logger:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_car_gazebo:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_mux:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/new_car_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_bot_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/data_logger:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers:/opt/ros/humble:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_car_gazebo')]), 'shell': False}
+[0.099276] (-) TimerEvent: {}
+[0.102007] (data_logger) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target data_logger_node2\x1b[0m\n'}
+[0.139755] (data_logger) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/data_logger_node2.dir/src/data_logger_node2.cpp.o\x1b[0m\n'}
+[0.199442] (-) TimerEvent: {}
+[0.300050] (-) TimerEvent: {}
+[0.400650] (-) TimerEvent: {}
+[0.501288] (-) TimerEvent: {}
+[0.602188] (-) TimerEvent: {}
+[0.703103] (-) TimerEvent: {}
+[0.803795] (-) TimerEvent: {}
+[0.904481] (-) TimerEvent: {}
+[1.005174] (-) TimerEvent: {}
+[1.106079] (-) TimerEvent: {}
+[1.206761] (-) TimerEvent: {}
+[1.307428] (-) TimerEvent: {}
+[1.408080] (-) TimerEvent: {}
+[1.508733] (-) TimerEvent: {}
+[1.609400] (-) TimerEvent: {}
+[1.710075] (-) TimerEvent: {}
+[1.810752] (-) TimerEvent: {}
+[1.911425] (-) TimerEvent: {}
+[2.012289] (-) TimerEvent: {}
+[2.113217] (-) TimerEvent: {}
+[2.213895] (-) TimerEvent: {}
+[2.314506] (-) TimerEvent: {}
+[2.415068] (-) TimerEvent: {}
+[2.515972] (-) TimerEvent: {}
+[2.616648] (-) TimerEvent: {}
+[2.717358] (-) TimerEvent: {}
+[2.818011] (-) TimerEvent: {}
+[2.918668] (-) TimerEvent: {}
+[3.019302] (-) TimerEvent: {}
+[3.119953] (-) TimerEvent: {}
+[3.220611] (-) TimerEvent: {}
+[3.321256] (-) TimerEvent: {}
+[3.421795] (-) TimerEvent: {}
+[3.522429] (-) TimerEvent: {}
+[3.623122] (-) TimerEvent: {}
+[3.723787] (-) TimerEvent: {}
+[3.824472] (-) TimerEvent: {}
+[3.925173] (-) TimerEvent: {}
+[4.026054] (-) TimerEvent: {}
+[4.126934] (-) TimerEvent: {}
+[4.227618] (-) TimerEvent: {}
+[4.328282] (-) TimerEvent: {}
+[4.428917] (-) TimerEvent: {}
+[4.529564] (-) TimerEvent: {}
+[4.630248] (-) TimerEvent: {}
+[4.730922] (-) TimerEvent: {}
+[4.831612] (-) TimerEvent: {}
+[4.932295] (-) TimerEvent: {}
+[5.032980] (-) TimerEvent: {}
+[5.133653] (-) TimerEvent: {}
+[5.234331] (-) TimerEvent: {}
+[5.335013] (-) TimerEvent: {}
+[5.435652] (-) TimerEvent: {}
+[5.536286] (-) TimerEvent: {}
+[5.636956] (-) TimerEvent: {}
+[5.737630] (-) TimerEvent: {}
+[5.838298] (-) TimerEvent: {}
+[5.938966] (-) TimerEvent: {}
+[6.039623] (-) TimerEvent: {}
+[6.140276] (-) TimerEvent: {}
+[6.240933] (-) TimerEvent: {}
+[6.341605] (-) TimerEvent: {}
+[6.442255] (-) TimerEvent: {}
+[6.542907] (-) TimerEvent: {}
+[6.643559] (-) TimerEvent: {}
+[6.744222] (-) TimerEvent: {}
+[6.844902] (-) TimerEvent: {}
+[6.945554] (-) TimerEvent: {}
+[7.046235] (-) TimerEvent: {}
+[7.147008] (-) TimerEvent: {}
+[7.247789] (-) TimerEvent: {}
+[7.348582] (-) TimerEvent: {}
+[7.449371] (-) TimerEvent: {}
+[7.550012] (-) TimerEvent: {}
+[7.618823] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KDataLogger::DataLogger()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.619306] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:51:50:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kentry\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[7.619462] (data_logger) StderrLine: {'line': b'   51 |                                 for (const auto &\x1b[01;35m\x1b[Kentry\x1b[m\x1b[K : fs::directory_iterator(m_drive)) {\n'}
+[7.619589] (data_logger) StderrLine: {'line': b'      |                                                  \x1b[01;35m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[7.619856] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:67:50:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kentry\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[7.619990] (data_logger) StderrLine: {'line': b'   67 |                                 for (const auto &\x1b[01;35m\x1b[Kentry\x1b[m\x1b[K : fs::directory_iterator(m_image_drive)) {\n'}
+[7.620103] (data_logger) StderrLine: {'line': b'      |                                                  \x1b[01;35m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[7.650148] (-) TimerEvent: {}
+[7.750776] (-) TimerEvent: {}
+[7.778499] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:32:37:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kvariable \xe2\x80\x98\x1b[01m\x1b[Kqos\x1b[m\x1b[K\xe2\x80\x99 set but not used [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-but-set-variable\x07-Wunused-but-set-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[7.778952] (data_logger) StderrLine: {'line': b'   32 |                         rclcpp::QoS \x1b[01;35m\x1b[Kqos\x1b[m\x1b[K = rclcpp::QoS(1);\n'}
+[7.779088] (data_logger) StderrLine: {'line': b'      |                                     \x1b[01;35m\x1b[K^~~\x1b[m\x1b[K\n'}
+[7.850936] (-) TimerEvent: {}
+[7.951562] (-) TimerEvent: {}
+[8.052151] (-) TimerEvent: {}
+[8.152707] (-) TimerEvent: {}
+[8.253435] (-) TimerEvent: {}
+[8.354080] (-) TimerEvent: {}
+[8.454697] (-) TimerEvent: {}
+[8.555225] (-) TimerEvent: {}
+[8.655863] (-) TimerEvent: {}
+[8.756546] (-) TimerEvent: {}
+[8.857204] (-) TimerEvent: {}
+[8.957836] (-) TimerEvent: {}
+[9.058485] (-) TimerEvent: {}
+[9.159119] (-) TimerEvent: {}
+[9.259764] (-) TimerEvent: {}
+[9.360431] (-) TimerEvent: {}
+[9.461103] (-) TimerEvent: {}
+[9.561744] (-) TimerEvent: {}
+[9.662399] (-) TimerEvent: {}
+[9.763070] (-) TimerEvent: {}
+[9.863737] (-) TimerEvent: {}
+[9.964661] (-) TimerEvent: {}
+[10.065355] (-) TimerEvent: {}
+[10.166024] (-) TimerEvent: {}
+[10.266679] (-) TimerEvent: {}
+[10.367353] (-) TimerEvent: {}
+[10.468014] (-) TimerEvent: {}
+[10.568665] (-) TimerEvent: {}
+[10.669350] (-) TimerEvent: {}
+[10.769995] (-) TimerEvent: {}
+[10.870653] (-) TimerEvent: {}
+[10.971529] (-) TimerEvent: {}
+[11.072211] (-) TimerEvent: {}
+[11.172901] (-) TimerEvent: {}
+[11.273556] (-) TimerEvent: {}
+[11.374212] (-) TimerEvent: {}
+[11.474842] (-) TimerEvent: {}
+[11.575454] (-) TimerEvent: {}
+[11.676087] (-) TimerEvent: {}
+[11.776737] (-) TimerEvent: {}
+[11.877417] (-) TimerEvent: {}
+[11.978061] (-) TimerEvent: {}
+[12.078698] (-) TimerEvent: {}
+[12.179336] (-) TimerEvent: {}
+[12.279988] (-) TimerEvent: {}
+[12.380635] (-) TimerEvent: {}
+[12.481309] (-) TimerEvent: {}
+[12.581952] (-) TimerEvent: {}
+[12.682594] (-) TimerEvent: {}
+[12.783231] (-) TimerEvent: {}
+[12.884117] (-) TimerEvent: {}
+[12.984794] (-) TimerEvent: {}
+[13.085426] (-) TimerEvent: {}
+[13.186096] (-) TimerEvent: {}
+[13.286845] (-) TimerEvent: {}
+[13.387516] (-) TimerEvent: {}
+[13.488197] (-) TimerEvent: {}
+[13.588819] (-) TimerEvent: {}
+[13.689403] (-) TimerEvent: {}
+[13.790594] (-) TimerEvent: {}
+[13.891524] (-) TimerEvent: {}
+[13.992410] (-) TimerEvent: {}
+[14.093323] (-) TimerEvent: {}
+[14.194212] (-) TimerEvent: {}
+[14.295123] (-) TimerEvent: {}
+[14.396045] (-) TimerEvent: {}
+[14.496945] (-) TimerEvent: {}
+[14.597603] (-) TimerEvent: {}
+[14.698489] (-) TimerEvent: {}
+[14.799156] (-) TimerEvent: {}
+[14.899813] (-) TimerEvent: {}
+[15.000463] (-) TimerEvent: {}
+[15.101158] (-) TimerEvent: {}
+[15.201806] (-) TimerEvent: {}
+[15.302654] (-) TimerEvent: {}
+[15.403341] (-) TimerEvent: {}
+[15.504247] (-) TimerEvent: {}
+[15.604920] (-) TimerEvent: {}
+[15.705809] (-) TimerEvent: {}
+[15.806711] (-) TimerEvent: {}
+[15.907616] (-) TimerEvent: {}
+[16.008465] (-) TimerEvent: {}
+[16.109387] (-) TimerEvent: {}
+[16.210071] (-) TimerEvent: {}
+[16.310981] (-) TimerEvent: {}
+[16.411836] (-) TimerEvent: {}
+[16.512502] (-) TimerEvent: {}
+[16.613178] (-) TimerEvent: {}
+[16.713839] (-) TimerEvent: {}
+[16.814491] (-) TimerEvent: {}
+[16.915151] (-) TimerEvent: {}
+[17.015823] (-) TimerEvent: {}
+[17.116499] (-) TimerEvent: {}
+[17.217192] (-) TimerEvent: {}
+[17.317814] (-) TimerEvent: {}
+[17.418450] (-) TimerEvent: {}
+[17.519111] (-) TimerEvent: {}
+[17.619714] (-) TimerEvent: {}
+[17.720287] (-) TimerEvent: {}
+[17.820983] (-) TimerEvent: {}
+[17.921669] (-) TimerEvent: {}
+[18.022306] (-) TimerEvent: {}
+[18.122944] (-) TimerEvent: {}
+[18.223579] (-) TimerEvent: {}
+[18.324240] (-) TimerEvent: {}
+[18.424881] (-) TimerEvent: {}
+[18.525498] (-) TimerEvent: {}
+[18.626142] (-) TimerEvent: {}
+[18.726779] (-) TimerEvent: {}
+[18.827416] (-) TimerEvent: {}
+[18.928053] (-) TimerEvent: {}
+[19.028690] (-) TimerEvent: {}
+[19.129347] (-) TimerEvent: {}
+[19.229982] (-) TimerEvent: {}
+[19.330619] (-) TimerEvent: {}
+[19.431237] (-) TimerEvent: {}
+[19.531850] (-) TimerEvent: {}
+[19.632500] (-) TimerEvent: {}
+[19.733184] (-) TimerEvent: {}
+[19.833808] (-) TimerEvent: {}
+[19.934448] (-) TimerEvent: {}
+[20.035075] (-) TimerEvent: {}
+[20.135715] (-) TimerEvent: {}
+[20.236331] (-) TimerEvent: {}
+[20.336960] (-) TimerEvent: {}
+[20.437552] (-) TimerEvent: {}
+[20.538167] (-) TimerEvent: {}
+[20.638791] (-) TimerEvent: {}
+[20.739422] (-) TimerEvent: {}
+[20.840042] (-) TimerEvent: {}
+[20.940670] (-) TimerEvent: {}
+[21.041304] (-) TimerEvent: {}
+[21.141921] (-) TimerEvent: {}
+[21.242542] (-) TimerEvent: {}
+[21.343167] (-) TimerEvent: {}
+[21.443763] (-) TimerEvent: {}
+[21.544356] (-) TimerEvent: {}
+[21.645005] (-) TimerEvent: {}
+[21.745629] (-) TimerEvent: {}
+[21.846255] (-) TimerEvent: {}
+[21.946882] (-) TimerEvent: {}
+[22.047486] (-) TimerEvent: {}
+[22.148086] (-) TimerEvent: {}
+[22.248710] (-) TimerEvent: {}
+[22.349341] (-) TimerEvent: {}
+[22.449932] (-) TimerEvent: {}
+[22.550553] (-) TimerEvent: {}
+[22.651189] (-) TimerEvent: {}
+[22.751811] (-) TimerEvent: {}
+[22.852447] (-) TimerEvent: {}
+[22.953080] (-) TimerEvent: {}
+[23.053679] (-) TimerEvent: {}
+[23.154274] (-) TimerEvent: {}
+[23.254895] (-) TimerEvent: {}
+[23.355530] (-) TimerEvent: {}
+[23.456138] (-) TimerEvent: {}
+[23.556730] (-) TimerEvent: {}
+[23.657372] (-) TimerEvent: {}
+[23.757977] (-) TimerEvent: {}
+[23.858576] (-) TimerEvent: {}
+[23.959215] (-) TimerEvent: {}
+[24.059829] (-) TimerEvent: {}
+[24.160436] (-) TimerEvent: {}
+[24.261077] (-) TimerEvent: {}
+[24.361691] (-) TimerEvent: {}
+[24.462318] (-) TimerEvent: {}
+[24.562945] (-) TimerEvent: {}
+[24.663572] (-) TimerEvent: {}
+[24.764180] (-) TimerEvent: {}
+[24.864794] (-) TimerEvent: {}
+[24.965409] (-) TimerEvent: {}
+[25.066023] (-) TimerEvent: {}
+[25.166636] (-) TimerEvent: {}
+[25.267243] (-) TimerEvent: {}
+[25.367845] (-) TimerEvent: {}
+[25.468468] (-) TimerEvent: {}
+[25.569109] (-) TimerEvent: {}
+[25.669713] (-) TimerEvent: {}
+[25.770296] (-) TimerEvent: {}
+[25.870884] (-) TimerEvent: {}
+[25.971511] (-) TimerEvent: {}
+[26.072125] (-) TimerEvent: {}
+[26.172724] (-) TimerEvent: {}
+[26.273367] (-) TimerEvent: {}
+[26.373988] (-) TimerEvent: {}
+[26.474617] (-) TimerEvent: {}
+[26.575497] (-) TimerEvent: {}
+[26.676153] (-) TimerEvent: {}
+[26.776814] (-) TimerEvent: {}
+[26.877461] (-) TimerEvent: {}
+[26.978108] (-) TimerEvent: {}
+[27.078749] (-) TimerEvent: {}
+[27.179579] (-) TimerEvent: {}
+[27.280235] (-) TimerEvent: {}
+[27.380906] (-) TimerEvent: {}
+[27.481547] (-) TimerEvent: {}
+[27.582178] (-) TimerEvent: {}
+[27.682802] (-) TimerEvent: {}
+[27.783462] (-) TimerEvent: {}
+[27.884104] (-) TimerEvent: {}
+[27.984776] (-) TimerEvent: {}
+[28.085424] (-) TimerEvent: {}
+[28.186268] (-) TimerEvent: {}
+[28.286970] (-) TimerEvent: {}
+[28.387623] (-) TimerEvent: {}
+[28.488545] (-) TimerEvent: {}
+[28.589482] (-) TimerEvent: {}
+[28.690133] (-) TimerEvent: {}
+[28.728100] (data_logger) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking CXX executable data_logger_node2\x1b[0m\n'}
+[28.790317] (-) TimerEvent: {}
+[28.891000] (-) TimerEvent: {}
+[28.991705] (-) TimerEvent: {}
+[29.092614] (-) TimerEvent: {}
+[29.193316] (-) TimerEvent: {}
+[29.283718] (data_logger) StderrLine: {'line': b'/usr/bin/ld: warning: libopencv_imgcodecs.so.4.5d, needed by /opt/ros/humble/lib/libcv_bridge.so, may conflict with libopencv_imgcodecs.so.408\n'}
+[29.293422] (-) TimerEvent: {}
+[29.393991] (-) TimerEvent: {}
+[29.494593] (-) TimerEvent: {}
+[29.595225] (-) TimerEvent: {}
+[29.696079] (-) TimerEvent: {}
+[29.796730] (-) TimerEvent: {}
+[29.897402] (-) TimerEvent: {}
+[29.998250] (-) TimerEvent: {}
+[30.098912] (-) TimerEvent: {}
+[30.199744] (-) TimerEvent: {}
+[30.300412] (-) TimerEvent: {}
+[30.401316] (-) TimerEvent: {}
+[30.502187] (-) TimerEvent: {}
+[30.594085] (data_logger) StdoutLine: {'line': b'[100%] Built target data_logger_node2\n'}
+[30.602338] (-) TimerEvent: {}
+[30.617471] (data_logger) CommandEnded: {'returncode': 0}
+[30.663448] (data_logger) JobProgress: {'identifier': 'data_logger', 'progress': 'install'}
+[30.685414] (data_logger) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger'], 'cwd': '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'agxorin1'), ('ROS_PACKAGE_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/share'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda-12.2/lib64:'), ('HOME', '/home/agxorin1'), ('OLDPWD', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '2875'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'agxorin1'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib/aarch64-linux-gnu/pkgconfig:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'agxorin1'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda-12.2/bin:/home/agxorin1/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/agxorin1:@/tmp/.ICE-unix/2850,unix/agxorin1:/tmp/.ICE-unix/2850'), ('FASTRTPS_DEFAULT_PROFILES_FILE', '/var/tmp/husarnet-fastdds-simple.xml'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/9c9a1b42_14bf_4e27_b7c7_22948c1932df'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('RMW_IMPLEMENTATION', 'rmw_fastrtps_cpp'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.92'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_mux:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/new_car_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_bot_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/data_logger:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_car_gazebo:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_mux:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/new_car_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_bot_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/data_logger:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers:/opt/ros/humble:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_car_gazebo')]), 'shell': False}
+[30.702177] (data_logger) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[30.702635] (-) TimerEvent: {}
+[30.702879] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/lib/data_logger/data_logger_node2\n'}
+[30.714384] (data_logger) StdoutLine: {'line': b'-- Set runtime path of "/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/lib/data_logger/data_logger_node2" to ""\n'}
+[30.714750] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/ament_index/resource_index/package_run_dependencies/data_logger\n'}
+[30.715107] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/ament_index/resource_index/parent_prefix_path/data_logger\n'}
+[30.715443] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/environment/ament_prefix_path.sh\n'}
+[30.715681] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/environment/ament_prefix_path.dsv\n'}
+[30.715913] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/environment/path.sh\n'}
+[30.716135] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/environment/path.dsv\n'}
+[30.716353] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/local_setup.bash\n'}
+[30.716598] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/local_setup.sh\n'}
+[30.716855] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/local_setup.zsh\n'}
+[30.717072] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/local_setup.dsv\n'}
+[30.717281] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/package.dsv\n'}
+[30.717661] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/ament_index/resource_index/packages/data_logger\n'}
+[30.717939] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/cmake/data_loggerConfig.cmake\n'}
+[30.718139] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/cmake/data_loggerConfig-version.cmake\n'}
+[30.718348] (data_logger) StdoutLine: {'line': b'-- Installing: /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/install/data_logger/share/data_logger/package.xml\n'}
+[30.721948] (data_logger) CommandEnded: {'returncode': 0}
+[30.802832] (-) TimerEvent: {}
+[30.833311] (data_logger) JobEnded: {'identifier': 'data_logger', 'rc': 0}
+[30.836089] (-) EventReactorShutdown: {}
