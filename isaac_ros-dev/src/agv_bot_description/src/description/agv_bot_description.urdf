@@ -89,9 +89,9 @@
   </xacro:macro>
 
 
-  <xacro:wheel prefix="drivewhl_r" x_reflect="-1" y_reflect="1" />
+  <xacro:wheel prefix="drivewhl_l" x_reflect="-1" y_reflect="1" />
   <xacro:steeringwheels prefix="drivewhl_steering_r" x_reflect="1" y_reflect="-1" />
-  <xacro:wheel prefix="drivewhl_l" x_reflect="-1" y_reflect="-1" />
+  <xacro:wheel prefix="drivewhl_r" x_reflect="-1" y_reflect="-1" />
   <xacro:steeringwheels prefix="drivewhl_steering_l" x_reflect="1" y_reflect="1" />
 
   <!-- Lidar -->
