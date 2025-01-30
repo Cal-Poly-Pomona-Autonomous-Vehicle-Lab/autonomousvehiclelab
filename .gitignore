@@ -10,3 +10,6 @@
 .vscode
 *yolo*
 *node_modules*
+**/log/**
+**/build/**
+**/install/**
