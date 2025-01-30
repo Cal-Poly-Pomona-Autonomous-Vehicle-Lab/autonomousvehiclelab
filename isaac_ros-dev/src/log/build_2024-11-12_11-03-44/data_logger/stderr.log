@@ -1,0 +1,7 @@
+[01m[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:14:10:[m[K [01;31m[Kfatal error: [m[Kmessage_filters/synchronizer.hpp: No such file or directory
+   14 | #include [01;31m[K<message_filters/synchronizer.hpp>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/data_logger_node2.dir/build.make:76: CMakeFiles/data_logger_node2.dir/src/data_logger_node2.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/data_logger_node2.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

@@ -1,0 +1,317 @@
+[0.000000] (-) TimerEvent: {}
+[0.000546] (-) JobUnselected: {'identifier': 'agv_bot_description'}
+[0.000756] (-) JobUnselected: {'identifier': 'async_web_server_cpp'}
+[0.000812] (-) JobUnselected: {'identifier': 'camera_publishers'}
+[0.000861] (-) JobUnselected: {'identifier': 'gps_package'}
+[0.000932] (-) JobUnselected: {'identifier': 'image_stitcher'}
+[0.001274] (-) JobUnselected: {'identifier': 'joint_state_publisher'}
+[0.001352] (-) JobUnselected: {'identifier': 'joint_state_publisher_gui'}
+[0.001487] (-) JobUnselected: {'identifier': 'motor_control_pkg'}
+[0.001528] (-) JobUnselected: {'identifier': 'realsense2_camera'}
+[0.001584] (-) JobUnselected: {'identifier': 'realsense2_camera_msgs'}
+[0.001637] (-) JobUnselected: {'identifier': 'realsense2_description'}
+[0.001849] (-) JobUnselected: {'identifier': 'realsense_obj_det'}
+[0.001923] (-) JobUnselected: {'identifier': 'road_segmentation'}
+[0.002049] (-) JobUnselected: {'identifier': 'teleop_twist_joy'}
+[0.002090] (-) JobUnselected: {'identifier': 'teleop_twist_keyboard'}
+[0.002132] (-) JobUnselected: {'identifier': 'twist_converter'}
+[0.002184] (-) JobUnselected: {'identifier': 'twist_mux'}
+[0.002224] (-) JobUnselected: {'identifier': 'web_video_server'}
+[0.002270] (data_logger) JobQueued: {'identifier': 'data_logger', 'dependencies': OrderedDict()}
+[0.002551] (data_logger) JobStarted: {'identifier': 'data_logger'}
+[0.019610] (data_logger) JobProgress: {'identifier': 'data_logger', 'progress': 'cmake'}
+[0.020740] (data_logger) JobProgress: {'identifier': 'data_logger', 'progress': 'build'}
+[0.021800] (data_logger) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger', '--', '-j8', '-l8'], 'cwd': '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'agxorin1'), ('ROS_PACKAGE_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/share'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs/lib:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib:/usr/local/cuda-12.2/lib64:'), ('HOME', '/home/agxorin1'), ('OLDPWD', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('SYSTEMD_EXEC_PID', '2875'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('IM_CONFIG_PHASE', '1'), ('COLCON_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'agxorin1'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib/aarch64-linux-gnu/pkgconfig:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'agxorin1'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/opt/ros/humble/bin:/usr/local/cuda-12.2/bin:/home/agxorin1/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/agxorin1:@/tmp/.ICE-unix/2850,unix/agxorin1:/tmp/.ICE-unix/2850'), ('FASTRTPS_DEFAULT_PROFILES_FILE', '/var/tmp/husarnet-fastdds-simple.xml'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/9c9a1b42_14bf_4e27_b7c7_22948c1932df'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('RMW_IMPLEMENTATION', 'rmw_fastrtps_cpp'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('GNOME_TERMINAL_SERVICE', ':1.92'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_mux:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/new_car_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_bot_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/data_logger:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_car_gazebo:/opt/ros/humble'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/data_logger'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs/local/lib/python3.10/dist-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package/lib/python3.10/site-packages:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_mux:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_joy:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense2_camera_msgs:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/new_car_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_bot_description:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/data_logger:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/web_video_server_python:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/twist_converter:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/teleop_twist_keyboard:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/road_segmentation:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/realsense_obj_det:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_derek:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/object_avoidance:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/motor_control_pkg:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher_gui:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/joint_state_publisher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/image_stitcher:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/gps_package:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/camera_publishers:/opt/ros/humble:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/async_web_server_cpp:/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/install/agv_car_gazebo')]), 'shell': False}
+[0.098418] (-) TimerEvent: {}
+[0.125061] (data_logger) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/data_logger_node2.dir/src/data_logger_node2.cpp.o\x1b[0m\n'}
+[0.198629] (-) TimerEvent: {}
+[0.299449] (-) TimerEvent: {}
+[0.400253] (-) TimerEvent: {}
+[0.501051] (-) TimerEvent: {}
+[0.601835] (-) TimerEvent: {}
+[0.702599] (-) TimerEvent: {}
+[0.803405] (-) TimerEvent: {}
+[0.904213] (-) TimerEvent: {}
+[1.005026] (-) TimerEvent: {}
+[1.105830] (-) TimerEvent: {}
+[1.206624] (-) TimerEvent: {}
+[1.307444] (-) TimerEvent: {}
+[1.408296] (-) TimerEvent: {}
+[1.509101] (-) TimerEvent: {}
+[1.609904] (-) TimerEvent: {}
+[1.710673] (-) TimerEvent: {}
+[1.811461] (-) TimerEvent: {}
+[1.912256] (-) TimerEvent: {}
+[2.013055] (-) TimerEvent: {}
+[2.113858] (-) TimerEvent: {}
+[2.214651] (-) TimerEvent: {}
+[2.315474] (-) TimerEvent: {}
+[2.416272] (-) TimerEvent: {}
+[2.517079] (-) TimerEvent: {}
+[2.617867] (-) TimerEvent: {}
+[2.718666] (-) TimerEvent: {}
+[2.819508] (-) TimerEvent: {}
+[2.920315] (-) TimerEvent: {}
+[3.021127] (-) TimerEvent: {}
+[3.121931] (-) TimerEvent: {}
+[3.222762] (-) TimerEvent: {}
+[3.323570] (-) TimerEvent: {}
+[3.424374] (-) TimerEvent: {}
+[3.525169] (-) TimerEvent: {}
+[3.625954] (-) TimerEvent: {}
+[3.726743] (-) TimerEvent: {}
+[3.827497] (-) TimerEvent: {}
+[3.928274] (-) TimerEvent: {}
+[4.029071] (-) TimerEvent: {}
+[4.129850] (-) TimerEvent: {}
+[4.230655] (-) TimerEvent: {}
+[4.331499] (-) TimerEvent: {}
+[4.432308] (-) TimerEvent: {}
+[4.533124] (-) TimerEvent: {}
+[4.633949] (-) TimerEvent: {}
+[4.734756] (-) TimerEvent: {}
+[4.835532] (-) TimerEvent: {}
+[4.936337] (-) TimerEvent: {}
+[5.037151] (-) TimerEvent: {}
+[5.137969] (-) TimerEvent: {}
+[5.239058] (-) TimerEvent: {}
+[5.339880] (-) TimerEvent: {}
+[5.440694] (-) TimerEvent: {}
+[5.541504] (-) TimerEvent: {}
+[5.642311] (-) TimerEvent: {}
+[5.743151] (-) TimerEvent: {}
+[5.843952] (-) TimerEvent: {}
+[5.944759] (-) TimerEvent: {}
+[6.045576] (-) TimerEvent: {}
+[6.146389] (-) TimerEvent: {}
+[6.247228] (-) TimerEvent: {}
+[6.348044] (-) TimerEvent: {}
+[6.448865] (-) TimerEvent: {}
+[6.549681] (-) TimerEvent: {}
+[6.650495] (-) TimerEvent: {}
+[6.751315] (-) TimerEvent: {}
+[6.852114] (-) TimerEvent: {}
+[6.952920] (-) TimerEvent: {}
+[7.053718] (-) TimerEvent: {}
+[7.154531] (-) TimerEvent: {}
+[7.255366] (-) TimerEvent: {}
+[7.356183] (-) TimerEvent: {}
+[7.456999] (-) TimerEvent: {}
+[7.490536] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[KDataLogger::DataLogger()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.491067] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:51:50:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kentry\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[7.491224] (data_logger) StderrLine: {'line': b'   51 |                                 for (const auto &\x1b[01;35m\x1b[Kentry\x1b[m\x1b[K : fs::directory_iterator(m_drive)) {\n'}
+[7.491350] (data_logger) StderrLine: {'line': b'      |                                                  \x1b[01;35m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[7.491904] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:67:50:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kentry\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[7.492101] (data_logger) StderrLine: {'line': b'   67 |                                 for (const auto &\x1b[01;35m\x1b[Kentry\x1b[m\x1b[K : fs::directory_iterator(m_image_drive)) {\n'}
+[7.492241] (data_logger) StderrLine: {'line': b'      |                                                  \x1b[01;35m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[7.495103] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:97:37:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[Kmessage_filters::Subscriber<sensor_msgs::msg::Image_<std::allocator<void> > >::subscribe(DataLogger*, const char [20], rclcpp::QoS&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.495534] (data_logger) StderrLine: {'line': b'   97 |             \x1b[01;31m\x1b[Km_front_camera.subscribe(this, "/video/front_camera", qos)\x1b[m\x1b[K;\n'}
+[7.495703] (data_logger) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.495820] (data_logger) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:13\x1b[m\x1b[K:\n'}
+[7.495948] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:219:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(message_filters::Subscriber<M, NodeType>::NodePtr, const string&, rmw_qos_profile_t) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; message_filters::Subscriber<M, NodeType>::NodePtr = std::shared_ptr<rclcpp::Node>; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.496070] (data_logger) StderrLine: {'line': b'  219 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(NodePtr node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.496176] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.496276] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:219:26:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 1 from \xe2\x80\x98\x1b[01m\x1b[KDataLogger*\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kmessage_filters::Subscriber<sensor_msgs::msg::Image_<std::allocator<void> > >::NodePtr\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kstd::shared_ptr<rclcpp::Node>\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[7.496381] (data_logger) StderrLine: {'line': b'  219 |   void subscribe(\x1b[01;36m\x1b[KNodePtr node\x1b[m\x1b[K, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.496480] (data_logger) StderrLine: {'line': b'      |                  \x1b[01;36m\x1b[K~~~~~~~~^~~~\x1b[m\x1b[K\n'}
+[7.496580] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:234:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(NodeType*, const string&, rmw_qos_profile_t) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.496683] (data_logger) StderrLine: {'line': b'  234 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(NodeType * node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.496782] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.496876] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:234:85:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 3 from \xe2\x80\x98\x1b[01m\x1b[Krclcpp::QoS\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Krmw_qos_profile_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Krmw_qos_profile_s\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[7.496975] (data_logger) StderrLine: {'line': b'  234 |   void subscribe(NodeType * node, const std::string& topic, \x1b[01;36m\x1b[Kconst rmw_qos_profile_t qos = rmw_qos_profile_default\x1b[m\x1b[K) override\n'}
+[7.497099] (data_logger) StderrLine: {'line': b'      |                                                             \x1b[01;36m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.497200] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:249:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(message_filters::Subscriber<M, NodeType>::NodePtr, const string&, rmw_qos_profile_t, rclcpp::SubscriptionOptions) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; message_filters::Subscriber<M, NodeType>::NodePtr = std::shared_ptr<rclcpp::Node>; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s; rclcpp::SubscriptionOptions = rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.497319] (data_logger) StderrLine: {'line': b'  249 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(\n'}
+[7.497418] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.503474] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:249:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[7.503740] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:271:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(NodeType*, const string&, rmw_qos_profile_t, rclcpp::SubscriptionOptions) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s; rclcpp::SubscriptionOptions = rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.504384] (data_logger) StderrLine: {'line': b'  271 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(\n'}
+[7.504778] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.504906] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:271:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[7.505022] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:298:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe() [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.505137] (data_logger) StderrLine: {'line': b'  298 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K() override\n'}
+[7.505241] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.505344] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:298:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 0 arguments, 3 provided\n'}
+[7.505445] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:98:36:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[Kmessage_filters::Subscriber<sensor_msgs::msg::Image_<std::allocator<void> > >::subscribe(DataLogger*, const char [19], rclcpp::QoS&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.505550] (data_logger) StderrLine: {'line': b'   98 |             \x1b[01;31m\x1b[Km_left_camera.subscribe(this, "/video/left_camera", qos)\x1b[m\x1b[K;\n'}
+[7.505651] (data_logger) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.505748] (data_logger) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:13\x1b[m\x1b[K:\n'}
+[7.505847] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:219:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(message_filters::Subscriber<M, NodeType>::NodePtr, const string&, rmw_qos_profile_t) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; message_filters::Subscriber<M, NodeType>::NodePtr = std::shared_ptr<rclcpp::Node>; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.505970] (data_logger) StderrLine: {'line': b'  219 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(NodePtr node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.506073] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.506170] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:219:26:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 1 from \xe2\x80\x98\x1b[01m\x1b[KDataLogger*\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kmessage_filters::Subscriber<sensor_msgs::msg::Image_<std::allocator<void> > >::NodePtr\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kstd::shared_ptr<rclcpp::Node>\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[7.506304] (data_logger) StderrLine: {'line': b'  219 |   void subscribe(\x1b[01;36m\x1b[KNodePtr node\x1b[m\x1b[K, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.506407] (data_logger) StderrLine: {'line': b'      |                  \x1b[01;36m\x1b[K~~~~~~~~^~~~\x1b[m\x1b[K\n'}
+[7.506504] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:234:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(NodeType*, const string&, rmw_qos_profile_t) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.506607] (data_logger) StderrLine: {'line': b'  234 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(NodeType * node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.506725] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.506834] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:234:85:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 3 from \xe2\x80\x98\x1b[01m\x1b[Krclcpp::QoS\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Krmw_qos_profile_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Krmw_qos_profile_s\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[7.506939] (data_logger) StderrLine: {'line': b'  234 |   void subscribe(NodeType * node, const std::string& topic, \x1b[01;36m\x1b[Kconst rmw_qos_profile_t qos = rmw_qos_profile_default\x1b[m\x1b[K) override\n'}
+[7.507039] (data_logger) StderrLine: {'line': b'      |                                                             \x1b[01;36m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.507137] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:249:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(message_filters::Subscriber<M, NodeType>::NodePtr, const string&, rmw_qos_profile_t, rclcpp::SubscriptionOptions) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; message_filters::Subscriber<M, NodeType>::NodePtr = std::shared_ptr<rclcpp::Node>; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s; rclcpp::SubscriptionOptions = rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.507267] (data_logger) StderrLine: {'line': b'  249 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(\n'}
+[7.507369] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.507466] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:249:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[7.507565] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:271:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(NodeType*, const string&, rmw_qos_profile_t, rclcpp::SubscriptionOptions) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s; rclcpp::SubscriptionOptions = rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.507668] (data_logger) StderrLine: {'line': b'  271 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(\n'}
+[7.507763] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.507858] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:271:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[7.507954] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:298:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe() [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.508054] (data_logger) StderrLine: {'line': b'  298 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K() override\n'}
+[7.508149] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.508243] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:298:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 0 arguments, 3 provided\n'}
+[7.508338] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:99:37:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[Kmessage_filters::Subscriber<sensor_msgs::msg::Image_<std::allocator<void> > >::subscribe(DataLogger*, const char [20], rclcpp::QoS&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.508436] (data_logger) StderrLine: {'line': b'   99 |             \x1b[01;31m\x1b[Km_right_camera.subscribe(this, "/video/right_camera", qos)\x1b[m\x1b[K;\n'}
+[7.508544] (data_logger) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.508657] (data_logger) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:13\x1b[m\x1b[K:\n'}
+[7.508755] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:219:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(message_filters::Subscriber<M, NodeType>::NodePtr, const string&, rmw_qos_profile_t) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; message_filters::Subscriber<M, NodeType>::NodePtr = std::shared_ptr<rclcpp::Node>; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.508856] (data_logger) StderrLine: {'line': b'  219 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(NodePtr node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.508963] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.509057] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:219:26:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 1 from \xe2\x80\x98\x1b[01m\x1b[KDataLogger*\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kmessage_filters::Subscriber<sensor_msgs::msg::Image_<std::allocator<void> > >::NodePtr\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kstd::shared_ptr<rclcpp::Node>\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[7.509153] (data_logger) StderrLine: {'line': b'  219 |   void subscribe(\x1b[01;36m\x1b[KNodePtr node\x1b[m\x1b[K, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.509260] (data_logger) StderrLine: {'line': b'      |                  \x1b[01;36m\x1b[K~~~~~~~~^~~~\x1b[m\x1b[K\n'}
+[7.509360] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:234:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(NodeType*, const string&, rmw_qos_profile_t) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.509461] (data_logger) StderrLine: {'line': b'  234 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(NodeType * node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.509560] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.509655] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:234:85:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 3 from \xe2\x80\x98\x1b[01m\x1b[Krclcpp::QoS\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Krmw_qos_profile_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Krmw_qos_profile_s\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[7.509757] (data_logger) StderrLine: {'line': b'  234 |   void subscribe(NodeType * node, const std::string& topic, \x1b[01;36m\x1b[Kconst rmw_qos_profile_t qos = rmw_qos_profile_default\x1b[m\x1b[K) override\n'}
+[7.509854] (data_logger) StderrLine: {'line': b'      |                                                             \x1b[01;36m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.509951] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:249:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(message_filters::Subscriber<M, NodeType>::NodePtr, const string&, rmw_qos_profile_t, rclcpp::SubscriptionOptions) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; message_filters::Subscriber<M, NodeType>::NodePtr = std::shared_ptr<rclcpp::Node>; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s; rclcpp::SubscriptionOptions = rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.510055] (data_logger) StderrLine: {'line': b'  249 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(\n'}
+[7.510150] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.510244] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:249:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[7.510340] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:271:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(NodeType*, const string&, rmw_qos_profile_t, rclcpp::SubscriptionOptions) [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s; rclcpp::SubscriptionOptions = rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.510463] (data_logger) StderrLine: {'line': b'  271 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(\n'}
+[7.510569] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.510665] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:271:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[7.510824] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:298:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe() [with M = sensor_msgs::msg::Image_<std::allocator<void> >; NodeType = rclcpp::Node]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.510938] (data_logger) StderrLine: {'line': b'  298 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K() override\n'}
+[7.511038] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.511135] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:298:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 0 arguments, 3 provided\n'}
+[7.511232] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:100:37:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[Kmessage_filters::Subscriber<geometry_msgs::msg::Twist_<std::allocator<void> > >::subscribe(DataLogger*, const char [19], rclcpp::QoS&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.511346] (data_logger) StderrLine: {'line': b'  100 |             \x1b[01;31m\x1b[Km_steering_msg.subscribe(this, "/twist_mux/cmd_vel", qos)\x1b[m\x1b[K;\n'}
+[7.511450] (data_logger) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.511549] (data_logger) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/data_logger/src/data_logger_node2.cpp:13\x1b[m\x1b[K:\n'}
+[7.511648] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:219:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(message_filters::Subscriber<M, NodeType>::NodePtr, const string&, rmw_qos_profile_t) [with M = geometry_msgs::msg::Twist_<std::allocator<void> >; NodeType = rclcpp::Node; message_filters::Subscriber<M, NodeType>::NodePtr = std::shared_ptr<rclcpp::Node>; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.511752] (data_logger) StderrLine: {'line': b'  219 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(NodePtr node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.511850] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.511945] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:219:26:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 1 from \xe2\x80\x98\x1b[01m\x1b[KDataLogger*\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kmessage_filters::Subscriber<geometry_msgs::msg::Twist_<std::allocator<void> > >::NodePtr\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kstd::shared_ptr<rclcpp::Node>\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[7.512057] (data_logger) StderrLine: {'line': b'  219 |   void subscribe(\x1b[01;36m\x1b[KNodePtr node\x1b[m\x1b[K, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.512154] (data_logger) StderrLine: {'line': b'      |                  \x1b[01;36m\x1b[K~~~~~~~~^~~~\x1b[m\x1b[K\n'}
+[7.512251] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:234:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(NodeType*, const string&, rmw_qos_profile_t) [with M = geometry_msgs::msg::Twist_<std::allocator<void> >; NodeType = rclcpp::Node; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.512353] (data_logger) StderrLine: {'line': b'  234 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(NodeType * node, const std::string& topic, const rmw_qos_profile_t qos = rmw_qos_profile_default) override\n'}
+[7.512449] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.512543] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:234:85:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 3 from \xe2\x80\x98\x1b[01m\x1b[Krclcpp::QoS\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Krmw_qos_profile_t\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Krmw_qos_profile_s\x1b[m\x1b[K\xe2\x80\x99}\n'}
+[7.512642] (data_logger) StderrLine: {'line': b'  234 |   void subscribe(NodeType * node, const std::string& topic, \x1b[01;36m\x1b[Kconst rmw_qos_profile_t qos = rmw_qos_profile_default\x1b[m\x1b[K) override\n'}
+[7.512737] (data_logger) StderrLine: {'line': b'      |                                                             \x1b[01;36m\x1b[K~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.512831] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:249:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(message_filters::Subscriber<M, NodeType>::NodePtr, const string&, rmw_qos_profile_t, rclcpp::SubscriptionOptions) [with M = geometry_msgs::msg::Twist_<std::allocator<void> >; NodeType = rclcpp::Node; message_filters::Subscriber<M, NodeType>::NodePtr = std::shared_ptr<rclcpp::Node>; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s; rclcpp::SubscriptionOptions = rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.512969] (data_logger) StderrLine: {'line': b'  249 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(\n'}
+[7.513069] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.513166] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:249:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[7.513262] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:271:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe(NodeType*, const string&, rmw_qos_profile_t, rclcpp::SubscriptionOptions) [with M = geometry_msgs::msg::Twist_<std::allocator<void> >; NodeType = rclcpp::Node; std::string = std::__cxx11::basic_string<char>; rmw_qos_profile_t = rmw_qos_profile_s; rclcpp::SubscriptionOptions = rclcpp::SubscriptionOptionsWithAllocator<std::allocator<void> >]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.513383] (data_logger) StderrLine: {'line': b'  271 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K(\n'}
+[7.513483] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.513578] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:271:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[7.513674] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:298:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kvoid message_filters::Subscriber<M, NodeType>::subscribe() [with M = geometry_msgs::msg::Twist_<std::allocator<void> >; NodeType = rclcpp::Node]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.513774] (data_logger) StderrLine: {'line': b'  298 |   void \x1b[01;36m\x1b[Ksubscribe\x1b[m\x1b[K() override\n'}
+[7.513868] (data_logger) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.513963] (data_logger) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/message_filters/message_filters/subscriber.h:298:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 0 arguments, 3 provided\n'}
+[7.557132] (-) TimerEvent: {}
+[7.657739] (-) TimerEvent: {}
+[7.758356] (-) TimerEvent: {}
+[7.859043] (-) TimerEvent: {}
+[7.959667] (-) TimerEvent: {}
+[8.060259] (-) TimerEvent: {}
+[8.160755] (-) TimerEvent: {}
+[8.261276] (-) TimerEvent: {}
+[8.361871] (-) TimerEvent: {}
+[8.462363] (-) TimerEvent: {}
+[8.562827] (-) TimerEvent: {}
+[8.663351] (-) TimerEvent: {}
+[8.763935] (-) TimerEvent: {}
+[8.864465] (-) TimerEvent: {}
+[8.965061] (-) TimerEvent: {}
+[9.065629] (-) TimerEvent: {}
+[9.166100] (-) TimerEvent: {}
+[9.266598] (-) TimerEvent: {}
+[9.367374] (-) TimerEvent: {}
+[9.467950] (-) TimerEvent: {}
+[9.568433] (-) TimerEvent: {}
+[9.668917] (-) TimerEvent: {}
+[9.769482] (-) TimerEvent: {}
+[9.870022] (-) TimerEvent: {}
+[9.970585] (-) TimerEvent: {}
+[10.071110] (-) TimerEvent: {}
+[10.171703] (-) TimerEvent: {}
+[10.272243] (-) TimerEvent: {}
+[10.372862] (-) TimerEvent: {}
+[10.473439] (-) TimerEvent: {}
+[10.573943] (-) TimerEvent: {}
+[10.674479] (-) TimerEvent: {}
+[10.775120] (-) TimerEvent: {}
+[10.875745] (-) TimerEvent: {}
+[10.976344] (-) TimerEvent: {}
+[11.076948] (-) TimerEvent: {}
+[11.177565] (-) TimerEvent: {}
+[11.278184] (-) TimerEvent: {}
+[11.378800] (-) TimerEvent: {}
+[11.479392] (-) TimerEvent: {}
+[11.579988] (-) TimerEvent: {}
+[11.680593] (-) TimerEvent: {}
+[11.781152] (-) TimerEvent: {}
+[11.881645] (-) TimerEvent: {}
+[11.982189] (-) TimerEvent: {}
+[12.082645] (-) TimerEvent: {}
+[12.183140] (-) TimerEvent: {}
+[12.283746] (-) TimerEvent: {}
+[12.384379] (-) TimerEvent: {}
+[12.484979] (-) TimerEvent: {}
+[12.585513] (-) TimerEvent: {}
+[12.686103] (-) TimerEvent: {}
+[12.786620] (-) TimerEvent: {}
+[12.887188] (-) TimerEvent: {}
+[12.987802] (-) TimerEvent: {}
+[13.088398] (-) TimerEvent: {}
+[13.188910] (-) TimerEvent: {}
+[13.289449] (-) TimerEvent: {}
+[13.390074] (-) TimerEvent: {}
+[13.490588] (-) TimerEvent: {}
+[13.591153] (-) TimerEvent: {}
+[13.691760] (-) TimerEvent: {}
+[13.792343] (-) TimerEvent: {}
+[13.892868] (-) TimerEvent: {}
+[13.993396] (-) TimerEvent: {}
+[14.093983] (-) TimerEvent: {}
+[14.194479] (-) TimerEvent: {}
+[14.295026] (-) TimerEvent: {}
+[14.395660] (-) TimerEvent: {}
+[14.496174] (-) TimerEvent: {}
+[14.596696] (-) TimerEvent: {}
+[14.697220] (-) TimerEvent: {}
+[14.797858] (-) TimerEvent: {}
+[14.898471] (-) TimerEvent: {}
+[14.999047] (-) TimerEvent: {}
+[15.099649] (-) TimerEvent: {}
+[15.200172] (-) TimerEvent: {}
+[15.300684] (-) TimerEvent: {}
+[15.401218] (-) TimerEvent: {}
+[15.501820] (-) TimerEvent: {}
+[15.602375] (-) TimerEvent: {}
+[15.703000] (-) TimerEvent: {}
+[15.803619] (-) TimerEvent: {}
+[15.904297] (-) TimerEvent: {}
+[16.005009] (-) TimerEvent: {}
+[16.105691] (-) TimerEvent: {}
+[16.206510] (-) TimerEvent: {}
+[16.307389] (-) TimerEvent: {}
+[16.408150] (-) TimerEvent: {}
+[16.508993] (-) TimerEvent: {}
+[16.609951] (-) TimerEvent: {}
+[16.710812] (-) TimerEvent: {}
+[16.791856] (data_logger) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/data_logger_node2.dir/build.make:76: CMakeFiles/data_logger_node2.dir/src/data_logger_node2.cpp.o] Error 1\n'}
+[16.792423] (data_logger) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/data_logger_node2.dir/all] Error 2\n'}
+[16.792963] (data_logger) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[16.797637] (data_logger) CommandEnded: {'returncode': 2}
+[16.810877] (-) TimerEvent: {}
+[16.875046] (data_logger) JobEnded: {'identifier': 'data_logger', 'rc': 2}
+[16.886619] (-) EventReactorShutdown: {}

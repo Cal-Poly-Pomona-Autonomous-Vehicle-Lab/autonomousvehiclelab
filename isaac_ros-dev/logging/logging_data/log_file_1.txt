@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Time		Image Name
 1730839208: logging/image_data/image_front_2028.jpg logging/image_data/image_left_2028.jpg logging/image_data/image_right_2028.jpg 512
 1730839208: logging/image_data/image_front_2029.jpg logging/image_data/image_left_2029.jpg logging/image_data/image_right_2029.jpg 512
@@ -2349,3 +2350,6 @@ Time		Image Name
 1730839435: logging/image_data/image_front_4375.jpg logging/image_data/image_left_4375.jpg logging/image_data/image_right_4375.jpg 512
 1730839436: logging/image_data/image_front_4376.jpg logging/image_data/image_left_4376.jpg logging/image_data/image_right_4376.jpg 512
 1730839436: logging/image_data/image_front_4377.jpg logging/image_data/image_left_4377.jpg logging/image_data/image_right_4377.jpg 512
+=======
+Time		Image Name		Steering
+>>>>>>> cbc4e0e1013de4830a002153e4f7292c64f68f34
