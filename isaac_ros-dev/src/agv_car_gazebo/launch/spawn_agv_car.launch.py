@@ -49,7 +49,7 @@ def generate_launch_description():
         executable='create',
         arguments=[
             '-name', 'Agv_Bot',
-            '-file', urdf_path,
+            '-topic', urdf_path,
             '-x', x_pose,
             '-y', y_pose,
             '-z', '1.0'

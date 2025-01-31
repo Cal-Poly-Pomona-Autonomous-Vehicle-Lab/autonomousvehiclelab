@@ -1,56 +1,86 @@
+#!/usr/bin/env python3
+#
+# Copyright 2019 ROBOTIS CO., LTD.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Authors: Joep Tool
+
 import os
 
 from ament_index_python.packages import get_package_share_directory
-
-
 from launch import LaunchDescription
+from launch.actions import AppendEnvironmentVariable
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 
-
 def generate_launch_description():
+    launch_file_dir = os.path.join(get_package_share_directory('agv_car_description'), 'launch')
+    ros_gz_sim = get_package_share_directory('ros_gz_sim')
 
-    package_name='robot_description' 
+    use_sim_time = LaunchConfiguration('use_sim_time', default='true')
+    x_pose = LaunchConfiguration('x_pose', default='0.0')
+    y_pose = LaunchConfiguration('y_pose', default='0.0')
 
-    rsp = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory(package_name),'launch','rsp.launch.py'
-                )]), launch_arguments={'use_sim_time': 'true'}.items()
+    world = os.path.join(
+        get_package_share_directory('agv_car_description'),
+        'worlds',
+        'empty.world'
     )
 
-    # Include the Gazebo launch file, provided by the gazebo_ros package
-    gazebo = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
-             )
+    os.environ['GZ_SIM_RESOURCE_PATH'] = os.path.join('/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/') 
 
-    # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
-    spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
-                        arguments=['-topic', 'robot_description',
-                                   '-entity', 'my_bot'],
-                        output='screen')
+   
+    gzserver_cmd = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(ros_gz_sim, 'launch', 'gz_sim.launch.py')
+        ),
+        launch_arguments={'gz_args': ['-r -s -v4 ', world], 'on_exit_shutdown': 'true'}.items()
+    )
+    gzclient_cmd = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(ros_gz_sim, 'launch', 'gz_sim.launch.py')
+        ),
+        launch_arguments={'gz_args': '-g -v4 '}.items()
+    )
+
+    robot_state_publisher_cmd = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(launch_file_dir, 'display.launch.py')
+        ),
+        launch_arguments={'use_sim_time': use_sim_time}.items()
+    )
+    start_gazebo_ros_spawner_cmd = Node(
+        package='ros_gz_sim',
+        executable='create',
+        arguments=[
+            '-name', 'Agv_Bot',
+            '-topic', 'robot_description',
+            '-x', x_pose,
+            '-y', y_pose,
+            '-z', '1.0'
+        ],
+        output='screen',
+    )
     
-    ack_steer_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["ack_cont"],
-    )
-    
-    joint_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_broad"],
-    )
+    ld = LaunchDescription()
 
-
-
-    return LaunchDescription([
-        rsp,
-        gazebo,
-        spawn_entity,
-        ack_steer_spawner,
-        joint_broadcaster_spawner,
-    ])
+    # Add the commands to the launch description
+    ld.add_action(gzserver_cmd)
+    ld.add_action(gzclient_cmd)
+    ld.add_action(robot_state_publisher_cmd)
+    ld.add_action(start_gazebo_ros_spawner_cmd)
+    return ld
