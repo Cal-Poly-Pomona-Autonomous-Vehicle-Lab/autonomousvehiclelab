@@ -5,7 +5,7 @@ import os
 
 def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(package='agv_car_description').find('agv_car_description')
-    default_model_path = os.path.join(pkg_share, 'description/agv_car.xacro')
+    default_model_path = os.path.join(pkg_share, 'description/final_agv_car.xacro')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
 
     robot_state_publisher_node = launch_ros.actions.Node(
