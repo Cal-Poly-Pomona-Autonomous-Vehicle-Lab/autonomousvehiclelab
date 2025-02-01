@@ -21,7 +21,9 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import AppendEnvironmentVariable
-from launch.actions import IncludeLaunchDescription
+from launch.actions import RegisterEventHandler
+from launch.event_handlers import OnProcessExit
+from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -63,24 +65,64 @@ def generate_launch_description():
         ),
         launch_arguments={'use_sim_time': use_sim_time}.items()
     )
-    start_gazebo_ros_spawner_cmd = Node(
+    gz_spawn_entity = Node(
         package='ros_gz_sim',
         executable='create',
-        arguments=[
-            '-name', 'Agv_Bot',
-            '-topic', 'robot_description',
-            '-x', x_pose,
-            '-y', y_pose,
-            '-z', '1.0'
-        ],
         output='screen',
+        arguments=['-topic', 'robot_description', '-name',
+                   'car', '-allow_renaming', 'true'],
     )
-    
-    ld = LaunchDescription()
+    load_joint_state_broadcaster = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'joint_broad'],
+        output='screen'
+    )
 
-    # Add the commands to the launch description
-    ld.add_action(gzserver_cmd)
-    ld.add_action(gzclient_cmd)
-    ld.add_action(robot_state_publisher_cmd)
-    ld.add_action(start_gazebo_ros_spawner_cmd)
-    return ld
+    load_ackermann_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'ack_cont'],
+        output='screen'
+    )
+    # Bridge
+    bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
+    # Bridge
+    # bridge = Node(
+    #     package='ros_gz_bridge',
+    #     executable='parameter_bridge',
+    #     arguments=['cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist'],
+    #     output='screen'
+    # )
+
+    return LaunchDescription([
+        bridge,
+        # Launch gazebo  environment
+        gzserver_cmd,
+        gzclient_cmd,
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=gz_spawn_entity,
+                on_exit=[load_joint_state_broadcaster],
+            )
+        ),
+
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=load_joint_state_broadcaster,
+                on_exit=[load_ackermann_controller],
+            )
+        ),
+        robot_state_publisher_cmd,
+        gz_spawn_entity,
+        # Launch Arguments
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value=use_sim_time,
+            description='If true, use simulated clock'),
+    ])
+
+ 

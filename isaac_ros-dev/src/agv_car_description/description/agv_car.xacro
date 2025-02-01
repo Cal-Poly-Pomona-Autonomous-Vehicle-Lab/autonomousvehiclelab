@@ -16,7 +16,7 @@
     <!-- Robot Base -->
     <link name="base_link">
         <visual>
-            <origin xyz=".946 .521 -.313" rpy="0 0 ${pi}" />
+            <origin xyz=".946 .521 -0.313" rpy="0 0 ${pi}" />
             <geometry>
                 <mesh filename="package://agv_car_gazebo/models/agv_car/meshes/agv_chassis.stl"/>
             </geometry>
@@ -56,7 +56,7 @@
                 </material>
             </visual>
             <collision>
-                <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+                <!-- <origin xyz="0 0 0" rpy="${pi/2} 0 0"/> -->
                 <geometry>
                     <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
                 </geometry>
@@ -68,7 +68,7 @@
         <joint name="rear_${prefix}_wheel_joint" type="revolute">
             <parent link="base_link"/>
             <child link="rear_${prefix}_wheel"/>
-            <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(base_width/2+wheel_ygap)} ${-wheel_zoff}" rpy="0 0 0"/>
+            <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(base_width/2+wheel_ygap)} 0" rpy="0 0 0"/>
             <axis xyz="0 0 1"/>
             <limit effort="1000.0" lower="-0.698" upper="0.698" velocity="0.5"/>
         </joint>
@@ -100,7 +100,7 @@
         <joint name="front_${prefix}_wheel_steering_joint" type="revolute">
             <parent link="base_link"/>
             <child link="front_${prefix}_steering_wheel_link"/>
-            <origin xyz="${x_reflect * wheel_xoff} ${y_reflect * (base_width / 2 + wheel_ygap)} ${-wheel_zoff}" rpy="0 0 0"/>
+            <origin xyz="${x_reflect * wheel_xoff} ${y_reflect * (base_width / 2 + wheel_ygap)} 0" rpy="0 0 0"/>
             <axis xyz="0 0 1"/>
             <limit effort="1000.0" lower="-0.698" upper="0.698" velocity="0.5"/>
         </joint>
@@ -122,6 +122,7 @@
                 </material>
             </visual>
             <collision>
+                <!-- <origin xyz="0 0 0" rpy="${pi/2} 0 0"/> -->
                 <geometry>
                     <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
                 </geometry>
@@ -156,7 +157,7 @@
     <joint name="virtual_front_wheel_joint" type="revolute">
     <parent link="base_link"/>
     <child link="virtual_front_wheel"/>
-    <origin xyz="${wheel_xoff} 0 ${-wheel_zoff}" rpy="0 0 ${pi/2}"/>
+    <origin xyz="${wheel_xoff} 0 0" rpy="0 0 ${pi/2}"/>
     <axis xyz="0 0 1"/>
     <limit lower="-0.7853" upper="0.7853" effort="100.0" velocity="100.0"/>
     <dynamics damping="0.2"/>
@@ -176,7 +177,7 @@
     <joint name="virtual_rear_wheel_joint" type="continuous">
     <parent link="base_link"/>
     <child link="virtual_rear_wheel"/>
-    <origin xyz="${-wheel_xoff} 0 ${-wheel_zoff}" rpy="0 0 ${pi/2}"/>
+    <origin xyz="${-wheel_xoff} 0 0" rpy="0 0 ${pi/2}"/>
     <axis xyz="1 0 0"/>
     <limit effort="100.0" velocity="100.0"/>
     <dynamics damping="0.2"/>
@@ -200,5 +201,4 @@
         <child link="velodyne"/>
         <origin xyz="0 0 1.0414" rpy="0 0 0"/>
     </joint>
-
 </robot>
