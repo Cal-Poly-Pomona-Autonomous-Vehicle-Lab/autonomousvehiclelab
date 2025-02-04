@@ -10,9 +10,12 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution, TextSubstitution
 import os
 import launch_ros
-import os
 
 def generate_launch_description():
+     # Launch configuration variables specific to simulation
+    x_pose = LaunchConfiguration('x_pose', default='0.0')
+    y_pose = LaunchConfiguration('y_pose', default='0.0')
+
     pkg_share = launch_ros.substitutions.FindPackageShare(package='agv_bot_description').find('agv_bot_description')
     default_model_path = os.path.join(pkg_share, 'src/description/agv_bot_description.urdf')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/urdf_config.rviz')
@@ -28,6 +31,19 @@ def generate_launch_description():
         name='joint_state_publisher'
         # condition=launch.conditions.UnlessCondition(LaunchConfiguration('gui'))
     )
+    start_gazebo_ros_spawner_cmd = Node(
+            package='ros_gz_sim',
+            executable='create',
+            arguments=[
+                '-name', 'agv_car',
+                '-file', '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/agv_bot_description/src/description/agv_bot_description.urdf',
+                '-x', x_pose,
+                '-y', y_pose,
+                '-z', '0.01'
+            ],
+            output='screen',
+    )
+
     # joint_state_publisher_gui_node = launch_ros.actions.Node(
     #     package='joint_state_publisher_gui',
     #     executable='joint_state_publisher_gui',
@@ -68,7 +84,10 @@ def generate_launch_description():
                                             
         joint_state_publisher_node,
         # joint_state_publisher_gui_node,
+        
         robot_state_publisher_node,
+        # start_gazebo_ros_spawner_cmd,
+        # spawn_entity,
         # robot_localization_node,
         rviz_node
     ])

@@ -1,0 +1,5 @@
+<library path="libarduino_car_hardware.so">
+  <class name="arduino_car_hardware/ArduinoCarHardware" type="ArduinoCarHardware" base_class_type="hardware_interface::SystemInterface">
+    <description>Arduino hardware interface for a bicycle kinematics car.</description>
+  </class>
+</library>

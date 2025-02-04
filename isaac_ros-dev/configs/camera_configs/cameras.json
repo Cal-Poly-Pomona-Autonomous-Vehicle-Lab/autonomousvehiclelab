@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"/dev/left_fisheye": 4, "/dev/right_fisheye": 8, "/dev/front_fisheye": 0}
+=======
+{"/dev/left_fisheye": 0, "/dev/right_fisheye": 8, "/dev/front_fisheye":4}
+>>>>>>> main

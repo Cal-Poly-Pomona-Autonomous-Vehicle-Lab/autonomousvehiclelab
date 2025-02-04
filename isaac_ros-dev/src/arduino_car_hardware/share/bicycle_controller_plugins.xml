@@ -1,0 +1,5 @@
+<library path="libbicycle_controller.so">
+  <class name="bicycle_controller/BicycleController" type="BicycleController" base_class_type="controller_interface::ControllerInterface">
+    <description>Controller for bicycle kinematics using /cmd_vel input.</description>
+  </class>
+</library>

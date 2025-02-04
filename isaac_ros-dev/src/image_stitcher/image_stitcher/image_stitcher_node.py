@@ -28,8 +28,8 @@ class ImageStitching(Node):
         self.right_publisher_ = self.create_publisher(Image, '/video/right_camera', 1)
         # self.back_publisher_ = self.create_publisher(Image, '/video/back_camera', 1)
         # self.rs_subscription = self.create_subscription(Image, '/camera/color/image_raw', self.realsense_callback, 1)
-        self.front_subscription = self.create_subscription(Image, '/video/front_camera', self.front_callback, 1)
-        self.back_subscription = self.create_subscription(Image, '/video/back_camera', self.back_callback, 1)
+        # self.front_subscription = self.create_subscription(Image, '/video/front_camera', self.front_callback, 1)
+        # self.back_subscription = self.create_subscription(Image, '/video/back_camera', self.back_callback, 1)
         # self.vel_subscription = self.create_subscription(Twist, '/wheel_velocity', self.wheel_velocity_callback, 1)
         timer_period = 0.05 #seconds
         self.timer = self.create_timer(timer_period, self.stitching_callback)
@@ -57,9 +57,15 @@ class ImageStitching(Node):
 
         self.bridge = CvBridge()
         # self.realsense_image = np.empty([480, 640, 3]).astype('uint8')
+<<<<<<< HEAD
         # self.front_image = np.empty([240, 320, 3]).astype('uint8')
         # self.left_image = np.empty([480, 640, 3]).astype('uint8')
         # self.right_image = np.empty([480, 640, 3]).astype('uint8')
+=======
+        self.front_image = np.empty([240, 320, 3]).astype('uint8')
+        self.left_image = np.empty([480, 640, 3]).astype('uint8')
+        self.right_image = np.empty([480, 640, 3]).astype('uint8')
+>>>>>>> main
         # self.back_image = np.empty([240, 320, 3]).astype('uint8')
         # self.realsense_image = np.pad(self.realsense_image, pad_width=((0,0),(640,640),(0,0)))
         # self.stitched_image = np.empty([960, 1920, 3]).astype('uint8') #np.empty([1920, 960])
@@ -82,15 +88,15 @@ class ImageStitching(Node):
     #     self.realsense_image = self.bridge.imgmsg_to_cv2(msg)
     #     self.realsense_image = cv2.cvtColor(self.realsense_image, cv2.COLOR_RGB2BGR)
 
-    def front_callback(self, msg):
-        self.front_image = self.bridge.imgmsg_to_cv2(msg)
-        #self.front_image = cv2.cvtColor(self.front_image, cv2.COLOR_RGB2BGR)
-        self.front_image = cv2.resize(self.front_image, dsize=(640,480), interpolation=cv2.INTER_LINEAR)
+    # def front_callback(self, msg):
+    #     self.front_image = self.bridge.imgmsg_to_cv2(msg)
+    #     #self.front_image = cv2.cvtColor(self.front_image, cv2.COLOR_RGB2BGR)
+    #     self.front_image = cv2.resize(self.front_image, dsize=(640,480), interpolation=cv2.INTER_LINEAR)
 
-    def back_callback(self, msg):
-        self.back_image = self.bridge.imgmsg_to_cv2(msg)
-        #self.back_image = cv2.cvtColor(self.back_image, cv2.COLOR_RGB2BGR)
-        self.back_image = cv2.resize(self.back_image, dsize=(640,480), interpolation=cv2.INTER_LINEAR)
+    # def back_callback(self, msg):
+    #     self.back_image = self.bridge.imgmsg_to_cv2(msg)
+    #     #self.back_image = cv2.cvtColor(self.back_image, cv2.COLOR_RGB2BGR)
+    #     self.back_image = cv2.resize(self.back_image, dsize=(640,480), interpolation=cv2.INTER_LINEAR)
 
         
     def stitching_callback(self):
@@ -108,8 +114,13 @@ class ImageStitching(Node):
             # _, back_image = self.back_boxcam.read()
         
             # back_image_padded = np.pad(self.back_image, pad_width=((0,0),(640,640),(0,0)))
+<<<<<<< HEAD
             # merged_frames = np.concatenate((left_image, self.front_image, right_image), axis=1)
             # merged_frames = np.concatenate((merged_frames, back_image_padded), axis=0)
+=======
+            # merged_frames = np.concatenate((left_image, front_image, right_image), axis=1)
+            # # merged_frames = np.concatenate((merged_frames, back_image_padded), axis=0)
+>>>>>>> main
             # merged_frames = cv2.resize(merged_frames, dsize=(720,480), interpolation=cv2.INTER_LINEAR)
             # merged_frames = cv2.putText(merged_frames, 'Velocity ' + str(self.vel) + " m/s", (25,380), cv2.FONT_HERSHEY_SIMPLEX, .6, (255, 0, 0), 2, cv2.LINE_AA)
             # merged_frames = cv2.putText(merged_frames, 'Steering ' + str(self.steering_angle) + ' deg', (25,430), cv2.FONT_HERSHEY_SIMPLEX, .6, (255, 0, 0), 2, cv2.LINE_AA)

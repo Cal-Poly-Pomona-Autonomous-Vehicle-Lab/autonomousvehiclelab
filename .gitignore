@@ -8,4 +8,12 @@
 *.pkl
 *.pyc
 .vscode
+<<<<<<< HEAD
 
+=======
+*yolo*
+*node_modules*
+**/log/**
+**/build/**
+**/install/**
+>>>>>>> main
