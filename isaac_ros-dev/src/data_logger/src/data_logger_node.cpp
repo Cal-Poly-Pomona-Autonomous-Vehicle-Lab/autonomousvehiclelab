@@ -93,10 +93,10 @@ class DataLogger: public rclcpp::Node {
 		} 
 
 		~DataLogger() {
-			m_subscription_front_camera.shutdown();
-			m_subscription_left_camera.shutdown(); 
-			m_subscription_right_camera.shutdown();
-			m_subscription_steering_angle.shutdown();
+			m_subscription_front_camera.reset();
+			m_subscription_left_camera.reset(); 
+			m_subscription_right_camera.reset();
+			m_subscription_steering_angle.reset();
 
 			if (m_current_file.is_open()) 
 				m_current_file.close(); 
