@@ -72,7 +72,6 @@ class DataLogger: public rclcpp::Node {
 				}
 			}
 
-
 			/* Name the current logging file */
 			m_logging_files = m_logging_files + std::to_string(m_log_count); 
 			m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 
@@ -188,14 +187,28 @@ class DataLogger: public rclcpp::Node {
 			std::chrono::system_clock::time_point now_time = std::chrono::system_clock::now(); 
 			tt = std::chrono::system_clock::to_time_t ( now_time ); 
 			
+			/* Write to the assign directory */
+			bool is_write_right_frame = cv::imwrite(right_cam_result, cv_right_ptr->image); 
+			bool is_write_left_frame = cv::imwrite(left_cam_result, cv_left_ptr->image); 
+			bool is_write_front_frame = cv::imwrite(front_cam_result, cv_front_ptr->image);
+
+			if (!is_write_right_frame) 
+				return; 
+
+			if (!is_write_left_frame) {
+				fs::remove(right_cam_result);
+				return;
+			}
+
+			if (!is_write_front_frame) {
+				fs::remove(left_cam_result); 
+				fs::remove(right_cam_result); 
+				return 
+			}
+
 			/* Input seconds and reult to current logging file */ 
 			m_current_file << tt << ": " << front_cam_result << 
 				" " << left_cam_result << " " << right_cam_result <<  " " << steering_angle_int << std::endl; 
-
-			/* Write to the assign directory */
-			cv::imwrite(right_cam_result, cv_front_ptr->image);
-			cv::imwrite(left_cam_result, cv_left_ptr->image);
-			cv::imwrite(front_cam_result, cv_front_ptr->image); 
 
 			RCLCPP_INFO(this->get_logger(), "%s", front_cam_result.c_str()); 
 		} 
