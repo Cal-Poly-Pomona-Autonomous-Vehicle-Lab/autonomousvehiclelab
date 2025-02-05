@@ -157,11 +157,11 @@ class DataLogger: public rclcpp::Node {
 			double steering_angle = msg->angular.z;
             const int steering_angle_int = steering_angle * 61.0 + 512.0;
 
-			if (m_front_cam == NULL)
+			if (m_front_cam == nullptr)
 				return; 
-			if (m_left_cam == NULL)
+			if (m_left_cam == nullptr)
 				return; 
-			if (m_right_cam == NULL)
+			if (m_right_cam == nullptr)
 				return;
 
 			cv_bridge::CvImagePtr cv_front_ptr; 
