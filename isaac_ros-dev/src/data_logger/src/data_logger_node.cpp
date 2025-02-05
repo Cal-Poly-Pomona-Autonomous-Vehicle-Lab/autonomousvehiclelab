@@ -26,16 +26,6 @@ class DataLogger: public rclcpp::Node {
 	public: 
 		DataLogger() : Node("data_logger_node"),  m_log_count(0), m_image_count(0){
 
-			/* Subscribe to the front facing camera */
-			// m_subscription_front_camera = this->create_subscription<sensor_msgs::msg::Image>(
-			// "/video/front_fisheye_camera", 10, std::bind(&FrameMangSub::topic_callback, this, _1)); 
-
-			// m_subscription_left_camera = this->create_subscription<sensor_msgs::msg::Image>(
-			// "/video/left_camera", 10, std::bind(&FrameMangSub::topic_callback, this, _1)); 
-
-			// m_subscription_front_camera = this->create_subscription<sensor_msgs::msg::Image>(
-			// "/video/right_camera", 10, std::bind(&FrameMangSub::topic_callback, this, _1)); 
-
 			m_subscription_steering_angle = this->create_subscription<geometry_msgs::msg::Twist>(
 				"/twist_mux/cmd_vel", 10, std::bind(&DataLogger::topic_callback_steering, this, _1));
 			
@@ -61,23 +51,23 @@ class DataLogger: public rclcpp::Node {
 			}
 
 			/* Check whether directory exists or not */
-			if (!fs::is_directory(m_drive)){
-				fs::create_directory(m_drive);
+			if (!fs::is_directory(M_DRIVE)){
+				fs::create_directory(M_DRIVE);
 			} else {
 				/* TODO: Use std::distance or std::count_if */
 				/* Count the number of log files in the directory */ 
-				for (const auto &entry : fs::directory_iterator(m_drive)) {
+				for (const auto &entry : fs::directory_iterator(M_DRIVE)) {
 					m_log_count++; 
 				} 
 			} 
 
 			/* Determine whether Image directory has been created or not */ 
-			if (!fs::is_directory(m_image_drive)){
-				fs::create_directory(m_image_drive); 
+			if (!fs::is_directory(M_IMAGE_DRIVE)){
+				fs::create_directory(M_IMAGE_DRIVE); 
 			} else {
 				/* TODO: Use std::distance or std::count_if */
 				/* Count the number of images in the directory */ 
-				for (const auto &entry : fs::directory_iterator(m_image_drive)) {
+				for (const auto &entry : fs::directory_iterator(M_IMAGE_DRIVE)) {
 					m_image_count++; 
 				}
 			}
@@ -85,13 +75,10 @@ class DataLogger: public rclcpp::Node {
 
 			/* Name the current logging file */
 			m_logging_files = m_logging_files + std::to_string(m_log_count); 
-			m_current_file.open(m_drive + "/" + m_logging_files + m_type_file); 
-
-			/* Append the headers for file */
-			m_current_file << "Time\t\tImage Name" << std::endl;
+			m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 
 
 			/* Get current size of filesize */
-			double mb = fs::file_size(m_drive + "/" + m_logging_files + m_type_file) / 1024 / 1024; 
+			double mb = fs::file_size(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE) / 1024 / 1024; 
 
 			/* Check size of the tx file */
 			if (mb >= 500){
@@ -100,12 +87,16 @@ class DataLogger: public rclcpp::Node {
 				m_logging_files = m_logging_files + std::to_string(m_log_count);
 
 				m_current_file.close(); 
-				m_current_file.open(m_drive + "/" + m_logging_files + m_type_file); 
+				m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 
 			}
 			RCLCPP_DEBUG(this->get_logger(), "Finish Init"); 
 		} 
 
 		~DataLogger() {
+			m_subscription_front_camera.shutdown();
+			m_subscription_left_camera.shutdown(); 
+			m_subscription_right_camera.shutdown();
+			m_subscription_steering_angle.shutdown();
 
 			if (m_current_file.is_open()) 
 				m_current_file.close(); 
@@ -125,9 +116,9 @@ class DataLogger: public rclcpp::Node {
 		std::ofstream m_current_file; 
 
 		/* '/logging' should contain logging folder */
-		const std::string m_drive = "logging/logging_data"; // '/' is the location of 1tb drive  
-		const std::string m_image_drive = "logging/image_data"; // 
-		const std::string m_type_file = ".txt"; 
+		const std::string M_DRIVE = "logging/logging_data"; // '/' is the location of 1tb drive  
+		const std::string M_IMAGE_DRIVE = "logging/image_data"; // 
+		const std::string M_TYPE_FILE = ".txt"; 
 
 		std::string m_logging_files = "log_file_"; 
 
@@ -145,7 +136,6 @@ class DataLogger: public rclcpp::Node {
 		void right_camera_callback(const sensor_msgs::msg::Image::ConstSharedPtr &msg) {
 			m_right_cam = msg; 
 		}
-
 
 		void topic_callback_steering (const geometry_msgs::msg::Twist::SharedPtr msg) {
 
@@ -173,30 +163,22 @@ class DataLogger: public rclcpp::Node {
             cv_right_ptr = cv_bridge::toCvCopy(m_right_cam, sensor_msgs::image_encodings::BGR8);
 
 			/* Check if the camera frame is empty */ 
-			/* if (left_frame_cam.empty() || right_frame_cam.empty()
-				|| front_frame_cam.empty()) {
-				RCLCPP_INFO(this->get_logger(), "%s", "A frame from one of the cameras is empty"); 	
-				return; 
-			} */ 
-
 			m_image_count++;
+			std::string front_cam_result = M_IMAGE_DRIVE + "/" 
+				+ "image_front_" + std::to_string(m_image_count) + ".jpg"; 
+			std::string left_cam_result = M_IMAGE_DRIVE + "/" 
+				+ "image_left_" + std::to_string(m_image_count) + ".jpg"; 
+			std::string right_cam_result = M_IMAGE_DRIVE + "/" 
+				+ "image_right_" + std::to_string(m_image_count) + ".jpg";
 
-			std::string front_cam_result; 
-			std::string left_cam_result; 
-			std::string right_cam_result;
-
-			front_cam_result = m_image_drive + "/" + "image_front_" + std::to_string(m_image_count) + ".jpg"; 
-			left_cam_result = m_image_drive + "/" + "image_left_" + std::to_string(m_image_count) + ".jpg"; 
-			right_cam_result = m_image_drive + "/" + "image_right_" + std::to_string(m_image_count) + ".jpg";
-
-			double mb = fs::file_size(m_drive + "/" + m_logging_files + m_type_file) / 1024 / 1024; 
+			double mb = fs::file_size(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE) / 1024 / 1024; 
 		    if (mb >= 500) {
 				m_logging_files.pop_back(); 
 				m_log_count++; 
 				m_logging_files = m_logging_files + std::to_string(m_log_count); 
 
 				m_current_file.close(); 
-				m_current_file.open(m_drive + "/" + m_logging_files + m_type_file); 	
+				m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 	
 
 				m_current_file << "Time\t\tImage Name" << std::endl;
 			} 	
@@ -207,7 +189,8 @@ class DataLogger: public rclcpp::Node {
 			tt = std::chrono::system_clock::to_time_t ( now_time ); 
 			
 			/* Input seconds and reult to current logging file */ 
-			m_current_file << tt << ": " << front_cam_result << " " << left_cam_result << " " << right_cam_result <<  " " << steering_angle_int << std::endl; 
+			m_current_file << tt << ": " << front_cam_result << 
+				" " << left_cam_result << " " << right_cam_result <<  " " << steering_angle_int << std::endl; 
 
 			/* Write to the assign directory */
 			cv::imwrite(right_cam_result, cv_front_ptr->image);
