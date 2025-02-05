@@ -1,4 +1,0 @@
-[35m[1mConsolidate compiler generated dependencies of target twist_mux[0m
-[ 33%] Built target twist_marker
-[ 66%] [32mBuilding CXX object CMakeFiles/twist_mux.dir/src/twist_mux_diagnostics.cpp.o[0m
-[ 66%] [32mBuilding CXX object CMakeFiles/twist_mux.dir/src/twist_mux.cpp.o[0m

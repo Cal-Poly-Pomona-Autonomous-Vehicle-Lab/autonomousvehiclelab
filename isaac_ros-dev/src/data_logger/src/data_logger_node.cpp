@@ -113,16 +113,6 @@ class DataLogger: public rclcpp::Node {
 
 
 	private:
-		rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr m_subscription_steering_angle;  
-		rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr m_subscription_front_camera; 
-		rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr m_subscription_left_camera; 
-		rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr m_subscription_right_camera;
-
-		sensor_msgs::msg::Image m_left_cam; 
-		sensor_msgs::msg::Image m_right_cam; 
-		sensor_msgs::msg::Image m_front_cam;
-
-
 		std::ofstream m_current_file; 
 
 		/* '/logging' should contain logging folder */
@@ -135,15 +125,15 @@ class DataLogger: public rclcpp::Node {
 		int m_log_count;
 		int m_image_count; 
 
-		void front_camera_callback(sensor_msgs::msg::Image::SharedPtr &msg) {
+		void front_camera_callback(const sensor_msgs::msg::Image::ConstSharedPtr &msg) {
 			m_front_cam = msg; 
 		}
 
-		void left_camera_callback(sensor_msgs::msg::Image::SharedPtr &msg) {
+		void left_camera_callback(const sensor_msgs::msg::Image::ConstSharedPtr &msg) {
 			m_left_cam = msg; 
 		}
 
-		void right_camera_callback(sensor_msgs::msg::Image::SharedPtr &msg) {
+		void right_camera_callback(const sensor_msgs::msg::Image::ConstSharedPtr &msg) {
 			m_right_cam = msg; 
 		}
 
@@ -158,18 +148,18 @@ class DataLogger: public rclcpp::Node {
 			double steering_angle = msg->angular.z;
             const int steering_angle_int = steering_angle * 61.0 + 512.0;
 
-			cv::Mat left_frame_cam; 
+			/* cv::Mat left_frame_cam; 
 			cv::Mat right_frame_cam;
-			cv::Mat front_frame_cam; 
+			cv::Mat front_frame_cam; */ 
 
 			cv_bridge::CvImagePtr cv_front_ptr; 
             cv_bridge::CvImagePtr cv_left_ptr; 
             cv_bridge::CvImagePtr cv_right_ptr; 
             
 
-			cv_front_ptr = cv_bridge::toCvCopy(m_front_image, sensor_msgs::image_encodings::BGR8);
-            cv_left_ptr = cv_bridge::toCvCopy(m_left_image, sensor_msgs::image_encodings::BGR8);
-            cv_right_ptr = cv_bridge::toCvCopy(m_right_image, sensor_msgs::image_encodings::BGR8);
+			cv_front_ptr = cv_bridge::toCvCopy(m_front_cam, sensor_msgs::image_encodings::BGR8);
+            cv_left_ptr = cv_bridge::toCvCopy(m_left_cam, sensor_msgs::image_encodings::BGR8);
+            cv_right_ptr = cv_bridge::toCvCopy(m_right_cam, sensor_msgs::image_encodings::BGR8);
 
 			/* Check if the camera frame is empty */ 
 			/* if (left_frame_cam.empty() || right_frame_cam.empty()
@@ -215,6 +205,15 @@ class DataLogger: public rclcpp::Node {
 
 			RCLCPP_INFO(this->get_logger(), "%s", front_cam_result.c_str()); 
 		} 
+
+		rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr m_subscription_steering_angle;  
+		rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr m_subscription_front_camera; 
+		rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr m_subscription_left_camera; 
+		rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr m_subscription_right_camera;
+
+		sensor_msgs::msg::Image::ConstSharedPtr m_left_cam; 
+		sensor_msgs::msg::Image::ConstSharedPtr m_right_cam; 
+		sensor_msgs::msg::Image::ConstSharedPtr m_front_cam;
 		 
 }; 
 

@@ -1,2 +1,0 @@
-Invoking command in '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/twist_mux': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/twist_mux -- -j8 -l8
-Invoked command in '/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/twist_mux' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/build/twist_mux -- -j8 -l8

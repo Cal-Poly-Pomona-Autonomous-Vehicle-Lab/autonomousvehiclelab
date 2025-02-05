@@ -13,11 +13,6 @@ PI = 3.1415
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 
-camera_dict = dict()
-
-with open('/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/configs/camera_configs/cameras.json') as camera_json:
-    camera_dict = json.load(camera_json)
-
 class ImageStitching(Node):
     
     def __init__(self):
@@ -37,9 +32,9 @@ class ImageStitching(Node):
         self.vel = 0.0
         self.steering_angle = 0.0
 
-        self.front_fisheye = cv2.VideoCapture(camera_dict['/dev/front_fisheye'], cv2.CAP_V4L2) # Fisheye Front
-        self.left_fisheye = cv2.VideoCapture(camera_dict['/dev/left_fisheye'], cv2.CAP_V4L2) # Left
-        self.right_fisheye = cv2.VideoCapture(camera_dict['/dev/right_fisheye'], cv2.CAP_V4L2) # Right
+        self.front_fisheye = cv2.VideoCapture(0, cv2.CAP_V4L2) # Fisheye Front
+        self.left_fisheye = cv2.VideoCapture(4, cv2.CAP_V4L2) # Left
+        self.right_fisheye = cv2.VideoCapture(8, cv2.CAP_V4L2) # Right
         # self.back_boxcam = cv2.VideoCapture(camera_dict['/dev/back_boxcam'], cv2.CAP_V4L2) # Back Boxcamera
 
 
@@ -57,15 +52,9 @@ class ImageStitching(Node):
 
         self.bridge = CvBridge()
         # self.realsense_image = np.empty([480, 640, 3]).astype('uint8')
-<<<<<<< HEAD
-        # self.front_image = np.empty([240, 320, 3]).astype('uint8')
-        # self.left_image = np.empty([480, 640, 3]).astype('uint8')
-        # self.right_image = np.empty([480, 640, 3]).astype('uint8')
-=======
         self.front_image = np.empty([240, 320, 3]).astype('uint8')
         self.left_image = np.empty([480, 640, 3]).astype('uint8')
         self.right_image = np.empty([480, 640, 3]).astype('uint8')
->>>>>>> main
         # self.back_image = np.empty([240, 320, 3]).astype('uint8')
         # self.realsense_image = np.pad(self.realsense_image, pad_width=((0,0),(640,640),(0,0)))
         # self.stitched_image = np.empty([960, 1920, 3]).astype('uint8') #np.empty([1920, 960])
@@ -113,18 +102,6 @@ class ImageStitching(Node):
             _, right_image = self.right_fisheye.read()
             # _, back_image = self.back_boxcam.read()
         
-            # back_image_padded = np.pad(self.back_image, pad_width=((0,0),(640,640),(0,0)))
-<<<<<<< HEAD
-            # merged_frames = np.concatenate((left_image, self.front_image, right_image), axis=1)
-            # merged_frames = np.concatenate((merged_frames, back_image_padded), axis=0)
-=======
-            # merged_frames = np.concatenate((left_image, front_image, right_image), axis=1)
-            # # merged_frames = np.concatenate((merged_frames, back_image_padded), axis=0)
->>>>>>> main
-            # merged_frames = cv2.resize(merged_frames, dsize=(720,480), interpolation=cv2.INTER_LINEAR)
-            # merged_frames = cv2.putText(merged_frames, 'Velocity ' + str(self.vel) + " m/s", (25,380), cv2.FONT_HERSHEY_SIMPLEX, .6, (255, 0, 0), 2, cv2.LINE_AA)
-            # merged_frames = cv2.putText(merged_frames, 'Steering ' + str(self.steering_angle) + ' deg', (25,430), cv2.FONT_HERSHEY_SIMPLEX, .6, (255, 0, 0), 2, cv2.LINE_AA)
-            # stitched_frames = self.bridge.cv2_to_imgmsg(merged_frames, 'bgr8')
             front_frame = self.bridge.cv2_to_imgmsg(front_image, 'bgr8')
             left_frame = self.bridge.cv2_to_imgmsg(left_image, 'bgr8')
             right_frame = self.bridge.cv2_to_imgmsg(right_image, 'bgr8')
