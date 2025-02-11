@@ -36,12 +36,12 @@ def generate_launch_description():
     #executable='realsense_obj_det_node'
      #)    
 
-    web_video_server_node = Node(
-        package='web_video_server',
-        namespace='web_video_server',
-        executable='web_video_server'
+    # web_video_server_node = Node(
+    #     package='web_video_server',
+    #     namespace='web_video_server',
+    #     executable='web_video_server'
         
-    )
+    # )
 
     motor_control_node = Node(
         package='motor_control_pkg',
@@ -124,7 +124,7 @@ def generate_launch_description():
         # data_logging,
         # simulator_control_node,
         # realsense_obj_det_node,
-        web_video_server_node,
+        #web_video_server_node,
         # teleop_twist_keyboard_node,
         motor_control_node,
         #road_segmentation_node.0

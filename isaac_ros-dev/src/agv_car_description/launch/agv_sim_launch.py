@@ -90,14 +90,15 @@ def generate_launch_description():
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         output='screen'
     )
-    # Bridge
-    # bridge = Node(
-    #     package='ros_gz_bridge',
-    #     executable='parameter_bridge',
-    #     arguments=['cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist'],
-    #     output='screen'
-    # )
 
+    teleop_twist_keyboard = Node(
+    package='teleop_twist_keyboard',
+    executable='teleop_twist_keyboard',
+    output='screen',
+    remappings=[
+        ('keyboard/cmd_vel', '/ack_cont/reference_unstamped')
+    ]
+)
     return LaunchDescription([
         bridge,
         # Launch gazebo  environment
@@ -123,6 +124,7 @@ def generate_launch_description():
             'use_sim_time',
             default_value=use_sim_time,
             description='If true, use simulated clock'),
+        teleop_twist_keyboard,
     ])
 
  
