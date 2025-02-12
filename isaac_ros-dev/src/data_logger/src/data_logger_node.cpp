@@ -24,7 +24,7 @@ namespace fs = std::filesystem;
 
 class DataLogger: public rclcpp::Node {
 	public: 
-		DataLogger() : Node("data_logger_node"),  m_log_count(0), m_image_count(0){
+		DataLogger() : Node("data_logger_node"), m_log_count(0), m_image_count(0){
 
 			m_subscription_steering_angle = this->create_subscription<geometry_msgs::msg::Twist>(
 				"/twist_mux/cmd_vel", 10, std::bind(&DataLogger::topic_callback_steering, this, _1));
@@ -76,18 +76,8 @@ class DataLogger: public rclcpp::Node {
 			m_logging_files = m_logging_files + std::to_string(m_log_count); 
 			m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 
 
-			/* Get current size of filesize */
-			double mb = fs::file_size(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE) / 1024 / 1024; 
+			chck_log_file_size(); 
 
-			/* Check size of the tx file */
-			if (mb >= 500){
-				m_logging_files.pop_back();
-				m_log_count++; 
-				m_logging_files = m_logging_files + std::to_string(m_log_count);
-
-				m_current_file.close(); 
-				m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 
-			}
 			RCLCPP_DEBUG(this->get_logger(), "Finish Init"); 
 		} 
 
@@ -115,14 +105,27 @@ class DataLogger: public rclcpp::Node {
 		std::ofstream m_current_file; 
 
 		/* '/logging' should contain logging folder */
-		const std::string M_DRIVE = "logging/logging_data"; // '/' is the location of 1tb drive  
-		const std::string M_IMAGE_DRIVE = "logging/image_data"; // 
-		const std::string M_TYPE_FILE = ".txt"; 
+		constexpr std::string M_DRIVE = "logging/logging_data"; // '/' is the location of 1tb drive  
+		constexpr std::string M_IMAGE_DRIVE = "logging/image_data"; // 
+		constexpr std::string M_TYPE_FILE = ".txt"; 
 
 		std::string m_logging_files = "log_file_"; 
 
-		int m_log_count;
-		int m_image_count; 
+		size_t m_log_count;
+		size_t m_image_count; 
+
+		void chck_log_file_size() {
+			double mb = fs::file_size(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE) / 1024 / 1024; 
+
+			if (mb >= 50) {
+				m_logging_files.pop_back();
+				m_log_count++; 
+				m_logging_files = m_logging_files + std::to_string(m_log_count);
+
+				m_current_file.close(); 
+				m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 
+			}
+		}
 
 		void front_camera_callback(const sensor_msgs::msg::Image::ConstSharedPtr &msg) {
 			m_front_cam = msg; 
@@ -170,40 +173,26 @@ class DataLogger: public rclcpp::Node {
 			std::string right_cam_result = M_IMAGE_DRIVE + "/" 
 				+ "image_right_" + std::to_string(m_image_count) + ".jpg";
 
-			double mb = fs::file_size(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE) / 1024 / 1024; 
-		    if (mb >= 500) {
-				m_logging_files.pop_back(); 
-				m_log_count++; 
-				m_logging_files = m_logging_files + std::to_string(m_log_count); 
 
-				m_current_file.close(); 
-				m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 	
-
-				m_current_file << "Time\t\tImage Name" << std::endl;
-			} 	
+			chck_log_file_size();
 
 			/* Get the time currently */
 			time_t tt; 
 			std::chrono::system_clock::time_point now_time = std::chrono::system_clock::now(); 
 			tt = std::chrono::system_clock::to_time_t ( now_time ); 
 			
-			/* Write to the assign directory */
-			bool is_write_right_frame = cv::imwrite(right_cam_result, cv_right_ptr->image); 
-			bool is_write_left_frame = cv::imwrite(left_cam_result, cv_left_ptr->image); 
-			bool is_write_front_frame = cv::imwrite(front_cam_result, cv_front_ptr->image);
-
-			if (!is_write_right_frame) 
-				return; 
-
-			if (!is_write_left_frame) {
+			/* Checking whether imwrite fails, delete all images created previously */
+			if (!cv::imwrite(right_cam_result, cv_right_ptr->image)) { 
+				return;
+			} 
+			if (!cv::imwrite(left_cam_result, cv_left_ptr->image)) {
 				fs::remove(right_cam_result);
 				return;
 			}
-
-			if (!is_write_front_frame) {
-				fs::remove(left_cam_result); 
+			if (!cv::imwrite(front_cam_result, cv_front_ptr->image)) {
 				fs::remove(right_cam_result); 
-				return 
+				fs::remove(left_cam_result); 
+				return;
 			}
 
 			/* Input seconds and reult to current logging file */ 
