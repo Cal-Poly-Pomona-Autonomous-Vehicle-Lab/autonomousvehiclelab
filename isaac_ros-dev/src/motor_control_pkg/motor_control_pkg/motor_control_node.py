@@ -27,9 +27,7 @@ class MotorNode(Node):
 
     def __del__(self):
         ser.flush() 
-
-        if ser.isOpen():
-                ser.close() 
+        ser.close() 
         
     def listener_callback(self, msg):
         linear_velocity = round((msg.linear.x)/1.5,2)
@@ -48,10 +46,6 @@ class MotorNode(Node):
         ser.write(bytes(message, 'utf-8'))
         #print(message)
 
-
-    def __del__(self): 
-        ser.flush() 
-        ser.close()
 
 
     def publish_wheel_velocity(self):
