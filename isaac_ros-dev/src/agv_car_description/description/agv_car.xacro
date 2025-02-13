@@ -24,12 +24,14 @@
                 <color rgba="0 1.0 1.0 1.0"/>
             </material>
         </visual>
-
+\
         <collision>
+            <origin xyz=".946 .521 -0.313" rpy="0 0 ${pi}" />
             <geometry>
                 <mesh filename="package://agv_car_gazebo/models/agv_car/meshes/agv_chassis.stl"/>
             </geometry>
         </collision>
+
 
         <xacro:box_inertia m="15" w="${base_width}" d="${base_length}" h="${base_height}"/>
     </link>

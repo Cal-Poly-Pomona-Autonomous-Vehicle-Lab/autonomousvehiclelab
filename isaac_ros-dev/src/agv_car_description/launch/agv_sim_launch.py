@@ -24,9 +24,12 @@ from launch.actions import AppendEnvironmentVariable
 from launch.actions import RegisterEventHandler
 from launch.event_handlers import OnProcessExit
 from launch.actions import DeclareLaunchArgument, ExecuteProcess, IncludeLaunchDescription
+from launch.substitutions import Command, FindExecutable, PathJoinSubstitution, LaunchConfiguration
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
+from launch.conditions import IfCondition, UnlessCondition
 
 
 def generate_launch_description():
@@ -45,6 +48,15 @@ def generate_launch_description():
 
     os.environ['GZ_SIM_RESOURCE_PATH'] = os.path.join('/home/agxorin1/autonomousvehiclelab/isaac_ros-dev/src/') 
 
+    robot_controllers = PathJoinSubstitution(
+        [
+            FindPackageShare("agv_car_description"),
+            "config",
+            "controllers.yaml",
+        ]
+    )
+    remap_odometry_tf = LaunchConfiguration("remap_odometry_tf")
+    
    
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -72,17 +84,43 @@ def generate_launch_description():
         arguments=['-topic', 'robot_description', '-name',
                    'car', '-allow_renaming', 'true'],
     )
-    load_joint_state_broadcaster = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'joint_broad'],
-        output='screen'
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_broad",]
     )
 
-    load_ackermann_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'ack_cont'],
-        output='screen'
+    # load_joint_state_broadcaster = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+    #          'joint_broad'],
+    #     output='screen'
+    # )
+
+    # # the steering controller libraries by default publish odometry on a separate topic than /tf
+    # robot_ackermann_controller_spawner_remapped = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=[
+    #         "ack_cont",
+    #         "--param-file",
+    #         robot_controllers,
+    #         "--controller-ros-args",
+    #         "-r /ack_cont/tf_odometry:=/tf",
+    #     ],
+    #     condition=IfCondition(remap_odometry_tf),
+    # )
+
+    robot_ackermann_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["ack_cont", "--param-file", robot_controllers],
+        # condition=UnlessCondition(remap_odometry_tf),
     )
+    # load_ackermann_controller = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+    #          'ack_cont'],
+    #     output='screen'
+    # )
     # Bridge
     bridge = Node(
         package='ros_gz_bridge',
@@ -90,15 +128,25 @@ def generate_launch_description():
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         output='screen'
     )
-    # Bridge
-    # bridge = Node(
-    #     package='ros_gz_bridge',
-    #     executable='parameter_bridge',
-    #     arguments=['cmd_vel@geometry_msgs/msg/Twist@gz.msgs.Twist'],
-    #     output='screen'
-    # )
+    teleop_twist_keyboard = Node(
+        package='teleop_twist_keyboard',
+        executable='teleop_twist_keyboard',
+        name='teleop_twist_keyboard',
+        output='screen',
+        remappings=[('/keyboard/cmd_vel', '/ack_cont/reference_unstamped')]  # Remap topic
+    )
 
     return LaunchDescription([
+        # Launch Arguments
+        DeclareLaunchArgument(
+            'use_sim_time',
+            default_value=use_sim_time,
+            description='If true, use simulated clock'),
+        # DeclareLaunchArgument(
+        #     "remap_odometry_tf",
+        #     default_value="true",
+        #     description="Remap odometry TF from the steering controller to the TF tree.",
+        # ),
         bridge,
         # Launch gazebo  environment
         gzserver_cmd,
@@ -106,23 +154,19 @@ def generate_launch_description():
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=gz_spawn_entity,
-                on_exit=[load_joint_state_broadcaster],
+                on_exit=[joint_state_broadcaster_spawner],
             )
         ),
-
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=load_joint_state_broadcaster,
-                on_exit=[load_ackermann_controller],
-            )
-        ),
+        # RegisterEventHandler(
+        #     event_handler=OnProcessExit(
+        #         target_action=joint_state_broadcaster_spawner,
+        #         on_exit=[robot_ackermann_controller_spawner_remapped],
+        #     )
+        # ),
+        robot_ackermann_controller_spawner,
         robot_state_publisher_cmd,
         gz_spawn_entity,
-        # Launch Arguments
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value=use_sim_time,
-            description='If true, use simulated clock'),
+        teleop_twist_keyboard,
     ])
 
  
