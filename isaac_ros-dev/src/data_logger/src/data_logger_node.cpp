@@ -73,8 +73,7 @@ class DataLogger: public rclcpp::Node {
 			}
 
 			/* Name the current logging file */
-			m_logging_files = m_logging_files + std::to_string(m_log_count); 
-			m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 
+			m_current_file.open(M_DRIVE + "/" + M_LOGGING_FILES + std::to_string(m_log_count) + M_TYPE_FILE); 
 
 			chck_log_file_size(); 
 
@@ -108,22 +107,20 @@ class DataLogger: public rclcpp::Node {
 		constexpr std::string M_DRIVE = "logging/logging_data"; // '/' is the location of 1tb drive  
 		constexpr std::string M_IMAGE_DRIVE = "logging/image_data"; // 
 		constexpr std::string M_TYPE_FILE = ".txt"; 
-
-		std::string m_logging_files = "log_file_"; 
+		constexpr std::string M_LOGGING_FILES = "log_file_"; 
 
 		size_t m_log_count;
 		size_t m_image_count; 
 
 		void chck_log_file_size() {
-			double mb = fs::file_size(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE) / 1024 / 1024; 
+			double mb = fs::file_size(M_DRIVE + "/" + M_LOGGING_FILES 
+				+ std::to_string(m_log_count) + M_TYPE_FILE) / 1024 / 1024; 
 
 			if (mb >= 50) {
-				m_logging_files.pop_back();
 				m_log_count++; 
-				m_logging_files = m_logging_files + std::to_string(m_log_count);
 
 				m_current_file.close(); 
-				m_current_file.open(M_DRIVE + "/" + m_logging_files + M_TYPE_FILE); 
+				m_current_file.open(M_DRIVE + "/" + M_LOGGING_FILES + std::to_string(m_log_count) + M_TYPE_FILE); 
 			}
 		}
 
@@ -151,9 +148,9 @@ class DataLogger: public rclcpp::Node {
 
 			if (m_front_cam == nullptr)
 				return; 
-			if (m_left_cam == nullptr)
+			else if (m_left_cam == nullptr)
 				return; 
-			if (m_right_cam == nullptr)
+			else if (m_right_cam == nullptr)
 				return;
 
 			cv_bridge::CvImagePtr cv_front_ptr; 
@@ -166,11 +163,11 @@ class DataLogger: public rclcpp::Node {
 
 			/* Check if the camera frame is empty */ 
 			m_image_count++;
-			std::string front_cam_result = M_IMAGE_DRIVE + "/" 
+			constexpr std::string front_cam_result = M_IMAGE_DRIVE + "/" 
 				+ "image_front_" + std::to_string(m_image_count) + ".jpg"; 
-			std::string left_cam_result = M_IMAGE_DRIVE + "/" 
+			constexpr std::string left_cam_result = M_IMAGE_DRIVE + "/" 
 				+ "image_left_" + std::to_string(m_image_count) + ".jpg"; 
-			std::string right_cam_result = M_IMAGE_DRIVE + "/" 
+			constexpr std::string right_cam_result = M_IMAGE_DRIVE + "/" 
 				+ "image_right_" + std::to_string(m_image_count) + ".jpg";
 
 
@@ -185,11 +182,11 @@ class DataLogger: public rclcpp::Node {
 			if (!cv::imwrite(right_cam_result, cv_right_ptr->image)) { 
 				return;
 			} 
-			if (!cv::imwrite(left_cam_result, cv_left_ptr->image)) {
+			else if (!cv::imwrite(left_cam_result, cv_left_ptr->image)) {
 				fs::remove(right_cam_result);
 				return;
 			}
-			if (!cv::imwrite(front_cam_result, cv_front_ptr->image)) {
+			else if (!cv::imwrite(front_cam_result, cv_front_ptr->image)) {
 				fs::remove(right_cam_result); 
 				fs::remove(left_cam_result); 
 				return;
