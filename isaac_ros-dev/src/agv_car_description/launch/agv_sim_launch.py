@@ -55,7 +55,7 @@ def generate_launch_description():
             "controllers.yaml",
         ]
     )
-    remap_odometry_tf = LaunchConfiguration("remap_odometry_tf")
+    # remap_odometry_tf = LaunchConfiguration("remap_odometry_tf")
     
    
     gzserver_cmd = IncludeLaunchDescription(
@@ -96,26 +96,26 @@ def generate_launch_description():
     #     output='screen'
     # )
 
-    # # the steering controller libraries by default publish odometry on a separate topic than /tf
-    # robot_ackermann_controller_spawner_remapped = Node(
-    #     package="controller_manager",
-    #     executable="spawner",
-    #     arguments=[
-    #         "ack_cont",
-    #         "--param-file",
-    #         robot_controllers,
-    #         "--controller-ros-args",
-    #         "-r /ack_cont/tf_odometry:=/tf",
-    #     ],
-    #     condition=IfCondition(remap_odometry_tf),
-    # )
-
+    # the steering controller libraries by default publish odometry on a separate topic than /tf
     robot_ackermann_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["ack_cont", "--param-file", robot_controllers],
-        # condition=UnlessCondition(remap_odometry_tf),
+        arguments=[
+            "ack_cont",
+            "--param-file",
+            robot_controllers,
+            # "--controller-ros-args",
+            # "-r /ack_cont/tf_odometry:=/tf",
+        ],
+        # condition=IfCondition(remap_odometry_tf),
     )
+
+    # robot_ackermann_controller_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["ack_cont", "--param-file", robot_controllers],
+    #     # condition=UnlessCondition(remap_odometry_tf),
+    # )
     # load_ackermann_controller = ExecuteProcess(
     #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
     #          'ack_cont'],
