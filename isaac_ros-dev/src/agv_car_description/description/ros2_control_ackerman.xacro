@@ -22,6 +22,12 @@
       <command_interface name="position" />
       <state_interface name="position" />
     </joint>
+    <joint name="front_right_wheel_joint">
+      <state_interface name="position" />
+    </joint>
+    <joint name="front_left_wheel_joint">
+      <state_interface name="position" />
+    </joint>
   </ros2_control>
   <gazebo>
       <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
