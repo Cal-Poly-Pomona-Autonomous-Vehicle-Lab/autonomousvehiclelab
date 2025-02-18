@@ -1,6 +1,7 @@
-#include "arduino_car_hardware.h"
+#include "arduino_car_hardware/include/arduino_car_hardware.h"
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include <rclcpp/logging.hpp>
+#include "rclcpp/rclcpp.hpp"
 #include "pluginlib/class_list_macros.hpp"
 
 hardware_interface::CallbackReturn ArduinoCarHardware::on_init(const hardware_interface::HardwareInfo &info) {
@@ -13,9 +14,9 @@ hardware_interface::CallbackReturn ArduinoCarHardware::on_init(const hardware_in
 
     try {
         // Initialize Arduino communication
-        arduino_comms_.setup(port, baud_rate, timeout_ms);
+        arduino_comms_(port, baud_rate, timeout_ms);
 
-        if (!arduino_comms_.connected()) {
+        if (!arduino_comms_.is_connected_) {
             RCLCPP_ERROR(rclcpp::get_logger("ArduinoCarHardware"),
                          "Failed to connect to Arduino on port: %s", port.c_str());
             return hardware_interface::CallbackReturn::ERROR;

@@ -1,5 +1,5 @@
-#ifndef BICYCLEDRIVE_ARDUINO_ARDUINO_COMMS_H
-#define BICYCLEDRIVE_ARDUINO_ARDUINO_COMMS_H
+#ifndef ARDUINO__COMMS_H
+#define ARDUINO_COMMS_H
 
 #include <boost/asio.hpp>
 #include <vector>
@@ -25,7 +25,7 @@ public:
     double left_wheel_vel = 0.0;
     double right_wheel_vel = 0.0;
     double steering_angle = 0.0;
-    
+
     std::string read();
     void write(const std::string &message);
 
@@ -34,4 +34,4 @@ public:
     bool is_connected_ = false;
 };
 
-#endif // BICYCLEDRIVE_ARDUINO_ARDUINO_COMMS_H
+#endif // ARDUINO_COMMS_H
