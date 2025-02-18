@@ -131,7 +131,7 @@
     </link>
 
     <joint name="left_wheel_steering_joint" type="revolute">
-        <origin xyz="0.9 -0.5 -0.2" rpy="1.57 0 0" />
+        <origin xyz="0.9 0.5 -0.2" rpy="1.57 0 0" />
         <parent link="chassis" />
         <child link="left_wheel_steering" />
         <axis xyz="0 1 0" />
@@ -148,7 +148,7 @@
     </link>
 
     <joint name="right_wheel_steering_joint" type="revolute">
-        <origin xyz="0.9 0.5 -0.2" rpy="1.57 0 0" />
+        <origin xyz="0.9 -0.5 -0.2" rpy="1.57 0 0" />
         <parent link="chassis" />
         <child link="right_wheel_steering" />
         <axis xyz="0 1 0" />
@@ -227,7 +227,7 @@
     </link>
 
     <joint name="velodyne_joint" type="fixed">
-        <parent link="base_link"/>
+        <parent link="chassis"/>
         <child link="velodyne"/>
         <origin xyz="0 0 1.0414" rpy="0 0 0"/>
     </joint>

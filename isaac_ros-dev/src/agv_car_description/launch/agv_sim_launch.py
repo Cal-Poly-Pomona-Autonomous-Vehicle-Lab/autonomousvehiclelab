@@ -55,7 +55,7 @@ def generate_launch_description():
             "controllers.yaml",
         ]
     )
-    # remap_odometry_tf = LaunchConfiguration("remap_odometry_tf")
+    remap_odometry_tf = LaunchConfiguration("remap_odometry_tf")
     
    
     gzserver_cmd = IncludeLaunchDescription(
@@ -104,8 +104,8 @@ def generate_launch_description():
             "ack_cont",
             "--param-file",
             robot_controllers,
-            # "--controller-ros-args",
-            # "-r /ack_cont/tf_odometry:=/tf",
+            #"--controller-ros-args",
+            #"-r /ack_cont/tf_odometry:=/tf",
         ],
         # condition=IfCondition(remap_odometry_tf),
     )
