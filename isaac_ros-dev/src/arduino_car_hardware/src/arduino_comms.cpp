@@ -29,13 +29,18 @@ std::string ArduinoComms::read() {
         throw std::runtime_error("Serial port not connected");
     }
 
+    serial_port_.cancel();  // Cancel pending I/O
+    serial_port_.flush();   // Flush buffer
+
     boost::asio::streambuf buffer;
     boost::asio::read_until(serial_port_, buffer, '\n');
     std::istream is(&buffer);
     std::string data;
     std::getline(is, data);
+    
     return data;
 }
+
 
 void ArduinoComms::write(const std::string &message) {
     if (!is_connected_) {

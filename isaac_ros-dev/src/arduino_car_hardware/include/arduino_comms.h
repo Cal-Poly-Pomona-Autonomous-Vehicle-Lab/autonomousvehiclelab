@@ -25,8 +25,7 @@ public:
     double left_wheel_vel = 0.0;
     double right_wheel_vel = 0.0;
     double steering_angle = 0.0;
-
-private:
+    
     std::string read();
     void write(const std::string &message);
 
