@@ -1,75 +1,70 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 project(arduino_car_hardware)
 
-# Required dependencies
+# Use C++17 standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
-find_package(geometry_msgs REQUIRED)
-find_package(controller_manager REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system)
 
 # Include directories
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-# Add source files for the hardware library
-add_library(arduino_car_hardware
-    src/arduino_car_hardware.cpp
-    src/arduino_comms.cpp
+include_directories(
+  include
 )
 
-# Link dependencies to the library
-ament_target_dependencies(arduino_car_hardware
-    rclcpp
-    rclcpp_lifecycle
-    hardware_interface
-    pluginlib
-    geometry_msgs
+# Add library
+add_library(${PROJECT_NAME} SHARED
+  src/arduino_comms.cpp
+  src/carlikebot_system.cpp
 )
 
-# Add the robot node as an executable
-add_executable(arduino_car_node
-    src/robot.cpp
+# Link required libraries
+target_link_libraries(${PROJECT_NAME}
+  Boost::system
 )
 
-# Link dependencies to the executable
-ament_target_dependencies(arduino_car_node
-    rclcpp
-    controller_manager
-    hardware_interface
-    geometry_msgs
+ament_target_dependencies(${PROJECT_NAME}
+  rclcpp
+  rclcpp_lifecycle
+  hardware_interface
+  pluginlib
+  Boost
 )
 
-# Link the hardware library to the executable
-target_link_libraries(arduino_car_node arduino_car_hardware)
-
-# Export plugins for ros2_control
+# Export plugin for ROS 2 control
 pluginlib_export_plugin_description_file(hardware_interface share/arduino_car_hardware_plugins.xml)
 
 # Install headers
 install(
-    DIRECTORY include/
-    DESTINATION include
+  DIRECTORY include/
+  DESTINATION include
 )
 
-# Install plugin XML files
+# Install shared library
 install(
-    FILES
-        share/arduino_car_hardware_plugins.xml
-    DESTINATION share/${PROJECT_NAME}
+  TARGETS ${PROJECT_NAME}
+  EXPORT export_${PROJECT_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
 )
 
-# Install the robot executable
+# Install plugin description
 install(
-    TARGETS arduino_car_node
-    DESTINATION lib/${PROJECT_NAME}
+  FILES share/arduino_car_hardware_plugins.xml
+  DESTINATION share/${PROJECT_NAME}
 )
 
-# Install config and launch files
-install(
-    DIRECTORY config launch
-    DESTINATION share/${PROJECT_NAME}
-)
+# Export package
+ament_export_include_directories(include)
+ament_export_libraries(${PROJECT_NAME})
+ament_export_dependencies(rclcpp rclcpp_lifecycle hardware_interface pluginlib Boost)
 
+# Finalize package
 ament_package()

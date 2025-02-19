@@ -24,6 +24,18 @@ void ArduinoComms::setup(const std::string &serial_device, int32_t baud_rate, in
     }
 }
 
+void ArduinoComms::disconnect() {
+    if (is_connected_) {
+        try {
+            serial_port_.close();
+            is_connected_ = false;
+            std::cout << "Disconnected from Arduino." << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << "Error while disconnecting: " << e.what() << std::endl;
+        }
+    }
+}
+
 std::string ArduinoComms::read() {
     if (!is_connected_) {
         throw std::runtime_error("Serial port not connected");
@@ -72,15 +84,19 @@ std::vector<double> ArduinoComms::processSerialData(std::string &input) {
     return values;
 }
 
-void ArduinoComms::getVelocityAndSteerValues() {
+std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
+    std::vector<double> values;
     try {
         if (serial_port_.is_open()) {
             std::string data = read();
-            auto values = processSerialData(data);
-            if (values.size() == 3) {
-                left_wheel_vel = values[0];
-                right_wheel_vel = values[1];
-                steering_angle = values[2];
+            auto data = processSerialData(data);
+            if (data.size() == 3) {
+                left_wheel_vel = data[0];
+                right_wheel_vel = data[1];
+                steering_angle = data[2];
+
+                values.push_back((left_wheel_vel + right_wheel_vel)/2)
+                values.push_back(steering_angle)
             } else {
                 std::cerr << "Invalid number of tokens received: " << data << std::endl;
             }
@@ -88,6 +104,8 @@ void ArduinoComms::getVelocityAndSteerValues() {
     } catch (const std::exception &e) {
         std::cerr << "Error reading velocity and steer values: " << e.what() << std::endl;
     }
+
+    return values;
 }
 
 void ArduinoComms::setMotorValues(double speed, double steer) {

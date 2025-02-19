@@ -1,4 +1,4 @@
-#ifndef ARDUINO__COMMS_H
+#ifndef ARDUINO_COMMS_H
 #define ARDUINO_COMMS_H
 
 #include <boost/asio.hpp>
@@ -16,9 +16,11 @@ public:
 
     std::vector<double> processSerialData(std::string &input);
 
-    void getVelocityAndSteerValues();
+    std::vector<double> getVelocityAndSteerValues();
 
     void setMotorValues(double speed, double steer);
+    
+    void disconnect();
 
     bool connected() const { return is_connected_; }
 
