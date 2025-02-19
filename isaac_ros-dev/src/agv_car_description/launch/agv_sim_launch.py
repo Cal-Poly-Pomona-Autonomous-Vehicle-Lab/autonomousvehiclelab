@@ -90,12 +90,6 @@ def generate_launch_description():
         arguments=["joint_broad",]
     )
 
-    # load_joint_state_broadcaster = ExecuteProcess(
-    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-    #          'joint_broad'],
-    #     output='screen'
-    # )
-
     # the steering controller libraries by default publish odometry on a separate topic than /tf
     robot_ackermann_controller_spawner = Node(
         package="controller_manager",
@@ -104,23 +98,9 @@ def generate_launch_description():
             "ack_cont",
             "--param-file",
             robot_controllers,
-            #"--controller-ros-args",
-            #"-r /ack_cont/tf_odometry:=/tf",
         ],
-        # condition=IfCondition(remap_odometry_tf),
     )
 
-    # robot_ackermann_controller_spawner = Node(
-    #     package="controller_manager",
-    #     executable="spawner",
-    #     arguments=["ack_cont", "--param-file", robot_controllers],
-    #     # condition=UnlessCondition(remap_odometry_tf),
-    # )
-    # load_ackermann_controller = ExecuteProcess(
-    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-    #          'ack_cont'],
-    #     output='screen'
-    # )
     # Bridge
     bridge = Node(
         package='ros_gz_bridge',
@@ -135,6 +115,14 @@ def generate_launch_description():
         output='screen',
         remappings=[('/keyboard/cmd_vel', '/ack_cont/reference_unstamped')]  # Remap topic
     )
+
+    relay_tf = Node(
+    package='topic_tools',
+    executable='relay',
+    arguments=['/ack_cont/tf_odometry', '/tf'],
+    output='screen'
+    )
+
 
     return LaunchDescription([
         # Launch Arguments
@@ -167,6 +155,7 @@ def generate_launch_description():
         robot_state_publisher_cmd,
         gz_spawn_entity,
         teleop_twist_keyboard,
+        relay_tf,
     ])
 
  
