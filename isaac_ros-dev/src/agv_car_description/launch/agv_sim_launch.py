@@ -100,6 +100,15 @@ def generate_launch_description():
             robot_controllers,
         ],
     )
+    robot_bicycle_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=[
+            "bic_cont",
+            "--param-file",
+            robot_controllers,
+        ],
+    )
 
     # Bridge
     bridge = Node(
@@ -151,11 +160,12 @@ def generate_launch_description():
         #         on_exit=[robot_ackermann_controller_spawner_remapped],
         #     )
         # ),
-        robot_ackermann_controller_spawner,
+        # robot_ackermann_controller_spawner,
+        robot_bicycle_controller_spawner,
         robot_state_publisher_cmd,
         gz_spawn_entity,
-        teleop_twist_keyboard,
-        relay_tf,
+        # teleop_twist_keyboard,
+        # relay_tf,
     ])
 
  
