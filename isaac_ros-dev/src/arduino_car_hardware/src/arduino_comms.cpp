@@ -42,7 +42,7 @@ std::string ArduinoComms::read() {
     }
 
     serial_port_.cancel();  // Cancel pending I/O
-    serial_port_.flush();   // Flush buffer
+    // serial_port_.flush();   // Flush buffer
 
     boost::asio::streambuf buffer;
     boost::asio::read_until(serial_port_, buffer, '\n');
@@ -89,14 +89,14 @@ std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
     try {
         if (serial_port_.is_open()) {
             std::string data = read();
-            auto data = processSerialData(data);
-            if (data.size() == 3) {
-                left_wheel_vel = data[0];
-                right_wheel_vel = data[1];
-                steering_angle = data[2];
+            auto processed_data = processSerialData(data);
+            if (processed_data.size() == 3) {
+                left_wheel_vel = processed_data[0];
+                right_wheel_vel = processed_data[1];
+                steering_angle = processed_data[2];
 
-                values.push_back((left_wheel_vel + right_wheel_vel)/2)
-                values.push_back(steering_angle)
+                values.push_back((left_wheel_vel + right_wheel_vel)/2);
+                values.push_back(steering_angle);
             } else {
                 std::cerr << "Invalid number of tokens received: " << data << std::endl;
             }

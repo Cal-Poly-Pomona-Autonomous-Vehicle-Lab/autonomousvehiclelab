@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "arduino_car_hardware/carlikebot_system.hpp"
+#include "carlikebot_system.h"
 
 #include <chrono>
 #include <cmath>
@@ -192,11 +192,11 @@ hardware_interface::CallbackReturn CarlikeBotSystemHardware::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Configuring ...please wait...");
+  comms_.setup(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
   if (comms_.connected())
   {
     comms_.disconnect();
   }
-  comms_(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
   RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Successfully configured!");
 
   return hardware_interface::CallbackReturn::SUCCESS;
@@ -242,14 +242,15 @@ hardware_interface::CallbackReturn CarlikeBotSystemHardware::on_deactivate(
 
 hardware_interface::return_type CarlikeBotSystemHardware::read(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & period)
-{
+{ 
+  std::vector<double> values;
   if (!comms_.connected())
   {
     return hardware_interface::return_type::ERROR;
   }
   values = comms_.getVelocityAndSteerValues();
-  steering_.pos = values[1]
-  traction_.vel = values[0]
+  steering_.pos = values[1];
+  traction_.vel = values[0];
 
   return hardware_interface::return_type::OK;
 }
@@ -262,7 +263,7 @@ hardware_interface::return_type bicdrive_arduino ::CarlikeBotSystemHardware::wri
     return hardware_interface::return_type::ERROR;
   }
   
-  comms_.setMotorValues(traction_.cmd,steering_.pos)
+  comms_.setMotorValues(traction_.cmd,steering_.pos);
 
   return hardware_interface::return_type::OK;
 }

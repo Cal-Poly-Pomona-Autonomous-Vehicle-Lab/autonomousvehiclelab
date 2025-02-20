@@ -32,9 +32,9 @@
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
 
-#include "arduino_car_hardware/arduino_comms.h"
-#include "arduino_car_hardware/steering.hpp"
-#include "arduino_car_hardware/traction.hpp"
+#include "arduino_comms.h"
+#include "steering.h"
+#include "traction.h"
 
 namespace bicdrive_arduino
 {
