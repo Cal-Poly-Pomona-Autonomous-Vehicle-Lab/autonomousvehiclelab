@@ -13,7 +13,6 @@ from end_to_end_CNN import end_to_end_CNN_model
 
 model_dir = "/home/agxorin1/autonomousvehiclelab/workspaces/isaac_ros-dev/src/end_to_end_CNN/models/checkpoints/model.pth"
 transform = transforms.Compose([
-    transforms.ToPILImage(), 
     transforms.Resize((66, 200)),
     transforms.ToTensor(), 
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
@@ -78,9 +77,16 @@ class end_to_end_CNN_node(Node):
         front_frame = self.front_image_ 
         front_frame = cv2.cvtColor(front_frame, cv2.COLOR_RGB2YUV)
 
+
+        height, width, _ = front_frame.shape 
+        crop_height, crop_width = height // 3, width // 3
+
+        center_crop = transforms.CenterCrop((crop_height, crop_width))
+        cropped_img = center_crop(front_frame)
+
         steering_value = None 
         with torch.no_grad(): 
-            front_frame_tensor = transform(front_frame)
+            front_frame_tensor = transform(cropped_img)
             front_frame_tensor = torch.unsqueeze(front_frame_tensor, 1)
             front_frame_tensor = front_frame_tensor.permute(1, 0, 2, 3)
 
