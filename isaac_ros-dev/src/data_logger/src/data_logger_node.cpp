@@ -104,10 +104,10 @@ class DataLogger: public rclcpp::Node {
 		std::ofstream m_current_file; 
 
 		/* '/logging' should contain logging folder */
-		constexpr std::string M_DRIVE = "logging/logging_data"; // '/' is the location of 1tb drive  
-		constexpr std::string M_IMAGE_DRIVE = "logging/image_data"; // 
-		constexpr std::string M_TYPE_FILE = ".txt"; 
-		constexpr std::string M_LOGGING_FILES = "log_file_"; 
+		const std::string M_DRIVE = "logging/logging_data"; // '/' is the location of 1tb drive  
+		const std::string M_IMAGE_DRIVE = "logging/image_data"; // 
+		const std::string M_TYPE_FILE = ".txt"; 
+		const std::string M_LOGGING_FILES = "log_file_"; 
 
 		size_t m_log_count;
 		size_t m_image_count; 
@@ -163,11 +163,11 @@ class DataLogger: public rclcpp::Node {
 
 			/* Check if the camera frame is empty */ 
 			m_image_count++;
-			constexpr std::string front_cam_result = M_IMAGE_DRIVE + "/" 
+			const std::string front_cam_result = M_IMAGE_DRIVE + "/" 
 				+ "image_front_" + std::to_string(m_image_count) + ".jpg"; 
-			constexpr std::string left_cam_result = M_IMAGE_DRIVE + "/" 
+			const std::string left_cam_result = M_IMAGE_DRIVE + "/" 
 				+ "image_left_" + std::to_string(m_image_count) + ".jpg"; 
-			constexpr std::string right_cam_result = M_IMAGE_DRIVE + "/" 
+			const std::string right_cam_result = M_IMAGE_DRIVE + "/" 
 				+ "image_right_" + std::to_string(m_image_count) + ".jpg";
 
 
