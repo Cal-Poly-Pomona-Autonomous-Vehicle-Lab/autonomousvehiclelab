@@ -13,22 +13,22 @@ find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 
-# Include directories
+# Add include directories (header files)
 include_directories(
   include
 )
 
-# Add library
+# Add shared library target
 add_library(${PROJECT_NAME} SHARED
   src/arduino_comms.cpp
-  src/carlikebot_system.cpp
-)
+  src/carlikebot_system.cpp)
 
 # Link required libraries
 target_link_libraries(${PROJECT_NAME}
   Boost::system
 )
 
+# Add ament target dependencies
 ament_target_dependencies(${PROJECT_NAME}
   rclcpp
   rclcpp_lifecycle
@@ -37,16 +37,16 @@ ament_target_dependencies(${PROJECT_NAME}
   Boost
 )
 
-# Export plugin for ROS 2 control
+# Export plugin description for ROS 2 control
 pluginlib_export_plugin_description_file(hardware_interface share/arduino_car_hardware_plugins.xml)
 
-# Install headers
+# Install header files (from include/)
 install(
   DIRECTORY include/
   DESTINATION include
 )
 
-# Install shared library
+# Install the shared library
 install(
   TARGETS ${PROJECT_NAME}
   EXPORT export_${PROJECT_NAME}
@@ -55,13 +55,13 @@ install(
   RUNTIME DESTINATION bin
 )
 
-# Install plugin description
+# Install plugin description XML
 install(
   FILES share/arduino_car_hardware_plugins.xml
   DESTINATION share/${PROJECT_NAME}
 )
 
-# Export package
+# Export include directories and libraries
 ament_export_include_directories(include)
 ament_export_libraries(${PROJECT_NAME})
 ament_export_dependencies(rclcpp rclcpp_lifecycle hardware_interface pluginlib Boost)
