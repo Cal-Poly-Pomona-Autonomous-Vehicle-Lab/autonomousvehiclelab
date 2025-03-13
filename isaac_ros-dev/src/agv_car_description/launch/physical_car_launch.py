@@ -76,20 +76,20 @@ def generate_launch_description():
         )
     )
     
-    lidar = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('rplidar'), 'launch', 'rplidar_a1_launch.py')]),
-             )
+    # lidar = IncludeLaunchDescription(
+    #             PythonLaunchDescriptionSource([os.path.join(
+    #                 get_package_share_directory('rplidar'), 'launch', 'rplidar_a1_launch.py')]),
+    #          )
 
     # camera = IncludeLaunchDescription(
     #             PythonLaunchDescriptionSource([os.path.join(
     #                 get_package_share_directory('camera'), 'launch', 'camera.launch.py')]),
     #         )
     
-    laser_odometry = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('rf2o_laser_odometry'), 'launch', 'rf2o_laser_odometry.launch.py')]),
-             )
+    # laser_odometry = IncludeLaunchDescription(
+    #             PythonLaunchDescriptionSource([os.path.join(
+    #                 get_package_share_directory('rf2o_laser_odometry'), 'launch', 'rf2o_laser_odometry.launch.py')]),
+    #          )
     
     # sensor_fusion = IncludeLaunchDescription(
     #             PythonLaunchDescriptionSource([os.path.join(
@@ -103,9 +103,9 @@ def generate_launch_description():
         twist_mux,
         joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
-        lidar,
+        # lidar,
         # camera,
-        laser_odometry,
+        # laser_odometry,
         # sensor_fusion,
     ]
 

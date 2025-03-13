@@ -98,7 +98,15 @@ public:
     const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
   hardware_interface::return_type write(
-    const rclcpp::Time & time, const rclcpp::Duration & period) override;
+    const rclcpp::Time & time, const rclcpp::Duration & period) override;\
+
+  void set_steering_pos(double pos) { steering_.pos = pos; }
+  void set_traction_cmd(double cmd) { traction_.cmd = cmd; }
+  
+    // Optional getters for reading
+  double get_steering_pos() const { return steering_.pos; }
+  double get_traction_cmd() const { return traction_.cmd; }
+  
 
 private:
   
