@@ -16,7 +16,7 @@ int main() {
 
     while (std::chrono::steady_clock::now() - start_time < duration) {
         // Send motor values
-        arduino.setMotorValues(0.5, 590.0);
+        arduino.setMotorValues(0.3, 590.0);
         std::cout << "Sent: 0.5, 590" << std::endl;
 
         // Wait before sending the next command (adjustable)

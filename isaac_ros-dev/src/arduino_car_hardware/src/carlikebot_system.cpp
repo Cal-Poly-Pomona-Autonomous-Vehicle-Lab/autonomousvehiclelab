@@ -192,10 +192,9 @@ hardware_interface::CallbackReturn CarlikeBotSystemHardware::on_configure(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
   RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Configuring ...please wait...");
-  comms_.setup(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
-  if (comms_.connected())
+  if (!comms_.connected())
   {
-    comms_.disconnect();
+    comms_.setup(cfg_.device, cfg_.baud_rate, cfg_.timeout_ms);
   }
   RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Successfully configured!");
 

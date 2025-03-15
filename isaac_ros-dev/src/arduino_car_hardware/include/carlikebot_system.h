@@ -1,17 +1,3 @@
-// Copyright 2021 ros2_control Development Team
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 #ifndef BICDRIVE_ARDUINO_CARLIKEBOT_SYSTEM_H
 #define BICDRIVE_ARDUINO_CARLIKEBOT_SYSTEM_H
 
@@ -38,6 +24,8 @@
 
 namespace bicdrive_arduino
 {
+
+// Joint value representation
 struct JointValue
 {
   double position{0.0};
@@ -45,6 +33,7 @@ struct JointValue
   double effort{0.0};
 };
 
+// Joint container
 struct Joint
 {
   explicit Joint(const std::string & name) : joint_name(name)
@@ -59,27 +48,27 @@ struct Joint
   JointValue state;
   JointValue command;
 };
+
 class CarlikeBotSystemHardware : public hardware_interface::SystemInterface
 {
-struct Config
-{
-  std::string rear_wheel_name = "";
-  std::string front_wheel_name = "";
-  float loop_rate = 0.0;
-  std::string device = "";
-  int baud_rate = 0;
-  int timeout_ms = 0;
-};
-
+  struct Config
+  {
+    std::string rear_wheel_name = "";
+    std::string front_wheel_name = "";
+    float loop_rate = 0.0;
+    std::string device = "";
+    int baud_rate = 0;
+    int timeout_ms = 0;
+  };
 
 public:
   RCLCPP_SHARED_PTR_DEFINITIONS(CarlikeBotSystemHardware);
 
+  // System interface overrides
   hardware_interface::CallbackReturn on_init(
     const hardware_interface::HardwareInfo & info) override;
 
   std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
-
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
   hardware_interface::CallbackReturn on_configure(
@@ -98,22 +87,22 @@ public:
     const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
   hardware_interface::return_type write(
-    const rclcpp::Time & time, const rclcpp::Duration & period) override;\
+    const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
+  // Public setters for testing (allows unit tests to inject values)
   void set_steering_pos(double pos) { steering_.pos = pos; }
   void set_traction_cmd(double cmd) { traction_.cmd = cmd; }
-  
-    // Optional getters for reading
+
+  // Public getters for testing and inspection
   double get_steering_pos() const { return steering_.pos; }
   double get_traction_cmd() const { return traction_.cmd; }
-  
 
 private:
-  
-  ArduinoComms comms_;
-  Config cfg_;
-  Steering steering_;
-  Traction traction_;
+  ArduinoComms comms_;  // Communication class with Arduino
+  Config cfg_;          // Configuration for hardware connection
+
+  Steering steering_;  // Steering control (front wheel)
+  Traction traction_;  // Traction control (rear wheel)
 };
 
 }  // namespace bicdrive_arduino
