@@ -1,5 +1,0 @@
-<library path="arduino_car_hardware">
-  <class name="arduino_car_hardware/CarlikeBotSystemHardware" type="CarlikeBotSystemHardware" base_class_type="hardware_interface::SystemInterface">
-    <description>Arduino hardware interface for a bicycle kinematics car.</description>
-  </class>
-</library>

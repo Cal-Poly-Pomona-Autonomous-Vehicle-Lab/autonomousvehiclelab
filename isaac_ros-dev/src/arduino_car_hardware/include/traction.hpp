@@ -1,6 +1,5 @@
-
-#ifndef BICDRIVE_ARDUINO_TRACTION_H
-#define BICDRIVE_ARDUINO_TRACTION_H
+#ifndef ARDUINO_CAR_HARDWARE_TRACTION_HPP
+#define ARDUINO_CAR_HARDWARE_TRACTION_HPP
 
 #include <string>
 #include <cmath>
@@ -31,4 +30,4 @@ class Traction
 };
 
 
-#endif // BICDRIVE_ARDUINO_TRACTION_H
+#endif // ARDUINO_CAR_HARDWARE_TRACTION_HPP

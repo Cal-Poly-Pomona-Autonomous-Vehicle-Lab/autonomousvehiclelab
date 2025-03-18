@@ -1,5 +1,5 @@
-#ifndef BICDRIVE_ARDUINO_CARLIKEBOT_SYSTEM_H
-#define BICDRIVE_ARDUINO_CARLIKEBOT_SYSTEM_H
+#ifndef ARDUINO_CAR_HARDWARE_CARLIKEBOT_SYSTEM_HPP
+#define ARDUINO_CAR_HARDWARE_CARLIKEBOT_SYSTEM_HPP
 
 #include <map>
 #include <memory>
@@ -18,11 +18,11 @@
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
 
-#include "arduino_comms.h"
-#include "steering.h"
-#include "traction.h"
+#include "arduino_comms.hpp"
+#include "steering.hpp"
+#include "traction.hpp"
 
-namespace bicdrive_arduino
+namespace arduino_car_hardware
 {
 
 // Joint value representation
@@ -105,6 +105,6 @@ private:
   Traction traction_;  // Traction control (rear wheel)
 };
 
-}  // namespace bicdrive_arduino
+}
 
-#endif  // BICDRIVE_ARDUINO_CARLIKEBOT_SYSTEM_H
+#endif  // ARDUINO_CAR_HARDWARE_CARLIKEBOT_SYSTEM_HPP

@@ -1,5 +1,5 @@
-#ifndef ARDUINO_COMMS_H
-#define ARDUINO_COMMS_H
+#ifndef ARDUINO_COMMS_HPP
+#define ARDUINO_COMMS_HPP
 
 #include <boost/asio.hpp>
 #include <vector>
@@ -36,4 +36,4 @@ public:
     bool is_connected_ = false;
 };
 
-#endif // ARDUINO_COMMS_H
+#endif // ARDUINO_COMMS_HPP

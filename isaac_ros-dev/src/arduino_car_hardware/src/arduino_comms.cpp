@@ -1,4 +1,4 @@
-#include "arduino_comms.h"
+#include "arduino_comms.hpp"
 #include <boost/asio.hpp>
 #include <sstream>
 #include <iostream>

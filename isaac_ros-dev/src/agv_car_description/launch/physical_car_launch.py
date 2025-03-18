@@ -53,7 +53,7 @@ def generate_launch_description():
         package='twist_mux',
         executable='twist_mux',
         parameters=[twist_mux_params],
-        remappings=[('/cmd_vel_out', '/bic_cont/reference_unstamped')],
+        remappings=[('/cmd_vel', '/bic_cont/reference_unstamped')],
     )
 
 

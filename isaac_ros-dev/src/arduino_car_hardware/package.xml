@@ -29,9 +29,8 @@
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
 
-  <!-- Export plugin for ROS 2 control -->
   <export>
-    <hardware_interface plugin="${prefix}/share/arduino_car_hardware_plugins.xml"/>
+    <build_type>ament_cmake</build_type>
   </export>
 
 </package>

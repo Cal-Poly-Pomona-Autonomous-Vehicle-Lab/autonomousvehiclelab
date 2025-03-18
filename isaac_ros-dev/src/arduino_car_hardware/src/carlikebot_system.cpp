@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "carlikebot_system.h"
+#include "carlikebot_system.hpp"
 
 #include <chrono>
 #include <cmath>
@@ -24,7 +24,7 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-namespace bicdrive_arduino
+namespace arduino_car_hardware
 {
 hardware_interface::CallbackReturn CarlikeBotSystemHardware::on_init(
   const hardware_interface::HardwareInfo & info)
@@ -254,7 +254,7 @@ hardware_interface::return_type CarlikeBotSystemHardware::read(
   return hardware_interface::return_type::OK;
 }
 
-hardware_interface::return_type bicdrive_arduino ::CarlikeBotSystemHardware::write(
+hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
   if (!comms_.connected())
@@ -267,8 +267,8 @@ hardware_interface::return_type bicdrive_arduino ::CarlikeBotSystemHardware::wri
   return hardware_interface::return_type::OK;
 }
 
-}  // namespace bicdrive_arduino
+} 
 
 #include "pluginlib/class_list_macros.hpp"
-PLUGINLIB_EXPORT_CLASS(
-  bicdrive_arduino::CarlikeBotSystemHardware, hardware_interface::SystemInterface)
+PLUGINLIB_EXPORT_CLASS(arduino_car_hardware::CarlikeBotSystemHardware, hardware_interface::SystemInterface)
+
