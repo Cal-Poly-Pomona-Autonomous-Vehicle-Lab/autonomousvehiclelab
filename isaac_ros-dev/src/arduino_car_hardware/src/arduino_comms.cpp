@@ -3,6 +3,8 @@
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <termios.h>  // POSIX: for tcflush
+
 
 ArduinoComms::ArduinoComms(const std::string &serial_device, int32_t baud_rate, int32_t timeout_ms)
     : serial_port_(io_service_) {
@@ -41,8 +43,8 @@ std::string ArduinoComms::read() {
         throw std::runtime_error("Serial port not connected");
     }
 
-    serial_port_.cancel();  // Cancel pending I/O
-    // serial_port_.flush();   // Flush buffer
+    // Flush any existing data in the input buffer (POSIX-specific)
+    ::tcflush(serial_port_.native_handle(), TCIFLUSH);
 
     boost::asio::streambuf buffer;
     boost::asio::read_until(serial_port_, buffer, '\n');
@@ -52,7 +54,6 @@ std::string ArduinoComms::read() {
     
     return data;
 }
-
 
 void ArduinoComms::write(const std::string &message) {
     if (!is_connected_) {

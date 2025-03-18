@@ -62,12 +62,6 @@ install(
   RUNTIME DESTINATION bin
 )
 
-# # Install plugin description XML
-# install(
-#   FILES arduino_car_hardware_plugins.xml
-#   DESTINATION share/${PROJECT_NAME}
-# )
-
 ament_export_targets(export_${PROJECT_NAME} HAS_LIBRARY_TARGET)
 ament_export_dependencies(rclcpp rclcpp_lifecycle hardware_interface pluginlib Boost)
 
