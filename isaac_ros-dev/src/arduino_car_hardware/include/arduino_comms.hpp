@@ -1,5 +1,5 @@
-#ifndef BICYCLEDRIVE_ARDUINO_ARDUINO_COMMS_H
-#define BICYCLEDRIVE_ARDUINO_ARDUINO_COMMS_H
+#ifndef ARDUINO_COMMS_HPP
+#define ARDUINO_COMMS_HPP
 
 #include <boost/asio.hpp>
 #include <vector>
@@ -16,9 +16,11 @@ public:
 
     std::vector<double> processSerialData(std::string &input);
 
-    void getVelocityAndSteerValues();
+    std::vector<double> getVelocityAndSteerValues();
 
     void setMotorValues(double speed, double steer);
+    
+    void disconnect();
 
     bool connected() const { return is_connected_; }
 
@@ -26,7 +28,6 @@ public:
     double right_wheel_vel = 0.0;
     double steering_angle = 0.0;
 
-private:
     std::string read();
     void write(const std::string &message);
 
@@ -35,4 +36,4 @@ private:
     bool is_connected_ = false;
 };
 
-#endif // BICYCLEDRIVE_ARDUINO_ARDUINO_COMMS_H
+#endif // ARDUINO_COMMS_HPP

@@ -1,8 +1,10 @@
-#include "arduino_comms.h"
+#include "arduino_comms.hpp"
 #include <boost/asio.hpp>
 #include <sstream>
 #include <iostream>
 #include <vector>
+#include <termios.h>  // POSIX: for tcflush
+
 
 ArduinoComms::ArduinoComms(const std::string &serial_device, int32_t baud_rate, int32_t timeout_ms)
     : serial_port_(io_service_) {
@@ -24,16 +26,32 @@ void ArduinoComms::setup(const std::string &serial_device, int32_t baud_rate, in
     }
 }
 
+void ArduinoComms::disconnect() {
+    if (is_connected_) {
+        try {
+            serial_port_.close();
+            is_connected_ = false;
+            std::cout << "Disconnected from Arduino." << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << "Error while disconnecting: " << e.what() << std::endl;
+        }
+    }
+}
+
 std::string ArduinoComms::read() {
     if (!is_connected_) {
         throw std::runtime_error("Serial port not connected");
     }
+
+    // Flush any existing data in the input buffer (POSIX-specific)
+    ::tcflush(serial_port_.native_handle(), TCIFLUSH);
 
     boost::asio::streambuf buffer;
     boost::asio::read_until(serial_port_, buffer, '\n');
     std::istream is(&buffer);
     std::string data;
     std::getline(is, data);
+    
     return data;
 }
 
@@ -45,9 +63,30 @@ void ArduinoComms::write(const std::string &message) {
     boost::asio::write(serial_port_, boost::asio::buffer(message));
 }
 
+// std::vector<double> ArduinoComms::processSerialData(std::string &input) {
+//     std::vector<double> values;
+
+//     try {
+//         // Remove newline and carriage return characters
+//         input.erase(std::remove(input.begin(), input.end(), '\r'), input.end());
+//         input.erase(std::remove(input.begin(), input.end(), '\n'), input.end());
+
+//         // Split the input string using ',' as the delimiter
+//         std::istringstream token_stream(input);
+//         std::string token;
+
+//         while (std::getline(token_stream, token, ',')) {
+//             values.push_back(std::stod(token));
+//         }
+//     } catch (const std::exception &e) {
+//         std::cerr << "Error processing serial data: " << e.what() << std::endl;
+//     }
+
+//     return values;
+// }
+
 std::vector<double> ArduinoComms::processSerialData(std::string &input) {
     std::vector<double> values;
-
     try {
         // Remove newline and carriage return characters
         input.erase(std::remove(input.begin(), input.end(), '\r'), input.end());
@@ -56,34 +95,86 @@ std::vector<double> ArduinoComms::processSerialData(std::string &input) {
         // Split the input string using ',' as the delimiter
         std::istringstream token_stream(input);
         std::string token;
-
+        int token_index = 0;
         while (std::getline(token_stream, token, ',')) {
-            values.push_back(std::stod(token));
+            try {
+                // For tokens 0 and 1 (velocities): default to 0 if empty.
+                // For token 2 (steering): default to 511 if empty.
+                double value = 0;
+                if (token.empty()) {
+                    value = (token_index == 2) ? 511 : 0;
+                } else {
+                    value = std::stod(token);
+                }
+                values.push_back(value);
+            } catch (const std::exception &e) {
+                // If conversion fails, log a warning and use default values.
+                double default_value = (token_index == 2) ? 511 : 0;
+                std::cerr << "Warning: token conversion failed for token index " 
+                          << token_index << ". Using default value " 
+                          << default_value << std::endl;
+                values.push_back(default_value);
+            }
+            token_index++;
         }
     } catch (const std::exception &e) {
         std::cerr << "Error processing serial data: " << e.what() << std::endl;
     }
-
     return values;
 }
 
-void ArduinoComms::getVelocityAndSteerValues() {
+
+// std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
+//     std::vector<double> values;
+//     try {
+//         if (serial_port_.is_open()) {
+//             std::string data = read();
+//             auto processed_data = processSerialData(data);
+//             if (processed_data.size() == 3) {
+//                 left_wheel_vel = processed_data[0];
+//                 right_wheel_vel = processed_data[1];
+//                 steering_angle = processed_data[2];
+
+//                 values.push_back((left_wheel_vel + right_wheel_vel)/2);
+//                 values.push_back(steering_angle);
+//             } else {
+//                 std::cerr << "Invalid number of tokens received: " << data << std::endl;
+//             }
+//         }
+//     } catch (const std::exception &e) {
+//         std::cerr << "Error reading velocity and steer values: " << e.what() << std::endl;
+//     }
+
+//     return values;
+// }
+
+std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
+    std::vector<double> values;
     try {
         if (serial_port_.is_open()) {
             std::string data = read();
-            auto values = processSerialData(data);
-            if (values.size() == 3) {
-                left_wheel_vel = values[0];
-                right_wheel_vel = values[1];
-                steering_angle = values[2];
-            } else {
+            auto processed_data = processSerialData(data);
+
+            // If we don't have exactly 3 tokens, log an error and use defaults.
+            if (processed_data.size() != 3) {
                 std::cerr << "Invalid number of tokens received: " << data << std::endl;
+                processed_data = {0.0, 0.0, 511.0};  // Defaults: velocities 0, steering 511
             }
+
+            left_wheel_vel  = processed_data[0];
+            right_wheel_vel = processed_data[1];
+            steering_angle  = processed_data[2];
+
+            // Return average velocity and the steering angle
+            values.push_back((left_wheel_vel + right_wheel_vel) / 2);
+            values.push_back(steering_angle);
         }
     } catch (const std::exception &e) {
         std::cerr << "Error reading velocity and steer values: " << e.what() << std::endl;
     }
+    return values;
 }
+
 
 void ArduinoComms::setMotorValues(double speed, double steer) {
     try {

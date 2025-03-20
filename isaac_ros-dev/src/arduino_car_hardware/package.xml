@@ -8,23 +8,29 @@
   <maintainer email="avishwakarma@cpp.edu">Abhishek Vishwakarma</maintainer>
   <license>Apache-2.0</license>
 
-  <!-- Buildtool dependencies -->
+  <!-- Build tool dependencies -->
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <!-- Runtime dependencies -->
+  <!-- Core Dependencies -->
   <depend>rclcpp</depend>
-  <depend>controller_interface</depend>
+  <depend>rclcpp_lifecycle</depend>
   <depend>hardware_interface</depend>
   <depend>pluginlib</depend>
-  <depend>rclcpp_lifecycle</depend>
+  <depend>controller_interface</depend>
+  <depend>controller_manager</depend>
   <depend>geometry_msgs</depend>
-  <depend>controller_manager</depend> <!-- Added for the controller manager -->
+  <depend>boost</depend>
 
-  <!-- Exec dependencies for teleop and testing -->
+  <!-- Execution Dependencies -->
   <exec_depend>teleop_twist_keyboard</exec_depend>
-  <exec_depend>twist_mux</exec_depend> <!-- Added for twist_mux integration -->
+  <exec_depend>twist_mux</exec_depend>
 
-  <!-- Testing and Linting dependencies -->
+  <!-- Testing and Linting Dependencies -->
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
 </package>
