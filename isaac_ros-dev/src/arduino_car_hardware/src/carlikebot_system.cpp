@@ -187,7 +187,7 @@ CarlikeBotSystemHardware::export_command_interfaces()
 
   command_interfaces.emplace_back(hardware_interface::CommandInterface(
     steering_.name, hardware_interface::HW_IF_POSITION,
-    &steering_.pos));
+    &steering_.cmd));
 
   command_interfaces.emplace_back(hardware_interface::CommandInterface(
     traction_.name, hardware_interface::HW_IF_VELOCITY,

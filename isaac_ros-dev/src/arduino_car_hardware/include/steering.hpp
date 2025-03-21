@@ -8,7 +8,8 @@ class Steering
 {
 public:
     std::string name = "";
-    double pos = 512;
+    double pos = 0.0;
+    double cmd = 0.0;
 
     Steering() = default;
 
