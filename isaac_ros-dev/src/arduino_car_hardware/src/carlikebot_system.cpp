@@ -129,7 +129,7 @@ hardware_interface::CallbackReturn CarlikeBotSystemHardware::on_init(
         return hardware_interface::CallbackReturn::ERROR;
       }
 
-      if (joint.state_interfaces.size() != 1)
+      if (joint.state_interfaces.size() != 2)
       {
         RCLCPP_FATAL(
           rclcpp::get_logger("CarlikeBotSystemHardware"),
@@ -144,6 +144,14 @@ hardware_interface::CallbackReturn CarlikeBotSystemHardware::on_init(
           rclcpp::get_logger("CarlikeBotSystemHardware"),
           "Joint '%s' has %s state interface. '%s' expected.", joint.name.c_str(),
           joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_VELOCITY);
+        return hardware_interface::CallbackReturn::ERROR;
+      }
+
+      if (joint.state_interfaces[1].name != hardware_interface::HW_IF_POSITION)
+      {
+        RCLCPP_FATAL(
+          rclcpp::get_logger("CarlikeBotSystemHardware"), "Joint '%s' has %s state interface. '%s' expected.", joint.name.c_str(),
+          joint.state_interfaces[1].name.c_str(), hardware_interface::HW_IF_POSITION);
         return hardware_interface::CallbackReturn::ERROR;
       }
 
@@ -162,6 +170,9 @@ std::vector<hardware_interface::StateInterface> CarlikeBotSystemHardware::export
 
     state_interfaces.emplace_back(hardware_interface::StateInterface(
       traction_.name, hardware_interface::HW_IF_VELOCITY, &traction_.vel));
+
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+      traction_.name, hardware_interface::HW_IF_POSITION, &traction_.pos));
     
     RCLCPP_INFO(
         rclcpp::get_logger("CarlikeBotSystemHardware"), "State interfaces exported");
@@ -262,7 +273,30 @@ hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware:
     return hardware_interface::return_type::ERROR;
   }
   
-  comms_.setMotorValues(traction_.cmd,steering_.pos);
+  double steering_val = steering_.pos;
+  double velocity = traction._vel;
+  
+
+  if (steering_val > 1){
+      steering_val = 1;
+  }
+
+  if (steering_val < -1){
+    steering_val = -1;
+  }
+
+  steering_val = steering_val*61+512;
+
+  if (velocity > 1){
+    velocity = 1;
+  }
+
+  if (velocity < -1){
+  velocity = -1;
+  }
+
+  
+  comms_.setMotorValues(velocity,steering_val);
 
   return hardware_interface::return_type::OK;
 }

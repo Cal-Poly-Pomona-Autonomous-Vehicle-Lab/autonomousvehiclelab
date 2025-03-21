@@ -160,8 +160,10 @@ void loop() {
   }
  if (print_velocity == true)
  {
-   Serial.println(String(average) + "," + String(average2) + "," + String(averagezth)); //print encoder data
-   print_velocity = false; //reset flag
+  // Serial.println(String(average) + "," + String(average2) + "," + String(averagezth)); //print encoder data
+  Serial.println(String(average2) + "," + String(averagezth)); //print encoder data
+
+  print_velocity = false; //reset flag
  }
 
      
