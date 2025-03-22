@@ -144,7 +144,7 @@ std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
             steering_angle  = processed_data[1];
 
             steering_angle = (steering_angle - 512)/61.0;
-            right_wheel_vel = right_wheel_vel/80; // max encoder value at linear.x = 1
+            right_wheel_vel = right_wheel_vel/180; // max encoder value at linear.x = 1
 
             // Return average velocity and the steering angle
             values.push_back(right_wheel_vel);

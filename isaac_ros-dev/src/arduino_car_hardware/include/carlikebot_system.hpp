@@ -95,7 +95,7 @@ public:
 
   // Public getters for testing and inspection
   double get_steering_pos() const { return steering_.pos; }
-  double get_traction_cmd() const { return traction_.cmd; }
+  double get_traction_vel() const { return traction_.vel; }
 
 private:
   ArduinoComms comms_;  // Communication class with Arduino

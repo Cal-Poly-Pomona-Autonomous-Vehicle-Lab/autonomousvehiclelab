@@ -172,7 +172,7 @@ std::vector<hardware_interface::StateInterface> CarlikeBotSystemHardware::export
       traction_.name, hardware_interface::HW_IF_VELOCITY, &traction_.vel));
 
     state_interfaces.emplace_back(hardware_interface::StateInterface(
-      traction_.name, hardware_interface::HW_IF_POSITION, &traction_.pos));
+        traction_.name, hardware_interface::HW_IF_POSITION, &traction_.pos));
     
     RCLCPP_INFO(
         rclcpp::get_logger("CarlikeBotSystemHardware"), "State interfaces exported");
@@ -262,6 +262,8 @@ hardware_interface::return_type CarlikeBotSystemHardware::read(
   steering_.pos = values[1];
   traction_.vel = values[0];
 
+  RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Reading Velocity:%f, Steer:%f",traction_.vel,steering_.pos);
+
   return hardware_interface::return_type::OK;
 }
 
@@ -273,30 +275,34 @@ hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware:
     return hardware_interface::return_type::ERROR;
   }
   
-  double steering_val = steering_.pos;
-  double velocity = traction._vel;
+  double steering_val = steering_.cmd;
+  double velocity = traction_.cmd;
   
 
-  if (steering_val > 1){
+  if (steering_val >= 1){
       steering_val = 1;
   }
 
-  if (steering_val < -1){
+  if (steering_val <= -1){
     steering_val = -1;
   }
 
   steering_val = steering_val*61+512;
 
-  if (velocity > 1){
-    velocity = 1;
+
+  if (velocity > 0.3){
+    velocity = 0.3;
   }
 
-  if (velocity < -1){
-  velocity = -1;
+  if (velocity < -0.3){
+    velocity = -0.3;
   }
 
-  
+  RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Writing Velocity:%f, Steer:%f",traction_.cmd,steering_.cmd);
   comms_.setMotorValues(velocity,steering_val);
+  RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Wrote Velocity:%f, Steer:%f",velocity,steering_val);
+
+  // RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Wrote Velocity:%f, Steer:%f",traction_.cmd,steering_.cmd);
 
   return hardware_interface::return_type::OK;
 }
