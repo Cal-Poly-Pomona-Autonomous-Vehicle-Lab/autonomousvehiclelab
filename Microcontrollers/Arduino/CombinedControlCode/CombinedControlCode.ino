@@ -25,45 +25,50 @@ unsigned long timer=millis();
 //this is encoder stuff
 #include "Ticker.h"
 #include <Encoder.h>
-bool getVelocity();
+bool getSensor();
 void movemotor();
 void printvelocity();
 void stopmotor();
-long interval = 3; //Interval between calls for the encoder function
-Ticker timer1(getVelocity, 200, 0, MILLIS); //Get encoder data every 200ms
-Ticker timer2(movemotor, interval, 0, MILLIS); //Send position commands tyo steeriing every 3ms
-Ticker timer3(printvelocity,200,0,MILLIS); //Write velocity and steering angle over serial every 200ms
-// Ticker timer4 (stopmotor,2000,0,MILLIS);
+
+#define MEASURE_VELOCITY_INTERVAL  200 // Interval between calls for the encoder function
+#define MOTOR_COMMAND_INTERVAL  3      // Interval betweeen calls for the steering function
+#define PRINT_VELOCITY_INTERVAL 200   // Interval between calls for the print function
+
+Ticker timer1(getSensor, MEASURE_VELOCITY_INTERVAL, 0, MILLIS); // Get encoder data every 200ms
+Ticker timer2(movemotor, MOTOR_COMMAND_INTERVAL, 0, MILLIS); // Send position commands for steeriing every 3ms
+Ticker timer3(printvelocity,PRINT_VELOCITY_INTERVAL,0,MILLIS); // Write velocity and steering angle over serial every 200ms
+
 
 int Pos1; //Position encoder 1
 int Pos2; //Position encoder 2
 Encoder myEnc1 (2,3); //Encoder 1
 Encoder myEnc2 (21,20); //Encoder 2
-//double average = 0;
+
+#define PPR 1000       // Pulses Per Revolution (adjust based on your encoder)
+#define WHEEL_RADIUS 0.191 // Radius of the wheel in meters (adjust as needed)
+#define WHEEL_GEAR_RATIO 1 // Placeholder, ratio of encoder counts to wheel rotation
 
 const int l = 5; //Size of rolling average
-double rpm = 0; //This isnt used
-long sum = 0; //Sum used in averaging "left" wheel
+
+long sum1 = 0; //Sum used in averaging "left" wheel
 long sum2 = 0; //Sum used in averaging "right" wheel
 long zthsum = 0; //Sum used in averaging steering angle readings
-int rpmlist [l]; //List used for rolling average of "left" wheel
-int rpmlist2 [l]; //List used for rolling average of "right" wheel
+int pulseslist1 [l]; //List used for rolling average of "left" wheel
+int pulseslist2 [l]; //List used for rolling average of "right" wheel
 int zthlist [l]; //List used in rolling average of steering
 int i = 0; //Position in array of rolling 
-int average;
-int average2 = 0;
-int averagezth = 0;
+float average1 = 0;
+float average2 = 0;
+float averagezth = 0;
+
+float linearSpeed1 = 0;
+float linearSpeed2 = 0;
+float steeringPosRad = 0;
+
 bool print_velocity = false;
 
-int oldtime222=0;
-int newtime222 = 0;
-
-
-//Steering stuff
-String xin;
-String newarray;
 //PID
-#include <PID_v1.h>
+#include <PID_v1_bc.h>
 #define PIN_INPUT 0
 #define PIN_OUTPUT 3
 #define MAX_INPUT  12
@@ -122,11 +127,11 @@ void setup() {
   digitalWrite(R_IS, LOW);
   digitalWrite(L_EN, HIGH);
   digitalWrite(R_EN, HIGH);
-  
+
   Setpoint = 512;
   //this is encoder stuff
- timer1.start();
- timer2.start(); 
+  timer1.start();
+  timer2.start(); 
   timer3.start();
   // timer4.start();
   pinMode(A0, INPUT);
@@ -140,11 +145,9 @@ void setup() {
   stepper.enable();
 
 }
+
 void loop() {
-  // Serial.end();
-  //   Serial.begin(115200);
-  //  Serial.flush();
- //this is encoder stuff
+  //this is encoder stuff
   timer1.update();
   timer2.update();
   timer3.update();
@@ -160,13 +163,13 @@ void loop() {
   }
  if (print_velocity == true)
  {
-  // Serial.println(String(average) + "," + String(average2) + "," + String(averagezth)); //print encoder data
-  Serial.println(String(average2) + "," + String(averagezth)); //print encoder data
+  // Serial.println(String(linearSpeed1) + "," + String(linearSpeed2) + "," + String(averagezth)); // in case encoder 2 is replaced
+  Serial.println(String(linearSpeed1) + "," + String(steeringPosRad)); //print encoder data
 
   print_velocity = false; //reset flag
  }
 
-     
+ // auto sleep check
  if (millis()-timer >500) //set velocity to 0 if no velocity is sent after 500ms
   {
     timer=millis(); //reset timer
@@ -176,7 +179,7 @@ void loop() {
     // Serial.println(millis()-timer);
   }
 
-
+  // control motor from serial input
   x = String(commands[0]).toDouble(); //cast velocity command as double
   double velocity= x*255.0;
   int y  = (velocity);
@@ -195,71 +198,77 @@ void loop() {
 
   if (y<0) //Backwards commands
   {
-    // commands[0] = 0;
-    //Serial.print("RPWM: ");
-    //Serial.println(abs(y));
     analogWrite(LPWM,0);
-    // delay(100);
     analogWrite(RPWM,abs(y));
-    // timer=millis();
-    //  Serial.println("forward");
-          // Serial.println(millis());
   }
   if (y>=0) //Forward commands
   {
-    // commands[0] = 0;
-    //Serial.print("LPWM: ");
-    //Serial.println(abs(y));
     analogWrite(RPWM,0);
-    // delay(100);
     analogWrite(LPWM,abs(y));
-    // timer = millis();
-    //  Serial.println(millis()-timer);
  
   }
 
  }
-// }
-//Average across the "l" most recent encoder values. In this case, l=5.
-void rollingaverage (double rpm1, double rpm2) { // long average;
- sum = sum - rpmlist[i];
- sum2 = sum2 - rpmlist2[i];
- zthsum = zthsum - zthlist[i];
-//  Serial.println("Rpm1: " + String(rpm1));
-//  Serial.println(rpmlist[i]);
 
- rpmlist[i] = rpm1;
- rpmlist2[i] = rpm2;
- zthlist[i] = analogRead(A0);
- 
- sum = sum + rpmlist[i];
- sum2 = sum2 + rpmlist2[i];
- zthsum = zthsum + zthlist[i];
- 
- i = i + 1;
- if (i >= l)
- {
-   i = 0;
- }
- average = sum/l;
- average2 = sum2/l;
-  averagezth= zthsum/l;
+//Average across the "l" most recent encoder values. In this case, l=5.
+void rollingaverage (int pulses1, int pulses2, int steerPosAna) {
+  sum1 = sum1 - pulseslist1[i];
+  sum2 = sum2 - pulseslist2[i];
+  zthsum = zthsum - zthlist[i];
+  //  Serial.println("pulses1: " + String(pulses1));
+  //  Serial.println(rpmlist[i]);
+
+  pulseslist1[i] = pulses1;
+  pulseslist2[i] = pulses2;
+  zthlist[i] = steerPosAna;
+
+  sum1 = sum1 + pulseslist1[i];
+  sum2 = sum2 + pulseslist2[i];
+  zthsum = zthsum + zthlist[i];
+
+  i = i + 1;
+  if (i >= l)
+  {
+    i = 0;
+  }
+  average1 = (float)sum1 / l;
+  average2 = (float)sum2/l;
+  averagezth= (float)zthsum/l;
 
 } 
 
 //Read encoder values
-bool getVelocity() {
+bool getSensor() {
+  // read pulses from both rear encoders, and the analog reading from hall sensor
+  int pulses2 = myEnc2.readAndReset();
+  int pulses1 = pulses2; // use myEnc1.readAndReset(); when encoder 1 is fixed
+  int steerPosAna = analogRead(A0);
 
- Pos1 = myEnc1.read();
- Pos2 = myEnc2.read();
- //Pos2 = myEnc2.read();
- rollingaverage(float(Pos1)*60/2400,float(Pos2)*60/2400);//,float(Pos2)*1000/interval/2400*60);  
- myEnc1.write(0);
- myEnc2.write(0);
- return true;
+  // average of pulses1 and pulses2
+  rollingaverage(pulses1*WHEEL_GEAR_RATIO, pulses2*WHEEL_GEAR_RATIO, steerPosAna);
+    // Calculate rotational wheel speed
+    float RPS1 = average1 / PPR; // Revolutions per second
+    float RPS2 = average2 / PPR; // Revolutions per second
+    // Calculate linear car speed
+    linearSpeed1 = RPS1 * (2 * PI * WHEEL_RADIUS); // v = RPS * circumference
+    linearSpeed2 = RPS2 * (2 * PI * WHEEL_RADIUS); // v = RPS * circumference
+    // Calculate position in rad
+    steeringPosRad = ((averagezth - 512) * 2.0 * PI) / 1024.0; // Convert to radians
+
+    return true;
+}
  
 
-}
+// bool getSensor() {
+//   Pos1 = myEnc1.read();
+//   Pos2 = myEnc2.read();
+//   //Serial.println("Pos1: " + String(Pos1));
+//   //Serial.println("Pos2: " + String(Pos2));
+//   rollingaverage(float(Pos1)*60/2400,float(Pos2)*60/2400);  
+//   myEnc1.write(0);
+//   myEnc2.write(0);
+//   return true;
+// }
 
 //Set state of flag to determine when endocer values are published
 void printvelocity()
