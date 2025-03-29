@@ -134,7 +134,7 @@ std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
             // If we don't have exactly 3 tokens, log an error and use defaults.
             if (processed_data.size() != 2) {
                 std::cerr << "Invalid number of tokens received: " << data << std::endl;
-                processed_data = {0.0, 512.0};  // Defaults: velocities 0, steering 511
+                processed_data = {0.0, 0.0};  // Defaults: velocities 0, steering 511
             }
 
             
@@ -142,10 +142,7 @@ std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
             // left_wheel_vel  = processed_data[0];
             right_wheel_vel = processed_data[0];
             steering_angle  = processed_data[1];
-
-            steering_angle = (steering_angle - 512)/61.0;
-            right_wheel_vel = right_wheel_vel/180; // max encoder value at linear.x = 1
-
+            
             // Return average velocity and the steering angle
             values.push_back(right_wheel_vel);
             values.push_back(steering_angle);

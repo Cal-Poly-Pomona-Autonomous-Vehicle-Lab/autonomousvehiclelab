@@ -1,8 +1,9 @@
 //Written By: Severin Zaluzec, Matthew Jabson
 //other stuff
 
+// Matthew tried to make fixes to the code in a few hours to fix it, don't judge me
+
 //Velocity pin definition
-double x=0; //Velocity reading; Outgoing message
 double xvel;
 double zth;  //Steering angle; Outgoing message
 //Driver pinrs
@@ -64,6 +65,9 @@ float averagezth = 0;
 float linearSpeed1 = 0;
 float linearSpeed2 = 0;
 float steeringPosRad = 0;
+
+double requested_radian_position = 0; //cast radian command as double
+double requested_velocity_position = 0; //cast velocity command as double
 
 bool print_velocity = false;
 
@@ -131,9 +135,8 @@ void setup() {
   Setpoint = 512;
   //this is encoder stuff
   timer1.start();
-  timer2.start(); 
+  timer2.start();
   timer3.start();
-  // timer4.start();
   pinMode(A0, INPUT);
   stepper.begin(RPM, MICROSTEPS);
   //initialize the variables we're linked to
@@ -175,17 +178,19 @@ void loop() {
     timer=millis(); //reset timer
     analogWrite(LPWM,0); //0 to forward
     analogWrite(RPWM,0); //0 to backwards
-    commands[0] = 0;  //set velocity command to 0
+    requested_velocity_position = 0.0;  //set velocity command to 0
     // Serial.println(millis()-timer);
   }
 
   // control motor from serial input
-  x = String(commands[0]).toDouble(); //cast velocity command as double
-  double velocity= x*255.0;
-  int y  = (velocity);
+  int y  = (int) (requested_velocity_position*255);
+
+  // Note from Matt: the velocity is coming as m/s, the pwm does not mean speed, you need a new PID to control the speed instead
+  // someone with more time please put that fix in
+
   //limit output for motor drivers to between 0 and 255
   if (y>255)
-  {
+ {
     y=255;
   }
 
@@ -201,7 +206,8 @@ void loop() {
     analogWrite(LPWM,0);
     analogWrite(RPWM,abs(y));
   }
-  if (y>=0) //Forward commands
+  if (y>=0) //Forward commands  requested_velocity_position = String(commands[0]).toDouble(); //cast velocity command as double
+
   {
     analogWrite(RPWM,0);
     analogWrite(LPWM,abs(y));
@@ -276,6 +282,15 @@ void printvelocity()
   print_velocity = true;
 }
 
+int radiansToAnalog(double radians) {
+  int analogValue = int((radians * 1024.0) / (2.0 * PI) + 512.0);
+  
+  // Clamp value to 0–1023 just in case
+  if (analogValue < 0) analogValue = 0;
+  if (analogValue > 1023) analogValue = 1023;
+
+  return analogValue;
+}
 
 //PID control loop for steering servo
 void movemotor(){
@@ -283,37 +298,27 @@ void movemotor(){
   stepper.stop();
   stepper.disable();
   stepper.enable();
-  // Serial.println(String(commands[1]).toDouble());
-  if (String(commands[1]).toDouble()!=0.00 && String(commands[1]).toDouble()>450 && String(commands[1]).toDouble()<600 ) //Check to makesure setpoint is within acceptable range.
-  {
-    Setpoint = String(commands[1]).toDouble();
-    // Serial.println("inif");
-  }
-//  Serial.println("Setpoint: " + String(Setpoint));
- Input = analogRead(A0); //Read steering encoder
- if (100<Input<800)
- {
-     if ((Setpoint - Input) < 0)
-   {
-     myPID.SetControllerDirection(REVERSE);
-     dir = -1;
-   }
 
-   if ((Setpoint - Input) > 0)
-   {
-     myPID.SetControllerDirection(DIRECT);
-     dir = 1;
-   }
-   myPID.Compute();
-  //  Serial.println(dir*Output);
-  // Serial.println("Output: " + String(dir*Output));
-  //  stepper.startMove(dir*Output);
-  
-  //  stepper.nextAction(); 
-  stepper.move(dir*Output);
-   
- }
- 
+  Setpoint = radiansToAnalog(requested_radian_position);
+  // Soft limit, check to makesure setpoint is within acceptable steering range
+  if (Setpoint < 452) Setpoint = 452;
+  if (Setpoint > 572) Setpoint = 572;
+  //  Serial.println("Setpoint: " + String(Setpoint));
+
+  Input = analogRead(A0); //Read steering encoder
+  if ((Setpoint - Input) < 0)
+  {
+    myPID.SetControllerDirection(REVERSE);
+    dir = -1;
+  }
+
+  if ((Setpoint - Input) > 0)
+  {
+    myPID.SetControllerDirection(DIRECT);
+    dir = 1;
+  }
+  myPID.Compute();
+  stepper.move(dir*Output); 
 
 }
 
@@ -338,6 +343,11 @@ void process_data (char * data)
       i++;
 
    }
+
+   // convert to doubles
+   requested_radian_position = String(commands[1]).toDouble(); //cast radian command as double
+   requested_velocity_position = String(commands[0]).toDouble(); //cast velocity command as double
+
   }  // end of process_data
 
 

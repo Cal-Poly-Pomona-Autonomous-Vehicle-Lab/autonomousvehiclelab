@@ -280,14 +280,12 @@ hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware:
   
 
   if (steering_val >= 1){
-      steering_val = 1;
-  }
+    steering_val = 1;
+}
 
   if (steering_val <= -1){
     steering_val = -1;
   }
-
-  steering_val = steering_val*61+512;
 
 
   if (velocity > 0.3){

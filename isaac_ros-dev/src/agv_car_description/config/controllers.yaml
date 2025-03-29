@@ -46,8 +46,8 @@ bic_cont:
     odom_frame_id: odom
     enable_odom_tf: false
     wheelbase: 0.21
-    front_wheel_radius: 0.0215
-    rear_wheel_radius: 0.0215
+    front_wheel_radius: 0.191
+    rear_wheel_radius: 0.191
     twist_covariance_diagonal: [0.0, 7.0, 14.0, 21.0, 28.0, 35.0]
     pose_covariance_diagonal: [0.0, 7.0, 14.0, 21.0, 28.0, 35.0]
     use_stamped_vel: false
