@@ -1,4 +1,4 @@
-//Written By: Severin Zaluzec
+//Written By: Severin Zaluzec, Matthew Jabson
 //other stuff
 
 //Velocity pin definition
