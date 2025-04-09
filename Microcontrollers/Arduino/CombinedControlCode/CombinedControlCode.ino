@@ -46,9 +46,9 @@ int Pos2; //Position encoder 2
 Encoder myEnc1 (2,3); //Encoder 1
 Encoder myEnc2 (21,20); //Encoder 2
 
-#define PPR 100       // Pulses Per Revolution (adjust based on your encoder)
+#define PPR 600       // Pulses Per Revolution (adjust based on your encoder)
 #define WHEEL_RADIUS 0.191 // Radius of the wheel in meters (adjust as needed)
-#define WHEEL_GEAR_RATIO 30 // Placeholder, ratio of encoder counts to wheel rotation
+#define WHEEL_GEAR_RATIO 5 // Placeholder, ratio of encoder counts to wheel rotation
 
 const int l = 5; //Size of rolling average
 
@@ -89,7 +89,7 @@ PID SteerPID(&InputSteer, &OutputSteer, &SetpointSteer, stKp, stKi, stKd, DIRECT
 
 //PID values need tuning
 double SetpointSpeed, InputSpeed, OutputSpeed;
-double spKp=0.5, spKi=0, spKd=0;
+double spKp=50, spKi=0, spKd=0;
 PID SpeedPID(&InputSpeed, &OutputSpeed, &SetpointSpeed, spKp, spKi, spKd, DIRECT);
 
 //Motor
@@ -160,7 +160,7 @@ void setup() {
   stepper.enable();
 
   SpeedPID.SetMode(AUTOMATIC);
-  SpeedPID.SetOutputLimits(0, 255);
+  SpeedPID.SetOutputLimits(-1.15, 1.15);
   
 
 
@@ -171,7 +171,7 @@ void loop() {
   timer1.update();
   timer2.update();
   timer3.update();
-  motorVelocityTicker.update();
+  // motorVelocityTicker.update();
   // timer4.update();
 
 
@@ -200,37 +200,37 @@ void loop() {
     // Serial.println(millis()-timer);
   }
 
-//   // control motor from serial input
-//   int y  = (int) (target_velocity_position*255);
+  // control motor from serial input
+  int y  = (int) (target_velocity_position*255);
 
-//   // Note from Matt: the velocity is coming as m/s, the pwm does not mean speed, you need a new PID to control the speed instead
-//   // someone with more time please put that fix in
+  // Note from Matt: the velocity is coming as m/s, the pwm does not mean speed, you need a new PID to control the speed instead
+  // someone with more time please put that fix in
 
-//   //limit output for motor drivers to between 0 and 255
-//   if (y>255)
-//  {
-//     y=255;
-//   }
+  //limit output for motor drivers to between 0 and 255
+  if (y>255)
+ {
+    y=255;
+  }
 
-//   if(y<-255)
-//   {
-//     y = -255;
-//   }
+  if(y<-255)
+  {
+    y = -255;
+  }
 
 
+  // Serial.println("PWM value: "+String(y));
+  if (y<0) //Backwards commands
+  {
+    analogWrite(LPWM,0);
+    analogWrite(RPWM,abs(y));
+  }
+  if (y>=0) //Forward commands  requested_velocity_position = String(commands[0]).toDouble(); //cast velocity command as double
 
-//   if (y<0) //Backwards commands
-//   {
-//     analogWrite(LPWM,0);
-//     analogWrite(RPWM,abs(y));
-//   }
-//   if (y>=0) //Forward commands  requested_velocity_position = String(commands[0]).toDouble(); //cast velocity command as double
-
-//   {
-//     analogWrite(RPWM,0);
-//     analogWrite(LPWM,abs(y));
+  {
+    analogWrite(RPWM,0);
+    analogWrite(LPWM,abs(y));
  
-//   }
+  }
 
  }
 
@@ -270,10 +270,11 @@ bool getSensor() {
   int steerPosAna = analogRead(A0);
 
   // average of pulses1 and pulses2
-  rollingaverage(pulses1*WHEEL_GEAR_RATIO, pulses2*WHEEL_GEAR_RATIO, steerPosAna);
+  rollingaverage(pulses1, pulses2, steerPosAna);
     // Calculate rotational wheel speed
-    float RPS1 = average1 / PPR; // Revolutions per second
-    float RPS2 = average2 / PPR; // Revolutions per second
+    float CPR = PPR * 4 * WHEEL_GEAR_RATIO; // quadrature encoder
+    float RPS1 = average1 / CPR; // Revolutions per second
+    float RPS2 = average2 / CPR; // Revolutions per second
     // Calculate linear car speed
     linearSpeed1 = RPS1 * (2 * PI * WHEEL_RADIUS); // v = RPS * circumference
     linearSpeed2 = RPS2 * (2 * PI * WHEEL_RADIUS); // v = RPS * circumference
@@ -394,29 +395,32 @@ int rampedPWM(int targetPWM, int maxStep) {
   return targetPWM;
 }
 
-double calculateTargetPWM(double targetSpeed) {
-  // Compute the counts per wheel revolution:
-  double countsPerRev = PPR * 4 * WHEEL_GEAR_RATIO;  
-  // Wheel circumference in meters:
-  double circumference = 2 * PI * WHEEL_RADIUS;  
-  // Determine the required pulses per second to achieve the target speed:
-  // (targetSpeed/circumference) gives revolutions per second,
-  // multiplied by counts per revolution gives required pulses per second.
-  double requiredPulsesPerSec = (targetSpeed / circumference) * countsPerRev;
-  // Compute the scaling factor: pulses per second produced per PWM unit
-  int pulses = myEnc2.readAndReset();
-  double measuredPulsesPerSec = pulses/MOTOR_COMMAND_INTERVAL;
+double calculateTargetPWM(double targetSpeed) {             
+  const double QUADRATURE = 4.0;        // x4 decoding      // Motor to wheel gear ratio  // meters
+  const double SCALING_FACTOR = 150.3;  // pulses/sec per PWM (measured at PWM=76.5)
 
-  double scalingFactor = 30; // found by tests
-  // Determine the target PWM value
-  double targetPWM = requiredPulsesPerSec / scalingFactor;
-  
+  // Compute counts per wheel revolution
+  double countsPerRev = PPR * QUADRATURE * WHEEL_GEAR_RATIO;
+
+  // Compute wheel circumference
+  double circumference = 2 * PI * WHEEL_RADIUS;
+
+  // Convert m/s → rev/sec → counts/sec
+  double requiredPulsesPerSec = (targetSpeed / circumference) * countsPerRev;
+
+  // Convert pulses/sec → PWM
+  double targetPWM = requiredPulsesPerSec / SCALING_FACTOR;
+
+  // Clamp to max usable PWM (based on testing)
+  if (targetPWM > 76.5) targetPWM = 76.5;
+  if (targetPWM < 0) targetPWM = 0;
+
   return targetPWM;
 }
 
 void updateVelocityControl() {
   // === CONFIGURATION ===
-  const int max_pwm = 76;                    // 30% of 255
+  const int max_pwm = 80;                    // 30% of 255
   const int ramp_step = 1;                   // Max PWM change per cycle
 
   rampVelocity();
@@ -435,7 +439,7 @@ void updateVelocityControl() {
 
   
   SetpointSpeed = current_velocity_position;
-  InputSpeed = ;
+  InputSpeed = linearSpeed1;
 
   // === 4. Run PID Control ===
   SpeedPID.Compute();  // OutputSpeed will be updated here
