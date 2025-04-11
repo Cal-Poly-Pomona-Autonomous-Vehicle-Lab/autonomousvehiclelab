@@ -1,4 +1,4 @@
-//Written By: Severin Zaluzec, Matthew Jabson
+//Written By: Severin Zaluzec, Matthew Jabson, Abhishek Vishwakarma
 //other stuff
 
 // Matthew tried to make fixes to the code in a few hours to fix it, don't judge me
@@ -20,11 +20,11 @@ int test2 = 0;
 //Timer to check if a acceleration command has been recieved
 unsigned long timer=millis();
 
-
+#define PI 3.14
 
 
 //this is encoder stuff
-#include "Ticker.h"
+#include <Ticker.h>
 #include <Encoder.h>
 bool getSensor();
 void movesteermotor();
@@ -89,7 +89,7 @@ PID SteerPID(&InputSteer, &OutputSteer, &SetpointSteer, stKp, stKi, stKd, DIRECT
 
 //PID values need tuning
 double SetpointSpeed, InputSpeed, OutputSpeed;
-double spKp=50, spKi=0, spKd=0;
+double spKp=50, spKi=100, spKd=5;
 PID SpeedPID(&InputSpeed, &OutputSpeed, &SetpointSpeed, spKp, spKi, spKd, DIRECT);
 
 //Motor
@@ -160,7 +160,7 @@ void setup() {
   stepper.enable();
 
   SpeedPID.SetMode(AUTOMATIC);
-  SpeedPID.SetOutputLimits(-1.15, 1.15);
+  SpeedPID.SetOutputLimits(-255, 255);
   
 
 
@@ -171,7 +171,7 @@ void loop() {
   timer1.update();
   timer2.update();
   timer3.update();
-  // motorVelocityTicker.update();
+  motorVelocityTicker.update();
   // timer4.update();
 
 
@@ -201,36 +201,42 @@ void loop() {
   }
 
   // control motor from serial input
-  int y  = (int) (target_velocity_position*255);
+//   int y  = (int) (target_velocity_position*255);
 
-  // Note from Matt: the velocity is coming as m/s, the pwm does not mean speed, you need a new PID to control the speed instead
-  // someone with more time please put that fix in
+//   // Note from Matt: the velocity is coming as m/s, the pwm does not mean speed, you need a new PID to control the speed instead
+//   // someone with more time please put that fix in
 
-  //limit output for motor drivers to between 0 and 255
-  if (y>255)
- {
-    y=255;
-  }
+//   //limit output for motor drivers to between 0 and 255
+//   if (y>255)
+//  {
+//     y=255;
+//   }
 
-  if(y<-255)
-  {
-    y = -255;
-  }
+//   if(y<-255)
+//   {
+//     y = -255;
+//   }
 
 
-  // Serial.println("PWM value: "+String(y));
-  if (y<0) //Backwards commands
-  {
-    analogWrite(LPWM,0);
-    analogWrite(RPWM,abs(y));
-  }
-  if (y>=0) //Forward commands  requested_velocity_position = String(commands[0]).toDouble(); //cast velocity command as double
-
-  {
-    analogWrite(RPWM,0);
-    analogWrite(LPWM,abs(y));
+//   // Serial.println("PWM value: "+String(y));
+//   if (y<0) //Backwards commands
+//   {
+//     analogWrite(LPWM,0);
+//     analogWrite(RPWM,abs(y));
+//   }
+//   if (y>=0) //Forward commands  requested_velocity_position = String(commands[0]).toDouble(); //cast velocity command as double
+//  //limit output for motor drivers to between 0 and 255
+//   if (y>255)
+// …  // Serial.println("PWM value: "+String(y));
+//   if (y<0) //Backwards commands
+//   {
+//     analogWrite(LPWM,0);
+//     a
+//   {
+//     analogWrite(RPWM,0);
+//     analogWrite(LPWM,abs(y));
  
-  }
+//   }
 
  }
 
@@ -273,8 +279,9 @@ bool getSensor() {
   rollingaverage(pulses1, pulses2, steerPosAna);
     // Calculate rotational wheel speed
     float CPR = PPR * 4 * WHEEL_GEAR_RATIO; // quadrature encoder
-    float RPS1 = average1 / CPR; // Revolutions per second
-    float RPS2 = average2 / CPR; // Revolutions per second
+    const float interval_sec = MEASURE_VELOCITY_INTERVAL/1000.0; 
+    float RPS1 = (average1 / CPR) / interval_sec; // Revolutions per second
+    float RPS2 = (average2 / CPR) / interval_sec; // Revolutions per second
     // Calculate linear car speed
     linearSpeed1 = RPS1 * (2 * PI * WHEEL_RADIUS); // v = RPS * circumference
     linearSpeed2 = RPS2 * (2 * PI * WHEEL_RADIUS); // v = RPS * circumference
@@ -321,9 +328,10 @@ void movesteermotor(){
 
   SetpointSteer = radiansToAnalog(requested_radian_position);
   // Soft limit, check to makesure setpoint is within acceptable steering range
+  // Serial.println("ReqRad        " + String(requested_radian_position) + "        SetpointSteerAfter: " + String(SetpointSteer));
   if (SetpointSteer < 452) SetpointSteer = 452;
   if (SetpointSteer > 572) SetpointSteer = 572;
-  //  Serial.println("Setpoint: " + String(Setpoint));
+  // Serial.println("SetpointSteer After: " + String(SetpointSteer));
 
   InputSteer = analogRead(A0); //Read steering encoder
   if ((SetpointSteer - InputSteer) < 0)
@@ -420,8 +428,8 @@ double calculateTargetPWM(double targetSpeed) {
 
 void updateVelocityControl() {
   // === CONFIGURATION ===
-  const int max_pwm = 80;                    // 30% of 255
-  const int ramp_step = 1;                   // Max PWM change per cycle
+  const int max_pwm = 125;                    // 30% of 255
+  const int ramp_step = 2;                   // Max PWM change per cycle
 
   rampVelocity();
 
@@ -445,28 +453,28 @@ void updateVelocityControl() {
   SpeedPID.Compute();  // OutputSpeed will be updated here
 
   // === 5. Clamp and ramp PWM ===
-  int pwmVal = (int)calculateTargetPWM(OutputSpeed);
-  pwmVal = constrain(pwmVal, 0, max_pwm);
+  int pwmVal = (int)(OutputSpeed);
+  pwmVal = constrain(pwmVal, -255, 255);
   pwmVal = rampedPWM(pwmVal, ramp_step);  // Smooth transitions
 
-  /// Only kickstart if the motor is trying to move but speed is stuck
-  if (InputSpeed < 100 && pwmVal > 0 && pwmVal < 20) {
-    pwmVal = 20;
-  }
+  // Only kickstart if the motor is trying to move but speed is stuck
+  // if (abs(InputSpeed) < 0.05 && abs(pwmVal) > 0 && pwmVal < 20) {
+  //   pwmVal = (pwmVal > 0)? 20 : -20;
+  // }
 
   // === 6. Apply PWM to motor based on direction ===
-  if (current_velocity_position >= 0) {
+  if (pwmVal >= 0) {
     analogWrite(RPWM, 0);
     analogWrite(LPWM, pwmVal);
   } else {
     analogWrite(LPWM, 0);
-    analogWrite(RPWM, pwmVal);
+    analogWrite(RPWM, abs(pwmVal));
   }
 
   // === 7. Debug Output (optional) ===
   Serial.print("TargetVel: "); Serial.print(current_velocity_position);
-  Serial.print("Set CPS: "); Serial.print(SetpointSpeed);
-  Serial.print(" | Actual CPS: "); Serial.print(InputSpeed);
+  Serial.print("Setpoint velocity: "); Serial.print(SetpointSpeed);
+  Serial.print(" | Actual Velocity: "); Serial.print(InputSpeed);
   Serial.print(" | PWM: "); Serial.println(pwmVal);
 }
 
