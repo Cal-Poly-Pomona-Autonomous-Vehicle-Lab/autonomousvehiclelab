@@ -89,7 +89,7 @@ PID SteerPID(&InputSteer, &OutputSteer, &SetpointSteer, stKp, stKi, stKd, DIRECT
 
 //PID values need tuning
 double SetpointSpeed, InputSpeed, OutputSpeed;
-double spKp=50, spKi=100, spKd=5;
+double spKp=50, spKi=90, spKd=5;
 PID SpeedPID(&InputSpeed, &OutputSpeed, &SetpointSpeed, spKp, spKi, spKd, DIRECT);
 
 //Motor
@@ -434,7 +434,7 @@ void updateVelocityControl() {
   rampVelocity();
 
   // === 1. Zero-speed cutoff ===
-  if (abs(current_velocity_position < 0.01)) {
+  if (abs(current_velocity_position) < 0.01) {
     analogWrite(LPWM, 0);
     analogWrite(RPWM, 0);
     SpeedPID.SetMode(MANUAL);     // Disable PID
