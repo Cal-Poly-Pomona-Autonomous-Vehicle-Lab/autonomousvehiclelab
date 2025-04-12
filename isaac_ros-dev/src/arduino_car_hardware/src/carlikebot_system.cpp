@@ -24,6 +24,8 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
+#define WHEEL_RADIUS 0.191
+
 namespace arduino_car_hardware
 {
 hardware_interface::CallbackReturn CarlikeBotSystemHardware::on_init(
@@ -276,8 +278,8 @@ hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware:
   }
   
   double steering_val = steering_.cmd;
-  double velocity = traction_.cmd;
   
+  double velocity_mps = traction_.cmd * WHEEL_RADIUS; // // this is computed in rad/s, but we deal with m/s so need to multiply by wheel radius to convert back to m/s.
 
   if (steering_val >= 1){
     steering_val = 1;
@@ -288,17 +290,9 @@ hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware:
   }
 
 
-  if (velocity > 0.3){
-    velocity = 0.3;
-  }
-
-  if (velocity < -0.3){
-    velocity = -0.3;
-  }
-
-  RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Writing Velocity:%f, Steer:%f",traction_.cmd,steering_.cmd);
-  comms_.setMotorValues(velocity,steering_val);
-  RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Wrote Velocity:%f, Steer:%f",velocity,steering_val);
+  RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Writing Velocity:%f, Steer:%f",velocity_mps,steering_.cmd);
+  comms_.setMotorValues(velocity_mps,steering_val);
+  // RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Wrote Velocity:%f, Steer:%f",velocity,steering_val);
 
   // RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Wrote Velocity:%f, Steer:%f",traction_.cmd,steering_.cmd);
 

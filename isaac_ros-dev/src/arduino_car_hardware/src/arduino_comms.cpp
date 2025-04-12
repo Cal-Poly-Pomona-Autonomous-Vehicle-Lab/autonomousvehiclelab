@@ -102,14 +102,14 @@ std::vector<double> ArduinoComms::processSerialData(std::string &input) {
                 // For token 2 (steering): default to 511 if empty.
                 double value = 0;
                 if (token.empty()) {
-                    value = (token_index == 1) ? 512 : 0;
+                    value = 0.0;
                 } else {
                     value = std::stod(token);
                 }
                 values.push_back(value);
             } catch (const std::exception &e) {
                 // If conversion fails, log a warning and use default values.
-                double default_value = (token_index == 1) ? 512 : 0;
+                double default_value = 0.0;
                 std::cerr << "Warning: token conversion failed for token index " 
                           << token_index << ". Using default value " 
                           << default_value << std::endl;
@@ -126,32 +126,40 @@ std::vector<double> ArduinoComms::processSerialData(std::string &input) {
 
 std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
     std::vector<double> values;
+
     try {
         if (serial_port_.is_open()) {
             std::string data = read();
+
+            // Log raw incoming string
+            std::cout << "[Arduino RAW] " << data << std::endl;
+
             auto processed_data = processSerialData(data);
 
-            // If we don't have exactly 3 tokens, log an error and use defaults.
-            if (processed_data.size() != 2) {
-                std::cerr << "Invalid number of tokens received: " << data << std::endl;
-                processed_data = {0.0, 0.0};  // Defaults: velocities 0, steering 511
+            if (processed_data.size() < 2) {
+                std::cerr << "[ArduinoComms] Invalid number of values from serial (expected 2), got: "
+                          << processed_data.size() << " | Raw: [" << data << "]" << std::endl;
+
+                // Push default values to avoid segfault
+                values.push_back(0.0);  // velocity
+                values.push_back(0.0);  // steering
+            } else {
+                right_wheel_vel = processed_data[0];
+                steering_angle  = processed_data[1];
+
+                values.push_back(right_wheel_vel);
+                values.push_back(steering_angle);
             }
-
-            
-
-            // left_wheel_vel  = processed_data[0];
-            right_wheel_vel = processed_data[0];
-            steering_angle  = processed_data[1];
-            
-            // Return average velocity and the steering angle
-            values.push_back(right_wheel_vel);
-            values.push_back(steering_angle);
         }
     } catch (const std::exception &e) {
-        std::cerr << "Error reading velocity and steer values: " << e.what() << std::endl;
+        std::cerr << "[ArduinoComms] Exception while reading serial: " << e.what() << std::endl;
+        values.push_back(0.0);  // Safe fallback
+        values.push_back(0.0);
     }
+
     return values;
 }
+
 
 
 void ArduinoComms::setMotorValues(double speed, double steer) {
