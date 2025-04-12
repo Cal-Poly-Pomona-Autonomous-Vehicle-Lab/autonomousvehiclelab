@@ -1,0 +1,94 @@
+import os
+
+from ament_index_python.packages import get_package_share_directory
+
+from launch import LaunchDescription
+from launch.actions import RegisterEventHandler
+from launch.event_handlers import OnProcessExit
+from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
+from launch_ros.actions import Node
+from launch_ros.substitutions import FindPackageShare
+
+
+def generate_launch_description():
+    pkg = FindPackageShare("agv_car_description")
+
+    robot_description_content = Command([
+        PathJoinSubstitution([FindExecutable(name="xacro")]),
+        " ",
+        PathJoinSubstitution([pkg, "description", "final_agv_car.xacro"]),
+    ])
+    robot_description = {"robot_description": robot_description_content}
+
+    robot_controllers = PathJoinSubstitution([pkg, "config", "controllers.yaml"])
+    rviz_config_file = PathJoinSubstitution([pkg, "rviz", "bicbot.rviz"])
+    twist_mux_params = PathJoinSubstitution([pkg, "config", "twist_mux.yaml"])
+
+    control_node = Node(
+        package="controller_manager",
+        executable="ros2_control_node",
+        parameters=[robot_description, robot_controllers],
+        output="screen",
+    )
+
+    robot_state_pub_node = Node(
+        package="robot_state_publisher",
+        executable="robot_state_publisher",
+        parameters=[robot_description],
+        output="screen",
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        output="screen",
+    )
+
+    robot_controller_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["bic_cont", "--controller-manager", "/controller_manager"],
+        output="screen",
+    )
+
+    delay_robot_controller_spawner_after_joint_state_broadcaster = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=joint_state_broadcaster_spawner,
+            on_exit=[robot_controller_spawner],
+        )
+    )
+
+    rviz = Node(
+        package="rviz2",
+        executable="rviz2",
+        name="rviz2",
+        arguments=["-d", rviz_config_file],
+        output="screen"
+    )
+
+    # twist_mux = Node(
+    #     package='twist_mux',
+    #     executable='twist_mux',
+    #     parameters=[twist_mux_params],
+    #     remappings=[('/cmd_vel', '/bic_cont/reference_unstamped')],
+    #     output='screen',
+    # )
+
+    # lidar = IncludeLaunchDescription(...)
+    # camera = IncludeLaunchDescription(...)
+    # slam_toolbox = Node(...)
+    # nav2 = IncludeLaunchDescription(...)
+
+    return LaunchDescription([
+        robot_state_pub_node,
+        control_node,
+        joint_state_broadcaster_spawner,
+        delay_robot_controller_spawner_after_joint_state_broadcaster,
+        rviz,
+        # twist_mux,
+        # slam_toolbox,
+        # nav2,
+        # lidar,
+        # camera,
+    ])

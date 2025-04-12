@@ -254,20 +254,21 @@ hardware_interface::CallbackReturn CarlikeBotSystemHardware::on_deactivate(
 
 hardware_interface::return_type CarlikeBotSystemHardware::read(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & period)
-{ 
-  std::vector<double> values;
-  if (!comms_.connected())
-  {
-    return hardware_interface::return_type::ERROR;
-  }
-  values = comms_.getVelocityAndSteerValues();
-  steering_.pos = values[1];
-  traction_.vel = values[0];
+{
+    if (!comms_.connected())
+    {
+        return hardware_interface::return_type::ERROR;
+    }
 
-  RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Reading Velocity:%f, Steer:%f",traction_.vel,steering_.pos);
+    std::vector<double> values = comms_.getVelocityAndSteerValues();
 
-  return hardware_interface::return_type::OK;
+    traction_.vel = values[0];                         // from Arduino (rad/s or m/s depending on setup)
+    traction_.pos += traction_.vel * period.seconds(); // simulate position
+    steering_.pos = values[1];                         // from Arduino (steering angle in radians)
+
+    return hardware_interface::return_type::OK;
 }
+
 
 hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)

@@ -9,7 +9,7 @@ controller_manager:
     bic_cont:
       type: bicycle_steering_controller/BicycleSteeringController
 
-    joint_broad:
+    joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
 ack_cont:
@@ -39,12 +39,12 @@ bic_cont:
     front_steering: true
     open_loop: false
     velocity_rolling_window_size: 10      
-    position_feedback: false
+    position_feedback: true
     front_wheels_names: [virtual_front_wheel_joint]
     rear_wheels_names: [virtual_rear_wheel_joint]
     base_frame_id: base_link
     odom_frame_id: odom
-    enable_odom_tf: false
+    enable_odom_tf: true
     wheelbase: 1.5
     front_wheel_radius: 0.191
     rear_wheel_radius: 0.191
