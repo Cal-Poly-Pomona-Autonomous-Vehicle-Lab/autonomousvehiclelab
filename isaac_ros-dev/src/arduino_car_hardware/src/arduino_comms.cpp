@@ -132,7 +132,7 @@ std::vector<double> ArduinoComms::getVelocityAndSteerValues() {
             std::string data = read();
 
             // Log raw incoming string
-            std::cout << "[Arduino RAW] " << data << std::endl;
+            // std::cout << "[Arduino RAW] " << data << std::endl;
 
             auto processed_data = processSerialData(data);
 

@@ -3,11 +3,13 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription
 from launch.actions import RegisterEventHandler
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
 def generate_launch_description():
@@ -45,6 +47,16 @@ def generate_launch_description():
         output="screen",
     )
 
+    joint_state_publisher_node = Node(
+    package='joint_state_publisher',
+    executable='joint_state_publisher',
+    name='joint_state_publisher_static',
+    parameters=[{
+        'source_list': ''  # disables listening to real joint_states
+    }],
+    output='screen')
+
+
     robot_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -57,14 +69,6 @@ def generate_launch_description():
             target_action=joint_state_broadcaster_spawner,
             on_exit=[robot_controller_spawner],
         )
-    )
-
-    rviz = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        arguments=["-d", rviz_config_file],
-        output="screen"
     )
 
     # twist_mux = Node(
@@ -80,15 +84,23 @@ def generate_launch_description():
     # slam_toolbox = Node(...)
     # nav2 = IncludeLaunchDescription(...)
 
+    nav2_launch = IncludeLaunchDescription(
+    PythonLaunchDescriptionSource([
+        PathJoinSubstitution([pkg, "launch", "nav2_launch.py"])
+    ]))
+
+
     return LaunchDescription([
+        joint_state_publisher_node,
         robot_state_pub_node,
         control_node,
         joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster,
-        rviz,
         # twist_mux,
         # slam_toolbox,
         # nav2,
         # lidar,
         # camera,
+        nav2_launch,
+        
     ])

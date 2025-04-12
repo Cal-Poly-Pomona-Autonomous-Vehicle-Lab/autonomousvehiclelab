@@ -1,0 +1,25 @@
+ekf_filter_node:
+  ros__parameters:
+    use_sim_time: false
+    frequency: 30.0
+    sensor_timeout: 0.1
+
+    # Frames
+    base_link_frame: base_link
+    odom_frame: odom
+    world_frame: odom
+
+    # Inputs
+    odometry0: /bic_cont/odometry
+    odometry0_config: [true,  true,  false,
+                       false, false, true,
+                       false, false, false,
+                       false, false, false]
+    odometry0_differential: false
+    odometry0_relative: false
+
+    publish_tf: true
+    print_diagnostics: true
+
+    two_d_mode: true
+    transform_timeout: 0.1

@@ -30,9 +30,9 @@
        
 
         <visual>
-        <origin xyz=".946 .521 -0.313" rpy="0 0 ${pi}" />
+        <origin xyz="0 0 -0.313" rpy="0 0 ${pi}" />
          <geometry>
-                <mesh filename="package://agv_car_gazebo/models/agv_car/meshes/agv_chassis.stl"/>
+                <mesh filename="package://agv_car_description/meshes/agv_chassis.stl"/>
             </geometry>
             <material name="Cyan">
                 <color rgba="0 1.0 1.0 1.0"/>
@@ -42,7 +42,7 @@
         <collision>
             <origin xyz=".946 .521 -0.313" rpy="0 0 ${pi}" />
                 <geometry>
-                    <mesh filename="package://agv_car_gazebo/models/agv_car/meshes/agv_chassis.stl"/>
+                    <mesh filename="package://agv_car_description/meshes/agv_chassis.stl"/>
                 </geometry>
         </collision>
 
@@ -57,7 +57,7 @@
     </link>
 
     <joint name="chassis_joint" type="fixed">
-        <origin xyz="0.8 0 0.5" rpy="0 0 0" />
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
         <parent link="base_link" />
         <child link="chassis" />
     </joint>

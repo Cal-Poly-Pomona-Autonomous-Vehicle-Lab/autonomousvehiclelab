@@ -291,7 +291,7 @@ hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware:
   }
 
 
-  RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Writing Velocity:%f, Steer:%f",velocity_mps,steering_.cmd);
+  // RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Writing Velocity:%f, Steer:%f",velocity_mps,steering_.cmd);
   comms_.setMotorValues(velocity_mps,steering_val);
   // RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Wrote Velocity:%f, Steer:%f",velocity,steering_val);
 
