@@ -30,7 +30,7 @@
        
 
         <visual>
-        <origin xyz="0 0 -0.313" rpy="0 0 ${pi}" />
+        <origin xyz=".946 .512 -.313" rpy="0 0 ${pi}" />
          <geometry>
                 <mesh filename="package://agv_car_description/meshes/agv_chassis.stl"/>
             </geometry>
@@ -40,7 +40,7 @@
         </visual>
 
         <collision>
-            <origin xyz=".946 .521 -0.313" rpy="0 0 ${pi}" />
+            <origin xyz=".946 .512 -.313" rpy="0 0 ${pi}" />
                 <geometry>
                     <mesh filename="package://agv_car_description/meshes/agv_chassis.stl"/>
                 </geometry>
@@ -57,7 +57,7 @@
     </link>
 
     <joint name="chassis_joint" type="fixed">
-        <origin xyz="0 0 0.5" rpy="0 0 0" />
+        <origin xyz="0 0 .313" rpy="0 0 0" />
         <parent link="base_link" />
         <child link="chassis" />
     </joint>
@@ -86,7 +86,7 @@
     </link>
 
     <joint name="rear_left_wheel_joint" type="continuous">
-        <origin xyz="-0.8 0.5 -0.2" rpy="-1.57 0 0" />
+        <origin xyz="-0.9 0.5 -0.2" rpy="-1.57 0 0" />
         <parent link="chassis" />
         <child link="rear_left_wheel" />
         <axis xyz="0 0 1" />
@@ -115,7 +115,7 @@
     </link>
 
     <joint name="rear_right_wheel_joint" type="continuous">
-        <origin xyz="-0.8 -0.5 -0.2" rpy="-1.57 0 0" />
+        <origin xyz="-0.9 -0.5 -0.2" rpy="-1.57 0 0" />
         <parent link="chassis" />
         <child link="rear_right_wheel" />
         <axis xyz="0 0 1" />
@@ -216,7 +216,7 @@
 
      <link name="virtual_front_wheel">
     <visual>
-        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <origin xyz="0 0 0" py="0 0 0"/>
         <geometry>
         <cylinder length="0.01" radius="${wheel_radius}"/>
         </geometry>
@@ -225,9 +225,9 @@
     </link>
 
     <joint name="virtual_front_wheel_joint" type="revolute">
-    <parent link="base_link"/>
+    <parent link="chassis"/>
     <child link="virtual_front_wheel"/>
-    <origin xyz="${wheel_xoff} 0 0" rpy="0 0 ${pi/2}"/>
+    <origin xyz="0.9 0 -0.2" rpy="1.57 0 0"/>
     <axis xyz="0 0 1"/>
     <limit lower="-0.7853" upper="0.7853" effort="100.0" velocity="100.0"/>
     <dynamics damping="0.2"/>
@@ -236,7 +236,7 @@
     <!-- virtual rear wheel -->
     <link name="virtual_rear_wheel">
     <visual>
-        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
         <cylinder length="0.01" radius="${wheel_radius}"/>
         </geometry>
@@ -245,10 +245,10 @@
     </link>
 
     <joint name="virtual_rear_wheel_joint" type="continuous">
-    <parent link="base_link"/>
+    <parent link="chassis"/>
     <child link="virtual_rear_wheel"/>
-    <origin xyz="${-wheel_xoff} 0 0" rpy="0 0 ${pi/2}"/>
-    <axis xyz="1 0 0"/>
+    <origin xyz="-0.9 0 -0.2" rpy="-1.57 0 0"/>
+    <axis xyz="0 0 1"/>
     <limit effort="100.0" velocity="100.0"/>
     <dynamics damping="0.2"/>
     </joint>
