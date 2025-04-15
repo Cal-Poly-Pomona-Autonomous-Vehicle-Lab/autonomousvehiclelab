@@ -27,11 +27,15 @@ def generate_launch_description():
     twist_mux_params = PathJoinSubstitution([pkg, "config", "twist_mux.yaml"])
 
     control_node = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[robot_description, robot_controllers],
-        output="screen",
-    )
+    package="controller_manager",
+    executable="ros2_control_node",
+    parameters=[
+        {"update_rate": 1000},
+        robot_description,
+        robot_controllers,
+    ],
+    output="screen",
+)
 
     robot_state_pub_node = Node(
         package="robot_state_publisher",
@@ -91,7 +95,7 @@ def generate_launch_description():
 
 
     return LaunchDescription([
-        joint_state_publisher_node,
+        # joint_state_publisher_node,
         robot_state_pub_node,
         control_node,
         joint_state_broadcaster_spawner,

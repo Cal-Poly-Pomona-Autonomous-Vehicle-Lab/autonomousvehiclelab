@@ -265,7 +265,7 @@ hardware_interface::return_type CarlikeBotSystemHardware::read(
     traction_.vel = values[0];                         // from Arduino (rad/s or m/s depending on setup)
     traction_.pos += traction_.vel * period.seconds(); // simulate position
     steering_.pos = values[1];                         // from Arduino (steering angle in radians)
-
+    // RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Reading Velocity:%f, Steer:%f",traction_.vel,steering_.pos);
     return hardware_interface::return_type::OK;
 }
 
