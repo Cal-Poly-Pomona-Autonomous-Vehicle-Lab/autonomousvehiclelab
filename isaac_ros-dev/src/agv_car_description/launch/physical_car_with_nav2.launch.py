@@ -76,13 +76,14 @@ def generate_launch_description():
         )
     )
 
-    # twist_mux = Node(
-    #     package='twist_mux',
-    #     executable='twist_mux',
-    #     parameters=[twist_mux_params],
-    #     remappings=[('/cmd_vel', '/bic_cont/reference_unstamped')],
-    #     output='screen',
-    # )
+    twist_mux = Node(
+        package='twist_mux',
+        executable='twist_mux',
+        parameters=[twist_mux_params],
+        remappings=[('/cmd_vel_out', '/bic_cont/reference_unstamped')],
+        output='screen',
+    )
+
     slam_toolbox_node = Node(
     package='slam_toolbox',
     executable='async_slam_toolbox_node',
@@ -147,7 +148,7 @@ def generate_launch_description():
         control_node,
         joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster,
-        # twist_mux,
+        twist_mux,
         # nav2,
         # lidar,
         # camera,
