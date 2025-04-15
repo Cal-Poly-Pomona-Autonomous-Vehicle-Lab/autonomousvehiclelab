@@ -10,6 +10,7 @@ from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import TimerAction
 
 
 def generate_launch_description():
@@ -51,14 +52,14 @@ def generate_launch_description():
         output="screen",
     )
 
-    joint_state_publisher_node = Node(
-    package='joint_state_publisher',
-    executable='joint_state_publisher',
-    name='joint_state_publisher_static',
-    parameters=[{
-        'source_list': ''  # disables listening to real joint_states
-    }],
-    output='screen')
+    # joint_state_publisher_node = Node(
+    # package='joint_state_publisher',
+    # executable='joint_state_publisher',
+    # name='joint_state_publisher_static',
+    # parameters=[{
+    #     'source_list': ''  # disables listening to real joint_states
+    # }],
+    # output='screen')
 
 
     robot_controller_spawner = Node(
@@ -82,17 +83,63 @@ def generate_launch_description():
     #     remappings=[('/cmd_vel', '/bic_cont/reference_unstamped')],
     #     output='screen',
     # )
-
-    # lidar = IncludeLaunchDescription(...)
-    # camera = IncludeLaunchDescription(...)
-    # slam_toolbox = Node(...)
-    # nav2 = IncludeLaunchDescription(...)
+    slam_toolbox_node = Node(
+    package='slam_toolbox',
+    executable='async_slam_toolbox_node',
+    name='slam_toolbox',
+    output='screen',
+    parameters=[PathJoinSubstitution([pkg, "config", "slam_toolbox_params.yaml"])]
+)
 
     nav2_launch = IncludeLaunchDescription(
     PythonLaunchDescriptionSource([
         PathJoinSubstitution([pkg, "launch", "nav2_launch.py"])
     ]))
 
+    velodyne_launch = IncludeLaunchDescription(
+    PythonLaunchDescriptionSource([
+        PathJoinSubstitution([
+            FindPackageShare("velodyne"),
+            "launch",
+            "velodyne-all-nodes-VLP16-launch.py"
+        ])
+    ]),
+    launch_arguments={
+        "velodyne_ip": "192.168.13.104",
+        "frame_id": "velodyne"
+    }.items()
+)
+
+    pointcloud_to_scan = Node(
+        package='pointcloud_to_laserscan',
+        executable='pointcloud_to_laserscan_node',
+        name='pointcloud_to_laserscan',
+        output='screen',
+        parameters=[{
+            "target_frame": "base_link",
+            "transform_tolerance": 0.01,
+            "min_height": -0.1,
+            "max_height": 0.1,
+            "angle_min": -3.14,
+            "angle_max": 3.14,
+            "angle_increment": 0.0087,  # ~0.5 deg
+            "scan_time": 0.1,
+            "range_min": 0.1,
+            "range_max": 20.0,
+            "use_inf": True,
+            "inf_epsilon": 1.0,
+            "concurrency_level": 1
+        }],
+        remappings=[
+            ("cloud_in", "/velodyne_points"),
+            ("scan", "/scan")
+        ]
+    )
+
+    pointcloud_to_scan_delayed = TimerAction(
+        period=5.0,
+        actions=[pointcloud_to_scan]
+    )
 
     return LaunchDescription([
         # joint_state_publisher_node,
@@ -101,10 +148,12 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster,
         # twist_mux,
-        # slam_toolbox,
         # nav2,
         # lidar,
         # camera,
+        slam_toolbox_node,
+        velodyne_launch,
+        pointcloud_to_scan_delayed,
         nav2_launch,
         
     ])
