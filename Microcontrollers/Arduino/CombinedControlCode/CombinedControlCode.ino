@@ -32,7 +32,7 @@ void printvelocity();
 void stopmotor();
 void updateVelocityControl();
 
-#define MEASURE_VELOCITY_INTERVAL  200 // Interval between calls for the encoder function
+#define MEASURE_VELOCITY_INTERVAL  30 // Interval between calls for the encoder function
 #define MOTOR_COMMAND_INTERVAL  3      // Interval betweeen calls for the steering function
 #define PRINT_VELOCITY_INTERVAL 200   // Interval between calls for the print function
 
@@ -271,7 +271,7 @@ void rollingaverage (int pulses1, int pulses2, int steerPosAna) {
 bool getSensor() {
   // read pulses from both rear encoders, and the analog reading from hall sensor
   int pulses2 = myEnc2.readAndReset();
-  Serial.println("Pulses from encoder: "+String(pulses2));
+  // Serial.println("Pulses from encoder: "+String(pulses2));
   int pulses1 = pulses2; // use myEnc1.readAndReset(); when encoder 1 is fixed
   int steerPosAna = analogRead(A0);
 
@@ -472,10 +472,10 @@ void updateVelocityControl() {
   }
 
   // === 7. Debug Output (optional) ===
-  Serial.print("TargetVel: "); Serial.print(current_velocity_position);
-  Serial.print("Setpoint velocity: "); Serial.print(SetpointSpeed);
-  Serial.print(" | Actual Velocity: "); Serial.print(InputSpeed);
-  Serial.print(" | PWM: "); Serial.println(pwmVal);
+  // Serial.print("TargetVel: "); Serial.print(current_velocity_position);
+  // Serial.print("Setpoint velocity: "); Serial.print(SetpointSpeed);
+  // Serial.print(" | Actual Velocity: "); Serial.print(InputSpeed);
+  // Serial.print(" | PWM: "); Serial.println(pwmVal);
 }
 
 //Read serrial message

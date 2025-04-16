@@ -142,6 +142,30 @@ def generate_launch_description():
         actions=[pointcloud_to_scan]
     )
 
+    xsens_driver_node = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("xsens_mti_ros2_driver"),
+                "launch",
+                "xsens_mti_node.launch.py"
+            ])
+        ]),
+        launch_arguments={
+            "device": "/dev/ttyUSB0"
+        }.items()
+    )
+
+
+    ntrip_client_node = IncludeLaunchDescription(
+    PythonLaunchDescriptionSource([
+        PathJoinSubstitution([
+            FindPackageShare("ntrip"),
+            "launch",
+            "ntrip.launch"
+        ])
+    ])
+)
+
     return LaunchDescription([
         # joint_state_publisher_node,
         robot_state_pub_node,
@@ -152,6 +176,8 @@ def generate_launch_description():
         # nav2,
         # lidar,
         # camera,
+        xsens_driver_node,
+        # ntrip_client_node
         slam_toolbox_node,
         velodyne_launch,
         pointcloud_to_scan_delayed,
