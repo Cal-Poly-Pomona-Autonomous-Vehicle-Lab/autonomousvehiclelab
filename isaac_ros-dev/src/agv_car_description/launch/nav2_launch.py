@@ -3,34 +3,55 @@ from launch_ros.actions import Node
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 
+
 def generate_launch_description():
     pkg = FindPackageShare("agv_car_description")
 
     nav2_params = PathJoinSubstitution([pkg, "config", "nav2_params.yaml"])
     rviz_config = PathJoinSubstitution([pkg, "rviz", "bicbot.rviz"])
 
-    ekf_config = PathJoinSubstitution([
-        FindPackageShare("agv_car_description"), "config", "ekf_gps.yaml"
+    dual_ekf_config = PathJoinSubstitution([
+        FindPackageShare("agv_car_description"), "config", "dual_ekf_gps_navsat.yaml"
     ])
 
-    ekf_node = Node(
-    package='robot_localization',
-    executable='ekf_node',
-    name='ekf_filter_node',
-    output='screen',
-    parameters=[ekf_config])
+    ekf_node_filtered_odom = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node_odom',
+        output='screen',
+        parameters=[dual_ekf_config],
+        remappings=[('odometry/filtered', 'odometry/local')]
+    )
 
-    navsat_transform_node =  Node(
-            package='robot_localization',
-            executable='navsat_transform_node',
-            name='navsat_transform_node',
-            output='screen',
-            parameters=[PathJoinSubstitution([pkg, 'config', 'navsat_transform.yaml'])]
-        )
+    ekf_node_filtered_map = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node_map',
+        output='screen',
+        parameters=[dual_ekf_config],
+        remappings=[('odometry/filtered', 'odometry/global')]
+    )
+
+    navsat_transform_node = Node(
+        package='robot_localization',
+        executable='navsat_transform_node',
+        name='navsat_transform_node',
+        output='screen',
+        parameters=[dual_ekf_config],
+        remappings=[
+            ('imu', 'imu/data'),
+            ('gps/fix', 'gnss'),                     
+            ('gps/filtered', 'gps/filtered'),
+            ('odometry/gps', 'odometry/gps'),
+            ('odometry/filtered', 'odometry/global')
+        ]
+    )
 
     nav2_nodes = [
-        ekf_node,
+        ekf_node_filtered_odom,
+        ekf_node_filtered_map,
         navsat_transform_node,
+
         Node(
             package='nav2_map_server',
             executable='map_server',
