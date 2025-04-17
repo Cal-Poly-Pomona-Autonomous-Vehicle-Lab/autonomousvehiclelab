@@ -10,7 +10,7 @@ def generate_launch_description():
     rviz_config = PathJoinSubstitution([pkg, "rviz", "bicbot.rviz"])
 
     ekf_config = PathJoinSubstitution([
-        FindPackageShare("agv_car_description"), "config", "ekf.yaml"
+        FindPackageShare("agv_car_description"), "config", "ekf_gps.yaml"
     ])
 
     ekf_node = Node(
@@ -20,8 +20,17 @@ def generate_launch_description():
     output='screen',
     parameters=[ekf_config])
 
+    navsat_transform_node =  Node(
+            package='robot_localization',
+            executable='navsat_transform_node',
+            name='navsat_transform_node',
+            output='screen',
+            parameters=[PathJoinSubstitution([pkg, 'config', 'navsat_transform.yaml'])]
+        )
+
     nav2_nodes = [
         ekf_node,
+        navsat_transform_node,
         Node(
             package='nav2_map_server',
             executable='map_server',

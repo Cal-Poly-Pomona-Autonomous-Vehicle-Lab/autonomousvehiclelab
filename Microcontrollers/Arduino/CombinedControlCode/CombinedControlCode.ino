@@ -34,7 +34,7 @@ void updateVelocityControl();
 
 #define MEASURE_VELOCITY_INTERVAL  30 // Interval between calls for the encoder function
 #define MOTOR_COMMAND_INTERVAL  3      // Interval betweeen calls for the steering function
-#define PRINT_VELOCITY_INTERVAL 200   // Interval between calls for the print function
+#define PRINT_VELOCITY_INTERVAL 30   // Interval between calls for the print function
 
 Ticker timer1(getSensor, MEASURE_VELOCITY_INTERVAL, 0, MILLIS); // Get encoder data every 200ms
 Ticker timer2(movesteermotor, MOTOR_COMMAND_INTERVAL, 0, MILLIS); // Send position commands for steeriing every 3ms

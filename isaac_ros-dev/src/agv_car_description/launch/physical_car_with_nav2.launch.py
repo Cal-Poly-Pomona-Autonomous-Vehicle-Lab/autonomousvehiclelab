@@ -27,7 +27,7 @@ def generate_launch_description():
     rviz_config_file = PathJoinSubstitution([pkg, "rviz", "bicbot.rviz"])
     twist_mux_params = PathJoinSubstitution([pkg, "config", "twist_mux.yaml"])
 
-    control_node = Node(
+    ros2_control_node = Node(
     package="controller_manager",
     executable="ros2_control_node",
     parameters=[
@@ -80,7 +80,7 @@ def generate_launch_description():
         package='twist_mux',
         executable='twist_mux',
         parameters=[twist_mux_params],
-        remappings=[('/cmd_vel_out', '/bic_cont/reference_unstamped')],
+        remappings=[('/cmd_vel_out', '/bic_cont/reference')],
         output='screen',
     )
 
@@ -169,7 +169,7 @@ def generate_launch_description():
     return LaunchDescription([
         # joint_state_publisher_node,
         robot_state_pub_node,
-        control_node,
+        ros2_control_node,
         joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster,
         twist_mux,
@@ -178,7 +178,7 @@ def generate_launch_description():
         # camera,
         xsens_driver_node,
         # ntrip_client_node
-        slam_toolbox_node,
+        # slam_toolbox_node,
         velodyne_launch,
         pointcloud_to_scan_delayed,
         nav2_launch,
