@@ -36,7 +36,7 @@ void updateVelocityControl();
 #define MOTOR_COMMAND_INTERVAL  3      // Interval betweeen calls for the steering function
 #define PRINT_VELOCITY_INTERVAL 30   // Interval between calls for the print function
 
-Ticker timer1(getSensor, MEASURE_VELOCITY_INTERVAL, 0, MILLIS); // Get encoder data every 200ms
+Ticker timer1(getSensor, MEASURE_VELOCITY_INTERVAL, 0, MILLIS); // Get encoder data every 30ms
 Ticker timer2(movesteermotor, MOTOR_COMMAND_INTERVAL, 0, MILLIS); // Send position commands for steeriing every 3ms
 Ticker timer3(printvelocity,PRINT_VELOCITY_INTERVAL,0,MILLIS); // Write velocity and steering angle over serial every 200ms
 Ticker motorVelocityTicker(updateVelocityControl,MOTOR_COMMAND_INTERVAL,0, MILLIS);
@@ -89,7 +89,7 @@ PID SteerPID(&InputSteer, &OutputSteer, &SetpointSteer, stKp, stKi, stKd, DIRECT
 
 //PID values need tuning
 double SetpointSpeed, InputSpeed, OutputSpeed;
-double spKp=50, spKi=90, spKd=5;
+double spKp=40, spKi=30, spKd=1;
 PID SpeedPID(&InputSpeed, &OutputSpeed, &SetpointSpeed, spKp, spKi, spKd, DIRECT);
 
 //Motor
