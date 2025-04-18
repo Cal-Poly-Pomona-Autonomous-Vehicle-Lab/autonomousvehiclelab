@@ -57,19 +57,36 @@ ekf_filter_node_map:
     transform_timeout: 0.0
     print_diagnostics: true
     debug: false
+    publish_tf: true
 
     map_frame: map
     odom_frame: odom
     base_link_frame: base_link
     world_frame: map
 
-    odom0: /odometry/filtered
+    odom0: /bic_cont/odometry
     odom0_config: [true,  true,  false,
                   false, false, true,
                   true,  false, false,
                   false, false, true,
                   false, false, false]
     odom0_queue_size: 10
+
+    imu0: /imu
+    # imu0_config: [false, false, false,
+    #               true,  true,  false,
+    #               false, false, false,
+    #               true,  true,  true,
+    #               true,  true,  true]
+    imu0_config: [false, false, false, # Position X, Y, Z
+                  false, false, true,  # Orientation roll, pitch, yaw (using yaw only)
+                  false, false, false, # Velocity X dot, Y dot, Z dot
+                  false, false, true,  # Angular Velocity roll dot, pitch dot, yaw dot
+                  false, false, false] # Acceleration X double dot, Y double dot, Z double dot
+    imu0_differential: false
+    imu0_relative: false
+    imu0_queue_size: 10
+    imu0_remove_gravitational_acceleration: true
 
     odom1: /odometry/gps
     odom1_config: [true,  true,  false,
