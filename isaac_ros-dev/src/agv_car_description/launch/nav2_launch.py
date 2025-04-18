@@ -14,13 +14,18 @@ def generate_launch_description():
         FindPackageShare("agv_car_description"), "config", "dual_ekf_gps_navsat.yaml"
     ])
 
+    navsat_transform_config = PathJoinSubstitution([
+        FindPackageShare("agv_car_description"), "config", "navsat_transform.yaml"
+    ])
+
+
     ekf_node_filtered_odom = Node(
         package='robot_localization',
         executable='ekf_node',
         name='ekf_filter_node_odom',
         output='screen',
         parameters=[dual_ekf_config],
-        remappings=[('odometry/filtered', 'odometry/local')]
+        # remappings=[('odometry/filtered', 'odometry/local')]
     )
 
     ekf_node_filtered_map = Node(
@@ -37,20 +42,20 @@ def generate_launch_description():
         executable='navsat_transform_node',
         name='navsat_transform_node',
         output='screen',
-        parameters=[dual_ekf_config],
-        remappings=[
-            ('imu', 'imu/data'),
-            ('gps/fix', 'gnss'),                     
-            ('gps/filtered', 'gps/filtered'),
-            ('odometry/gps', 'odometry/gps'),
-            ('odometry/filtered', 'odometry/global')
-        ]
+        parameters=[navsat_transform_config],
+        # remappings=[
+        #     # ('/imu/data', '/imu'),
+        #     # ('/gnss', '/gps/fix'),                     
+        #     # ('/gps/filtered', '/gps/filtered'),
+        #     # ('/odometry/gps', '/odometry/gps'),
+        #     # ('/odometry/global', '/odometry/filtered')
+        # ]
     )
 
     nav2_nodes = [
         ekf_node_filtered_odom,
         ekf_node_filtered_map,
-        navsat_transform_node,
+        # navsat_transform_node,
 
         Node(
             package='nav2_map_server',

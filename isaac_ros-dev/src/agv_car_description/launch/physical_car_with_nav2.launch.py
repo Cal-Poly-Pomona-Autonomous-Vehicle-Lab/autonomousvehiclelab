@@ -180,7 +180,7 @@ def generate_launch_description():
         # ntrip_client_node
         # slam_toolbox_node,
         velodyne_launch,
-        pointcloud_to_scan_delayed,
+        # pointcloud_to_scan_delayed,
         nav2_launch,
         
     ])

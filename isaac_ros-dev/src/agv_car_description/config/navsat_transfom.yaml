@@ -1,0 +1,15 @@
+navsat_transform_node:
+  ros__parameters:
+    frequency: 30.0
+    delay: 0.0
+    magnetic_declination_radians: 0.1982
+    yaw_offset: 0.0
+    zero_altitude: false
+    broadcast_utm_transform: true
+    publish_filtered_gps: true
+    use_odometry_yaw: true
+    wait_for_datum: false
+    datum: [34.0622881, -117.8171448, 382.416]
+    gps_topic: /gps/fix
+    imu_topic: /imu
+    odom_topic: /odometry/filtered
