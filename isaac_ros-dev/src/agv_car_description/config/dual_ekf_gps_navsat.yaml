@@ -69,6 +69,7 @@ ekf_filter_node_map:
                   true,  false, false,
                   false, false, true,
                   false, false, false]
+    odom0_queue_size: 10
 
     odom1: /odometry/gps
     odom1_config: [true,  true,  false,

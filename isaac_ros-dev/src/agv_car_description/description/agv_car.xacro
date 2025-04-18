@@ -253,8 +253,26 @@
     <dynamics damping="0.2"/>
     </joint>
 
+
+        <!-- IMU and GPS combined sensor -->
+    <link name="imu_link"/>
+    <joint name="imu_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="imu_link"/>
+    <!-- Adjust this to the actual mounting point on your robot -->
+    <origin xyz="0 0 1.2" rpy="0 0 0"/>
+    </joint>
+
+    <link name="gps_link"/>
+    <joint name="gps_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="gps_link"/>
+    <!-- Same origin as imu_link -->
+    <origin xyz="0 0 1.2" rpy="0 0 0"/>
+    </joint>
+
         <!-- Lidar -->
-    <link name="velodyne">
+    <link name="lidar">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
@@ -266,9 +284,9 @@
         </visual>
     </link>
 
-    <joint name="velodyne_joint" type="fixed">
+    <joint name="lidar_joint" type="fixed">
         <parent link="chassis"/>
-        <child link="velodyne"/>
+        <child link="lidar"/>
         <origin xyz="0 0 1.0414" rpy="0 0 0"/>
     </joint>
 
