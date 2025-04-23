@@ -52,15 +52,14 @@ def generate_launch_description():
         output="screen",
     )
 
-    # joint_state_publisher_node = Node(
-    # package='joint_state_publisher',
-    # executable='joint_state_publisher',
-    # name='joint_state_publisher_static',
-    # parameters=[{
-    #     'source_list': ''  # disables listening to real joint_states
-    # }],
-    # output='screen')
-
+    
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+        parameters=[{'use_gui': False}],
+        output='screen'
+    )
 
     robot_controller_spawner = Node(
         package="controller_manager",
@@ -195,7 +194,7 @@ def generate_launch_description():
 )
 
     return LaunchDescription([
-        # joint_state_publisher_node,
+        joint_state_publisher_node,
         robot_state_pub_node,
         ros2_control_node,
         joint_state_broadcaster_spawner,
