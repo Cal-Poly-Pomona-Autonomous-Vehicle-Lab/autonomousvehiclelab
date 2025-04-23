@@ -284,11 +284,19 @@ hardware_interface::return_type arduino_car_hardware ::CarlikeBotSystemHardware:
 
   if (steering_val >= 1){
     steering_val = 1;
-}
+  }
 
   if (steering_val <= -1){
     steering_val = -1;
   }
+
+  // if (velocity_mps >= 0.5){
+  //   velocity_mps = 0.5;
+  // }
+
+  // if (velocity_mps <= -0.5){
+  //   velocity_mps = -0.5;
+  // }
 
 
   // RCLCPP_INFO(rclcpp::get_logger("CarlikeBotSystemHardware"), "Writing Velocity:%f, Steer:%f",velocity_mps,steering_.cmd);

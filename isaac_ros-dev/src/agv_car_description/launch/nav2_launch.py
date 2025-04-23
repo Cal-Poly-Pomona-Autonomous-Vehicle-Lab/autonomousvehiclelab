@@ -14,6 +14,10 @@ def generate_launch_description():
         FindPackageShare("agv_car_description"), "config", "dual_ekf_gps_navsat.yaml"
     ])
 
+    ekf_config = PathJoinSubstitution([
+        FindPackageShare("agv_car_description"), "config", "ekf.yaml"
+    ])
+
     navsat_transform_config = PathJoinSubstitution([
         FindPackageShare("agv_car_description"), "config", "navsat_transform.yaml"
     ])
@@ -26,6 +30,15 @@ def generate_launch_description():
         output='screen',
         parameters=[dual_ekf_config],
         remappings=[('odometry/filtered', 'odometry/local')]
+    )
+
+    ekf_node = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node',
+        output='screen',
+        parameters=[ekf_config],
+        # remappings=[('odometry/filtered', 'odom')]
     )
 
     ekf_node_filtered_map = Node(
@@ -56,6 +69,7 @@ def generate_launch_description():
         ekf_node_filtered_odom,
         ekf_node_filtered_map,
         navsat_transform_node,
+        # ekf_node,
 
         Node(
             package='nav2_map_server',
@@ -86,6 +100,20 @@ def generate_launch_description():
             parameters=[nav2_params]
         ),
         Node(
+            package='nav2_smoother',
+            executable='smoother_server',
+            name='smoother_server',
+            output='screen',
+            parameters=[nav2_params]
+        ),
+        Node(
+            package='nav2_behaviors',
+            executable='behavior_server',
+            name='behavior_server',
+            output='screen',
+            parameters=[nav2_params]
+        ),
+        Node(
             package='nav2_lifecycle_manager',
             executable='lifecycle_manager',
             name='lifecycle_manager_nav2',
@@ -94,10 +122,12 @@ def generate_launch_description():
                 'use_sim_time': False,
                 'autostart': True,
                 'node_names': [
-                    'map_server',
+                    # 'map_server',
                     'planner_server',
                     'controller_server',
-                    'bt_navigator'
+                    'bt_navigator',
+                    'smoother_server',
+                    'behavior_server',
                 ]
             }]
         ),

@@ -85,12 +85,41 @@ def generate_launch_description():
     )
 
     slam_toolbox_node = Node(
-    package='slam_toolbox',
-    executable='async_slam_toolbox_node',
-    name='slam_toolbox',
-    output='screen',
-    parameters=[PathJoinSubstitution([pkg, "config", "slam_toolbox_params.yaml"])]
-)
+        package='slam_toolbox',
+        executable='async_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen',
+        parameters=[PathJoinSubstitution([pkg, "config", "slam_toolbox_params.yaml"])],
+        remappings=[("/scan", "/velodyne_scan")],
+    )
+    
+    kiss_icp_node = Node(
+        package='kiss_icp',
+        executable='kiss_icp_node',
+        name='kiss_icp_node',
+        output='screen',
+        remappings=[('pointcloud_topic', '/velodyne_points'),],
+        parameters=[{
+            'base_frame': 'base_link',
+            'lidar_odom_frame': 'map',
+            'publish_odom_tf': True,
+            'invert_odom_tf': True,
+            'max_range': 100.0,
+            'min_range': 0.0,
+            'deskew': True,
+            'max_points_per_voxel': 20,
+            'voxel_size': 1.0,
+            'initial_threshold': 2.0,
+            'min_motion_th': 0.1,
+            'max_num_iteration': 500,
+            'convergence_criterion': 0.0001,
+            'max_num_threads': 0,
+            'position_covariance': 0.1,
+            'orientation_covariance': 0.1,
+            'publish_debug_clouds': True,
+            'use_sim_time': True
+        }],
+    )
 
     nav2_launch = IncludeLaunchDescription(
     PythonLaunchDescriptionSource([
@@ -98,18 +127,17 @@ def generate_launch_description():
     ]))
 
     velodyne_launch = IncludeLaunchDescription(
-    PythonLaunchDescriptionSource([
-        PathJoinSubstitution([
-            FindPackageShare("velodyne"),
-            "launch",
-            "velodyne-all-nodes-VLP16-launch.py"
-        ])
-    ]),
-    launch_arguments={
-        "velodyne_ip": "192.168.13.104",
-        "frame_id": "velodyne"
-    }.items()
-)
+        PythonLaunchDescriptionSource([
+            PathJoinSubstitution([
+                FindPackageShare("velodyne"),
+                    "launch",
+                    "velodyne-all-nodes-VLP16-launch.py"
+                ])
+        ]),
+        launch_arguments={
+            "velodyne_ip": "192.168.13.104",
+            "frame_id": "velodyne"}.items()
+    )
 
     pointcloud_to_scan = Node(
         package='pointcloud_to_laserscan',
@@ -179,6 +207,7 @@ def generate_launch_description():
         xsens_driver_node,
         # ntrip_client_node
         # slam_toolbox_node,
+        # kiss_icp_node,
         velodyne_launch,
         pointcloud_to_scan_delayed,
         nav2_launch,
