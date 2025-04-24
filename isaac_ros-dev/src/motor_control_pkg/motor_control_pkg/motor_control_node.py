@@ -22,7 +22,7 @@ class MotorNode(Node):
         self.wheel_velocity_publisher = self.create_publisher(Twist, "odom_encoder", 1)
         self.timer_ = self.create_timer(0.2, self.publish_wheel_velocity)
         self.get_logger().info("publishing velocities")
-        self.keyboard = self.create_subscription(Twist,'/keyboard/cmd_vel',self.listener_callback,1)
+        # self.keyboard = self.create_subscription(Twist,'/keyboard/cmd_vel',self.listener_callback,1)
         self.twistmux = self.create_subscription(Twist,'/twist_mux/cmd_vel',self.listener_callback,1)
 
     def __del__(self):

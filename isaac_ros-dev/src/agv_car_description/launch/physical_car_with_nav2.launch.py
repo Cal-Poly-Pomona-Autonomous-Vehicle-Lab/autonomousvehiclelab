@@ -27,16 +27,16 @@ def generate_launch_description():
     rviz_config_file = PathJoinSubstitution([pkg, "rviz", "bicbot.rviz"])
     twist_mux_params = PathJoinSubstitution([pkg, "config", "twist_mux.yaml"])
 
-    ros2_control_node = Node(
-    package="controller_manager",
-    executable="ros2_control_node",
-    parameters=[
-        {"update_rate": 1000},
-        robot_description,
-        robot_controllers,
-    ],
-    output="screen",
-)
+#     ros2_control_node = Node(
+#     package="controller_manager",
+#     executable="ros2_control_node",
+#     parameters=[
+#         {"update_rate": 1000},
+#         robot_description,
+#         robot_controllers,
+#     ],
+#     output="screen",
+# )
 
     robot_state_pub_node = Node(
         package="robot_state_publisher",
@@ -45,12 +45,20 @@ def generate_launch_description():
         output="screen",
     )
 
-    joint_state_broadcaster_spawner = Node(
-        package="controller_manager",
-        executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
-        output="screen",
+    motor_control_node = Node(
+    package="motor_control_pkg_car2",
+    executable="motor_control_node",  
+    name="motor_control_node",
+    output="screen"
     )
+
+
+    # joint_state_broadcaster_spawner = Node(
+    #     package="controller_manager",
+    #     executable="spawner",
+    #     arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+    #     output="screen",
+    # )
 
     
     joint_state_publisher_node = Node(
@@ -68,18 +76,18 @@ def generate_launch_description():
         output="screen",
     )
 
-    delay_robot_controller_spawner_after_joint_state_broadcaster = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=joint_state_broadcaster_spawner,
-            on_exit=[robot_controller_spawner],
-        )
-    )
+    # delay_robot_controller_spawner_after_joint_state_broadcaster = RegisterEventHandler(
+    #     event_handler=OnProcessExit(
+    #         target_action=joint_state_broadcaster_spawner,
+    #         on_exit=[robot_controller_spawner],
+    #     )
+    # )
 
     twist_mux = Node(
         package='twist_mux',
         executable='twist_mux',
         parameters=[twist_mux_params],
-        remappings=[('/cmd_vel_out', '/bic_cont/reference')],
+        # remappings=[('/cmd_vel_out', '/bic_cont/reference')],
         output='screen',
     )
 
@@ -134,7 +142,7 @@ def generate_launch_description():
                 ])
         ]),
         launch_arguments={
-            "velodyne_ip": "192.168.13.104",
+            "velodyne_ip": "192.168.1.201",
             "frame_id": "velodyne"}.items()
     )
 
@@ -196,9 +204,9 @@ def generate_launch_description():
     return LaunchDescription([
         joint_state_publisher_node,
         robot_state_pub_node,
-        ros2_control_node,
-        joint_state_broadcaster_spawner,
-        delay_robot_controller_spawner_after_joint_state_broadcaster,
+        # ros2_control_node,
+        # joint_state_broadcaster_spawner,
+        # delay_robot_controller_spawner_after_joint_state_broadcaster,
         twist_mux,
         # nav2,
         # lidar,
@@ -207,6 +215,7 @@ def generate_launch_description():
         # ntrip_client_node
         # slam_toolbox_node,
         # kiss_icp_node,
+        motor_control_node,
         velodyne_launch,
         pointcloud_to_scan_delayed,
         nav2_launch,

@@ -1,0 +1,302 @@
+<?xml version="1.0"?>
+<robot name="ackermann_drive" xmlns:xacro="http://ros.org/wiki/xacro">
+
+        <!-- Define robot constants -->
+    <xacro:property name="base_width" value="0.92"/>
+    <xacro:property name="base_length" value="1.65"/>
+    <xacro:property name="base_height" value="1.13"/>
+
+    <xacro:property name="wheel_radius" value="0.2"/>
+    <xacro:property name="front_wheel_width" value="0.15"/>
+    <xacro:property name="rear_wheel_width" value="0.17"/>
+    <xacro:property name="front_wheel_ygap" value="0.12"/>
+    <xacro:property name="rear_wheel_ygap" value="0.15"/>
+    <xacro:property name="wheel_zoff" value="0.123"/>
+    <xacro:property name="front_wheel_xoff" value="0.6"/>
+    <xacro:property name="rear_wheel_xoff" value="0.45"/>
+    <material name="Black">
+    <color rgba="0 0 0 1" />
+    </material>
+    <material name="Grey">
+        <color rgba="0.8 0.8 0.8 1" />
+    </material>
+    <material name="Orange">
+        <color rgba="1 0.6 0 1" />
+    </material>
+    <material name="White">
+        <color rgba="1 1 1 1" />
+    </material>
+
+    <link name="base_link" />
+
+    <!-- Chassis -->
+    <link name="chassis">
+       
+
+        <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${pi}" />
+         <geometry>
+                <mesh filename="package://agv_car_description/meshes/new_car_chassis.stl"/>
+            </geometry>
+            <material name="Cyan">
+                <color rgba="0 1.0 1.0 1.0"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz=".946 .512 -.313" rpy="0 0 ${pi}" />
+                <geometry>
+                    <mesh filename="package://agv_car_description/meshes/agv_chassis.stl"/>
+                </geometry>
+        </collision>
+
+
+        <!-- <xacro:box_inertia m="15" w="${base_width}" d="${base_length}" h="${base_height}"/> -->
+
+        <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <mass value="100" />
+        <inertia ixx="10.4" ixy="0.0" ixz="0.0" iyy="35.4" iyz="0.0" izz="41.66" />
+        </inertial>
+    </link>
+
+    <joint name="chassis_joint" type="fixed">
+        <origin xyz="0 0 .313" rpy="0 0 0" />
+        <parent link="base_link" />
+        <child link="chassis" />
+    </joint>
+
+    <!-- rear left wheel Link -->
+    <link name="rear_left_wheel">
+
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${rear_wheel_width}"/>
+            </geometry>
+            <material name="Gray">
+                <color rgba="0.5 0.5 0.5 1.0"/>
+            </material>
+        </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${rear_wheel_width}"/>
+                </geometry>
+            </collision>
+
+        <inertial>
+        <mass value="11.3" />
+        <inertia ixx="0.26" ixy="0.0" ixz="0.0" iyy="0.26" iyz="0.0" izz="0.51" />
+        </inertial>
+    </link>
+
+    <joint name="rear_left_wheel_joint" type="fixed">
+        <origin xyz="-0.9 0.5 -0.2" rpy="-1.57 0 0" />
+        <parent link="chassis" />
+        <child link="rear_left_wheel" />
+        <axis xyz="0 0 1" />
+        <dynamics damping="0.2" />
+    </joint>
+
+    <!-- rear right wheel Link -->
+    <link name="rear_right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${rear_wheel_width}"/>
+            </geometry>
+            <material name="Gray">
+                <color rgba="0.5 0.5 0.5 1.0"/>
+            </material>
+        </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${rear_wheel_width}"/>
+                </geometry>
+            </collision>
+        <inertial>
+        <mass value="11.3" />
+        <inertia ixx="0.26" ixy="0.0" ixz="0.0" iyy="0.26" iyz="0.0" izz="0.51" />
+        </inertial>
+    </link>
+
+    <joint name="rear_right_wheel_joint" type="fixed">
+        <origin xyz="-0.9 -0.5 -0.2" rpy="-1.57 0 0" />
+        <parent link="chassis" />
+        <child link="rear_right_wheel" />
+        <axis xyz="0 0 1" />
+        <dynamics damping="0.2" />
+    </joint>
+
+    <!-- left steer Link -->
+    <link name="left_wheel_steering">
+        <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+        </inertial>
+    </link>
+
+    <joint name="left_wheel_steering_joint" type="fixed">
+        <origin xyz="0.9 0.5 -0.2" rpy="1.57 0 0" />
+        <parent link="chassis" />
+        <child link="left_wheel_steering" />
+        <axis xyz="0 1 0" />
+        <dynamics damping="0.2" />
+        <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="30"/>
+    </joint>
+
+    <!-- right steer Link -->
+    <link name="right_wheel_steering">
+        <inertial>
+        <mass value="0.1"/>
+        <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+        </inertial>
+    </link>
+
+    <joint name="right_wheel_steering_joint" type="fixed">
+        <origin xyz="0.9 -0.5 -0.2" rpy="1.57 0 0" />
+        <parent link="chassis" />
+        <child link="right_wheel_steering" />
+        <axis xyz="0 1 0" />
+        <dynamics damping="0.2" />
+        <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="30"/>
+    </joint>
+
+    <!-- front left wheel Link -->
+    <link name="front_left_wheel">
+         <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${front_wheel_width}"/>
+            </geometry>
+            <material name="Gray">
+                <color rgba="0.5 0.5 0.5 1.0"/>
+            </material>
+        </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${front_wheel_width}"/>
+                </geometry>
+            </collision>
+        <inertial>
+        <mass value="11.3" />
+        <inertia ixx="0.26" ixy="0.0" ixz="0.0" iyy="0.26" iyz="0.0" izz="0.51" />
+        </inertial>
+    </link>
+
+    <joint name="front_left_wheel_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="left_wheel_steering" />
+        <child link="front_left_wheel" />
+        <axis xyz="0 0 1" />
+        <dynamics damping="0.2" />
+    </joint>
+
+    <!-- front right wheel Link -->
+    <link name="front_right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${front_wheel_width}"/>
+            </geometry>
+            <material name="Gray">
+                <color rgba="0.5 0.5 0.5 1.0"/>
+            </material>
+        </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${wheel_radius}" length="${front_wheel_width}"/>
+                </geometry>
+            </collision>
+        <inertial>
+        <mass value="11.3" />
+        <inertia ixx="0.26" ixy="0.0" ixz="0.0" iyy="0.26" iyz="0.0" izz="0.51" />
+        </inertial>
+    </link>
+
+    <joint name="front_right_wheel_joint" type="fixed">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="right_wheel_steering" />
+        <child link="front_right_wheel" />
+        <axis xyz="0 0 1" />
+        <dynamics damping="0.2" />
+    </joint>
+
+     <!-- <link name="virtual_front_wheel">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <cylinder length="0.01" radius="${wheel_radius}"/>
+        </geometry>
+    </visual>
+    </link>
+
+    <joint name="virtual_front_wheel_joint" type="revolute">
+    <parent link="chassis"/>
+    <child link="virtual_front_wheel"/>
+    <origin xyz="0.9 0 -0.2" rpy="1.57 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.7853" upper="0.7853" effort="100.0" velocity="100.0"/>
+    <dynamics damping="0.2"/>
+    </joint> -->
+
+    <!-- virtual rear wheel -->
+    <!-- <link name="virtual_rear_wheel">
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+        <cylinder length="0.01" radius="${wheel_radius}"/>
+        </geometry>
+    </visual>
+    </link> -->
+
+    <!-- <joint name="virtual_rear_wheel_joint" type="continuous">
+    <parent link="chassis"/>
+    <child link="virtual_rear_wheel"/>
+    <origin xyz="-0.9 0 -0.2" rpy="-1.57 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" velocity="100.0"/>
+    <dynamics damping="0.2"/>
+    </joint> -->
+
+
+        <!-- IMU and GPS combined sensor -->
+    <link name="imu_link"/>
+    <joint name="imu_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="imu_link"/>
+    <!-- Adjust this to the actual mounting point on your robot -->
+    <origin xyz="0 0 1.2" rpy="0 0 0"/>
+    </joint>
+
+    <link name="gps_link"/>
+    <joint name="gps_joint" type="fixed">
+    <parent link="chassis"/>
+    <child link="gps_link"/>
+    <!-- Same origin as imu_link -->
+    <origin xyz="0 0 1.2" rpy="0 0 0"/>
+    </joint>
+
+        <!-- Lidar -->
+    <link name="lidar">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius=".0762" length=".0762"/>
+            </geometry>
+            <material name="Cyan">
+                <color rgba="0 1.0 1.0 1.0"/>
+            </material>
+        </visual>
+
+        <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-5" iyy="1e-5" izz="1e-5"
+                ixy="0.0" ixz="0.0" iyz="0.0"/>
+        </inertial>
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="lidar"/>
+        <origin xyz="0 0 1.0414" rpy="0 0 0"/>
+    </joint>
+
+</robot>

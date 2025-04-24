@@ -35,9 +35,12 @@ controller_server:
       stateful: True
     FollowPath:
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
-      desired_linear_vel: 0.9
-      max_linear_vel: 0.9
+      desired_linear_vel: 1.5
+      max_linear_vel: 1.5
+      min_linear_vel: 1.1
       max_speed_xy: 0.9
+      max_angular_vel: 0.7     # ← ✅ limit angular.z upper bound
+      min_angular_vel: -0.7    # ← ✅ limit angular.z lower bound
       lookahead_dist: 0.6
       min_lookahead_dist: 0.4
       max_lookahead_dist: 0.9
