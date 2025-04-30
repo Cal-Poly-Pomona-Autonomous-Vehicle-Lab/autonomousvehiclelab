@@ -63,7 +63,7 @@ class MotorControlNode(Node):
             angular = 0.0
         else:
             # Clamp linear and angular to allowed ranges
-            linear = max(min(linear, 1.5), -1.5)
+            linear = max(min(linear, 1.7), -1.7)
             angular = max(min(angular, 0.7), -0.7)
 
             # Determine mode based on linear direction

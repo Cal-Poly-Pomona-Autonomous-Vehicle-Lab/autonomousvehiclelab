@@ -152,7 +152,7 @@ def generate_launch_description():
         name='pointcloud_to_laserscan',
         output='screen',
         parameters=[{
-            "target_frame": "base_link",
+            "target_frame": "lidar",
             "transform_tolerance": 0.01,
             "min_height": -0.1,
             "max_height": 0.1,
